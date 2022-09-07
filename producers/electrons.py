@@ -73,28 +73,28 @@ GoodElectronPtCut = Producer(
     call="physicsobject::CutPt({df}, {input}, {output}, {min_electron_pt})",
     input=[nanoAOD.Electron_pt],
     output=[],
-    scopes=["em", "et", "ee"],
+    scopes=["em", "et", "ee", "emt"],
 )
 GoodElectronEtaCut = Producer(
     name="GoodElectronEtaCut",
     call="physicsobject::CutEta({df}, {input}, {output}, {max_electron_eta})",
     input=[nanoAOD.Electron_eta],
     output=[],
-    scopes=["em", "et", "ee"],
+    scopes=["em", "et", "ee", "emt"],
 )
 GoodElectronIsoCut = Producer(
     name="GoodElectronIsoCut",
     call="physicsobject::electron::CutIsolation({df}, {output}, {input}, {electron_iso_cut})",
     input=[nanoAOD.Electron_iso],
     output=[],
-    scopes=["em", "et", "ee"],
+    scopes=["em", "et", "ee", "emt"],
 )
 GoodElectrons = ProducerGroup(
     name="GoodElectrons",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
     input=[q.base_electrons_mask],
     output=[q.good_electrons_mask],
-    scopes=["em", "et", "ee"],
+    scopes=["em", "et", "ee", "emt"],
     subproducers=[
         GoodElectronPtCut,
         GoodElectronEtaCut,
@@ -102,12 +102,19 @@ GoodElectrons = ProducerGroup(
     ],
 )
 
+# VetoElectrons = Producer(
+#     name="VetoElectrons",
+#     call="physicsobject::VetoCandInMask({df}, {output}, {input}, {electron_index_in_pair})",
+#     input=[q.base_electrons_mask, q.dileptonpair],
+#     output=[q.veto_electrons_mask],
+#     scopes=["em", "et", "ee"],
+# )
 VetoElectrons = Producer(
     name="VetoElectrons",
-    call="physicsobject::VetoCandInMask({df}, {output}, {input}, {electron_index_in_pair})",
-    input=[q.base_electrons_mask, q.dileptonpair],
+    call="physicsobject::VetoCandInMask({df}, {output}, {input}, {electron_index_in_triple})",
+    input=[q.base_electrons_mask, q.leptontriple],
     output=[q.veto_electrons_mask],
-    scopes=["em", "et", "ee"],
+    scopes=["emt"],
 )
 VetoSecondElectron = Producer(
     name="VetoSecondElectron",
@@ -120,6 +127,7 @@ ExtraElectronsVeto = Producer(
     name="ExtraElectronsVeto",
     call="physicsobject::LeptonVetoFlag({df}, {output}, {input})",
     input={
+        "emt": [q.veto_electrons_mask],
         "em": [q.veto_electrons_mask],
         "et": [q.veto_electrons_mask],
         "mt": [q.base_electrons_mask],
@@ -128,14 +136,14 @@ ExtraElectronsVeto = Producer(
         "ee": [q.veto_electrons_mask_2],
     },
     output=[q.electron_veto_flag],
-    scopes=["em", "et", "mt", "tt", "mm", "ee"],
+    scopes=["em", "et", "mt", "tt", "mm", "ee", "emt"],
 )
 NumberOfGoodElectrons = Producer(
     name="NumberOfGoodElectrons",
     call="quantities::NumberOfGoodLeptons({df}, {output}, {input})",
     input=[q.good_electrons_mask],
     output=[q.nelectrons],
-    scopes=["et", "em", "ee"],
+    scopes=["et", "em", "ee", "emt"],
 )
 
 ####################

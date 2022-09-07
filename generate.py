@@ -7,7 +7,7 @@ from code_generation.code_generation import CodeGenerator
 
 def run(args):
 
-    analysis_name = "tau"
+    analysis_name = "whtautau"
 
     available_samples = [
         "ggh_htautau",
@@ -25,9 +25,10 @@ def run(args):
         "wjets",
         "data",
         "electroweak_boson",
+        "wminush_htautau",
     ]
     available_eras = ["2016", "2017", "2018"]
-    available_scopes = ["et", "mt", "tt", "em", "ee", "mm"]
+    available_scopes = ["et", "mt", "tt", "em", "ee", "mm", "emt"]
 
     ## setup variables
     shifts = set([shift.lower() for shift in args.shifts])

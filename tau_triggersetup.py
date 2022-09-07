@@ -5,7 +5,7 @@ from code_generation.modifiers import EraModifier, SampleModifier
 def add_diTauTriggerSetup(configuration: Configuration):
     ## MT, MM scope trigger setup
     configuration.add_config_parameters(
-        ["mt", "mm", "em"],
+        ["mt", "mm", "em", "emt"],
         {
             "singlemoun_trigger": EraModifier(
                 {
@@ -134,7 +134,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
     )
     ## ET, EE scope trigger setup
     configuration.add_config_parameters(
-        ["et", "ee", "em"],
+        ["et", "ee", "em", "emt"],
         {
             "singleelectron_trigger": EraModifier(
                 {

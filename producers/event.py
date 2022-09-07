@@ -93,6 +93,13 @@ is_diboson = Producer(
     output=[q.is_diboson],
     scopes=["global"],
 )
+is_whtautau = Producer(
+    name="is_whtautau",
+    call="basefunctions::DefineQuantity({df}, {output}, {is_diboson})",
+    input=[],
+    output=[q.is_whtautau],
+    scopes=["global"],
+)
 
 SampleFlags = ProducerGroup(
     name="SampleFlags",
@@ -109,6 +116,7 @@ SampleFlags = ProducerGroup(
         is_ggh_htautau,
         is_vbf_htautau,
         is_diboson,
+        is_whtautau,
     ],
 )
 
@@ -160,7 +168,7 @@ ZPtMassReweighting = Producer(
         q.recoil_genboson_p4_vec,
     ],
     output=[q.ZPtMassReweightWeight],
-    scopes=["global", "em", "et", "mt", "tt", "mm"],
+    scopes=["global", "em", "et", "mt", "tt", "mm", "emt"],
 )
 
 TopPtReweighting = Producer(
@@ -172,7 +180,7 @@ TopPtReweighting = Producer(
         nanoAOD.GenParticle_pt,
     ],
     output=[q.topPtReweightWeight],
-    scopes=["global", "em", "et", "mt", "tt", "mm"],
+    scopes=["global", "em", "et", "mt", "tt", "mm", "emt"],
 )
 
 DiLeptonVeto = ProducerGroup(
@@ -189,7 +197,7 @@ GGH_NNLO_Reweighting = Producer(
     call='htxs::ggHNNLOWeights({df}, {output}, "{ggHNNLOweightsRootfile}", "{ggH_generator}", {input})',
     input=[nanoAOD.HTXS_Higgs_pt, nanoAOD.HTXS_njets30],
     output=[q.ggh_NNLO_weight],
-    scopes=["global", "em", "et", "mt", "tt", "mm"],
+    scopes=["global", "em", "et", "mt", "tt", "mm", "emt"],
 )
 
 GGH_WG1_Uncertainties = Producer(
@@ -211,7 +219,7 @@ GGH_WG1_Uncertainties = Producer(
         q.THU_ggH_PT120,
         q.THU_ggH_qmtop,
     ],
-    scopes=["global", "em", "et", "mt", "tt", "mm"],
+    scopes=["global", "em", "et", "mt", "tt", "mm", "emt"],
 )
 
 QQH_WG1_Uncertainties = Producer(
@@ -232,5 +240,5 @@ QQH_WG1_Uncertainties = Producer(
         q.THU_qqH_25,
         q.THU_qqH_JET01,
     ],
-    scopes=["global", "em", "et", "mt", "tt", "mm"],
+    scopes=["global", "em", "et", "mt", "tt", "mm", "emt"],
 )

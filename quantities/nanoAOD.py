@@ -75,7 +75,7 @@ GenParticle_mass = NanoAODQuantity("GenPart_mass")
 GenParticle_pdgId = NanoAODQuantity("GenPart_pdgId")
 GenParticle_status = NanoAODQuantity("GenPart_status")
 GenParticle_statusFlags = NanoAODQuantity("GenPart_statusFlags")
-GenParticle_motherid = NanoAODQuantity("GenPart_genPartIdxMother")
+GenParticle_motheridx = NanoAODQuantity("GenPart_genPartIdxMother")
 
 ## Trigger Objects
 TriggerObject_bit = NanoAODQuantity("TrigObj_filterBits")

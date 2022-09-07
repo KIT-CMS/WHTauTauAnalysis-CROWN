@@ -46,7 +46,8 @@ def build_config(
         available_eras,
         available_scopes,
     )
-
+    print("hi")
+    print(sample)
     # first add default parameters necessary for all scopes
     configuration.add_config_parameters(
         "global",
@@ -121,7 +122,7 @@ def build_config(
     #     },
     # )
     configuration.add_config_parameters(
-        ["et", "mt", "tt"],
+        ["emt", "et", "mt", "tt"],
         {
             "tau_dms": "0,1,10,11",
             "tau_sf_file": EraModifier(
@@ -267,20 +268,98 @@ def build_config(
     )
     ###### scope Specifics ######
     # MT/TT/ET scope tau ID flags and SFs
+    # configuration.add_config_parameters(
+    #     ["mt", "tt", "et"],
+    #     {
+    #         "vsjet_tau_id": [
+    #             {
+    #                 "tau_id_discriminator": "DeepTau2017v2p1VSjet",
+    #                 "tau_1_vsjet_sf_outputname": "id_wgt_tau_vsJet_{wp}_1".format(
+    #                     wp=wp
+    #                 ),
+    #                 "tau_2_vsjet_sf_outputname": "id_wgt_tau_vsJet_{wp}_2".format(
+    #                     wp=wp
+    #                 ),
+    #                 "vsjet_tau_id_WP": "{wp}".format(wp=wp),
+    #                 "tau_1_vsjet_id_outputname": "id_tau_vsJet_{wp}_1".format(wp=wp),
+    #                 "tau_2_vsjet_id_outputname": "id_tau_vsJet_{wp}_2".format(wp=wp),
+    #                 "vsjet_tau_id_WPbit": bit,
+    #             }
+    #             for wp, bit in {
+    #                 "VVVLoose": 1,
+    #                 "VVLoose": 2,
+    #                 "VLoose": 3,
+    #                 "Loose": 4,
+    #                 "Medium": 5,
+    #                 "Tight": 6,
+    #                 "VTight": 7,
+    #                 "VVTight": 8,
+    #             }.items()
+    #         ],
+    #         "vsele_tau_id": [
+    #             {
+    #                 "tau_id_discriminator": "DeepTau2017v2p1VSe",
+    #                 "tau_1_vsele_sf_outputname": "id_wgt_tau_vsEle_{wp}_1".format(
+    #                     wp=wp
+    #                 ),
+    #                 "tau_2_vsele_sf_outputname": "id_wgt_tau_vsEle_{wp}_2".format(
+    #                     wp=wp
+    #                 ),
+    #                 "vsele_tau_id_WP": "{wp}".format(wp=wp),
+    #                 "tau_1_vsele_id_outputname": "id_tau_vsEle_{wp}_1".format(wp=wp),
+    #                 "tau_2_vsele_id_outputname": "id_tau_vsEle_{wp}_2".format(wp=wp),
+    #                 "vsele_tau_id_WPbit": bit,
+    #             }
+    #             for wp, bit in {
+    #                 "VVLoose": 2,
+    #                 "VLoose": 3,
+    #                 "Loose": 4,
+    #                 "Medium": 5,
+    #                 "Tight": 6,
+    #                 "VTight": 7,
+    #                 "VVTight": 8,
+    #             }.items()
+    #         ],
+    #         "vsmu_tau_id": [
+    #             {
+    #                 "tau_id_discriminator": "DeepTau2017v2p1VSmu",
+    #                 "tau_1_vsmu_sf_outputname": "id_wgt_tau_vsMu_{wp}_1".format(wp=wp),
+    #                 "tau_2_vsmu_sf_outputname": "id_wgt_tau_vsMu_{wp}_2".format(wp=wp),
+    #                 "vsmu_tau_id_WP": "{wp}".format(wp=wp),
+    #                 "tau_1_vsmu_id_outputname": "id_tau_vsMu_{wp}_1".format(wp=wp),
+    #                 "tau_2_vsmu_id_outputname": "id_tau_vsMu_{wp}_2".format(wp=wp),
+    #                 "vsmu_tau_id_WPbit": bit,
+    #             }
+    #             for wp, bit in {
+    #                 "VLoose": 1,
+    #                 "Loose": 2,
+    #                 "Medium": 3,
+    #                 "Tight": 4,
+    #             }.items()
+    #         ],
+    #         "tau_sf_vsele_barrel": "nom",  # or "up"/"down" for up/down variation
+    #         "tau_sf_vsele_endcap": "nom",  # or "up"/"down" for up/down variation
+    #         "tau_sf_vsmu_wheel1": "nom",
+    #         "tau_sf_vsmu_wheel2": "nom",
+    #         "tau_sf_vsmu_wheel3": "nom",
+    #         "tau_sf_vsmu_wheel4": "nom",
+    #         "tau_sf_vsmu_wheel5": "nom",
+    #     },
+    # )
     configuration.add_config_parameters(
-        ["mt", "tt", "et"],
+        ["emt"],
         {
             "vsjet_tau_id": [
                 {
                     "tau_id_discriminator": "DeepTau2017v2p1VSjet",
-                    "tau_1_vsjet_sf_outputname": "id_wgt_tau_vsJet_{wp}_1".format(
+                    "tau_3_vsjet_sf_outputname": "id_wgt_tau_vsJet_{wp}_3".format(
                         wp=wp
                     ),
                     "tau_2_vsjet_sf_outputname": "id_wgt_tau_vsJet_{wp}_2".format(
                         wp=wp
                     ),
                     "vsjet_tau_id_WP": "{wp}".format(wp=wp),
-                    "tau_1_vsjet_id_outputname": "id_tau_vsJet_{wp}_1".format(wp=wp),
+                    "tau_3_vsjet_id_outputname": "id_tau_vsJet_{wp}_3".format(wp=wp),
                     "tau_2_vsjet_id_outputname": "id_tau_vsJet_{wp}_2".format(wp=wp),
                     "vsjet_tau_id_WPbit": bit,
                 }
@@ -298,14 +377,14 @@ def build_config(
             "vsele_tau_id": [
                 {
                     "tau_id_discriminator": "DeepTau2017v2p1VSe",
-                    "tau_1_vsele_sf_outputname": "id_wgt_tau_vsEle_{wp}_1".format(
+                    "tau_3_vsele_sf_outputname": "id_wgt_tau_vsEle_{wp}_3".format(
                         wp=wp
                     ),
                     "tau_2_vsele_sf_outputname": "id_wgt_tau_vsEle_{wp}_2".format(
                         wp=wp
                     ),
                     "vsele_tau_id_WP": "{wp}".format(wp=wp),
-                    "tau_1_vsele_id_outputname": "id_tau_vsEle_{wp}_1".format(wp=wp),
+                    "tau_3_vsele_id_outputname": "id_tau_vsEle_{wp}_3".format(wp=wp),
                     "tau_2_vsele_id_outputname": "id_tau_vsEle_{wp}_2".format(wp=wp),
                     "vsele_tau_id_WPbit": bit,
                 }
@@ -322,10 +401,10 @@ def build_config(
             "vsmu_tau_id": [
                 {
                     "tau_id_discriminator": "DeepTau2017v2p1VSmu",
-                    "tau_1_vsmu_sf_outputname": "id_wgt_tau_vsMu_{wp}_1".format(wp=wp),
+                    "tau_3_vsmu_sf_outputname": "id_wgt_tau_vsMu_{wp}_3".format(wp=wp),
                     "tau_2_vsmu_sf_outputname": "id_wgt_tau_vsMu_{wp}_2".format(wp=wp),
                     "vsmu_tau_id_WP": "{wp}".format(wp=wp),
-                    "tau_1_vsmu_id_outputname": "id_tau_vsMu_{wp}_1".format(wp=wp),
+                    "tau_3_vsmu_id_outputname": "id_tau_vsMu_{wp}_3".format(wp=wp),
                     "tau_2_vsmu_id_outputname": "id_tau_vsMu_{wp}_2".format(wp=wp),
                     "vsmu_tau_id_WPbit": bit,
                 }
@@ -347,7 +426,7 @@ def build_config(
     )
     # MT / ET tau id sf variations
     configuration.add_config_parameters(
-        ["mt", "et"],
+        ["emt", "mt", "et"],
         {
             "tau_sf_vsjet_tau30to35": "nom",
             "tau_sf_vsjet_tau35to40": "nom",
@@ -406,7 +485,7 @@ def build_config(
     )
     # Muon scale factors configuration
     configuration.add_config_parameters(
-        ["mt", "mm", "em"],
+        ["emt", "mt", "mm", "em"],
         {
             "muon_sf_file": EraModifier(
                 {
@@ -429,7 +508,7 @@ def build_config(
     )
     # electron scale factors configuration
     configuration.add_config_parameters(
-        ["et", "ee", "em"],
+        ["emt", "et", "ee", "em"],
         {
             "ele_sf_file": EraModifier(
                 {
@@ -449,6 +528,29 @@ def build_config(
                 }
             ),
             "ele_sf_varation": "sf",  # "sf" is nominal, "sfup"/"sfdown" are up/down variations
+        },
+    )
+    # EMT scope electron and selection
+    configuration.add_config_parameters(
+        ["emt"],
+        {
+            "min_tau_pt": 20.0,
+            "max_tau_eta": 2.3,
+            "max_tau_dz": 0.2,
+            "vsjet_tau_id_bit": 4,
+            "vsele_tau_id_bit": 4,
+            "vsmu_tau_id_bit": 1,
+            "electron_index_in_triple": 0,
+            "min_electron_pt": 25.0,
+            "max_electron_eta": 2.1,
+            "electron_iso_cut": 0.3,
+            "muon_index_in_triple": 1,
+            "min_muon_pt": 23.0,
+            "max_muon_eta": 2.1,
+            "muon_iso_cut": 0.15,
+            "deltaR_jet_veto": 0.5,
+            "tripleselection_min_dR_leptau": 0.5,
+            "tripleselection_min_dR_leplep": 0.3,
         },
     )
     # ET scope electron selection
@@ -645,8 +747,43 @@ def build_config(
             scalefactors.btagging_SF,
             met.MetCorrections,
             met.PFMetCorrections,
-            pairquantities.DiTauPairMETQuantities,
+            # pairquantities.DiTauPairMETQuantities,
             genparticles.GenMatching,
+        ],
+    )
+    configuration.add_producers(
+        "emt",
+        [
+            # muons taus
+            muons.GoodMuons,
+            muons.NumberOfGoodMuons,
+            muons.VetoMuons,
+            muons.ExtraMuonsVeto,
+            taus.TauEnergyCorrection,
+            # taus.BaseTaus,
+            taus.GoodTaus,
+            taus.NumberOfGoodTaus,
+            pairselection.EMTTripleSelection,
+            # pairselection.GoodMTPairFilter,
+            pairselection.LVElWH1,
+            pairselection.LVMuWH2,
+            pairselection.LVTauWH3,
+            pairselection.LVEl1Uncorrected,
+            pairselection.LVMu2Uncorrected,
+            pairselection.LVTau3Uncorrected,
+            pairquantities.EMTTripleQuantities,
+            genparticles.EMTGenTripleQuantities,
+            #  scalefactors.MuonIDIso_SF,
+            scalefactors.Tau_3_VsJetTauID_lt_SF,
+            scalefactors.Tau_3_VsEleTauID_SF,
+            scalefactors.Tau_3_VsMuTauID_SF,
+            # electrons
+            electrons.GoodElectrons,
+            electrons.NumberOfGoodElectrons,
+            electrons.VetoElectrons,
+            electrons.ExtraElectronsVeto,
+            triggers.EMTGenerateSingleElectronTriggerFlags,
+            triggers.EMTGenerateSingleMuonTriggerFlags,
         ],
     )
     configuration.add_producers(
@@ -1029,7 +1166,6 @@ def build_config(
             ],
         ),
     )
-
     configuration.add_outputs(
         scopes,
         [
@@ -1041,6 +1177,7 @@ def build_config(
             q.is_ggh_htautau,
             q.is_vbf_htautau,
             q.is_diboson,
+            q.is_whtautau,
             nanoAOD.run,
             q.lumi,
             q.npartons,
@@ -1048,10 +1185,13 @@ def build_config(
             q.puweight,
             q.pt_1,
             q.pt_2,
+            q.pt_3,
             q.eta_1,
             q.eta_2,
+            q.eta_3,
             q.phi_1,
             q.phi_2,
+            q.phi_3,
             q.njets,
             q.jpt_1,
             q.jpt_2,
@@ -1063,7 +1203,10 @@ def build_config(
             q.jtag_value_2,
             q.mjj,
             q.m_vis,
-            q.deltaR_ditaupair,
+            q.deltaR_elemu_wh,
+            q.deltaR_eletau_wh,
+            q.deltaR_mutau_wh,
+            q.Lt,
             q.pt_vis,
             q.nbtag,
             q.bpt_1,
@@ -1077,14 +1220,18 @@ def build_config(
             q.btag_weight,
             q.mass_1,
             q.mass_2,
+            q.mass_3,
             q.dxy_1,
             q.dxy_2,
             q.dz_1,
             q.dz_2,
+            q.dz_3,
             q.q_1,
             q.q_2,
+            q.q_3,
             q.iso_1,
             q.iso_2,
+            q.iso_3,
             q.gen_pt_1,
             q.gen_eta_1,
             q.gen_phi_1,
@@ -1095,6 +1242,11 @@ def build_config(
             q.gen_phi_2,
             q.gen_mass_2,
             q.gen_pdgid_2,
+            q.gen_pt_3,
+            q.gen_eta_3,
+            q.gen_phi_3,
+            q.gen_mass_3,
+            q.gen_pdgid_3,
             q.gen_m_vis,
             q.met,
             q.metphi,
@@ -1109,24 +1261,142 @@ def build_config(
             q.metcov01,
             q.metcov10,
             q.metcov11,
-            q.pzetamissvis,
-            q.mTdileptonMET,
-            q.mt_1,
-            q.mt_2,
-            q.pt_tt,
-            q.pt_ttjj,
-            q.mt_tot,
+            # q.pzetamissvis,
+            # q.mTdileptonMET,
+            # q.mt_1,
+            # q.mt_2,
+            # q.mt_3,
+            # q.pt_tt,
+            # q.pt_ttjj,
+            # q.mt_tot,
             q.genbosonmass,
             q.gen_match_1,
             q.gen_match_2,
+            q.gen_match_3,
         ],
     )
+    # configuration.add_outputs(
+    #     scopes,
+    #     [
+    #         q.is_data,
+    #         q.is_embedding,
+    #         q.is_ttbar,
+    #         q.is_dyjets,
+    #         q.is_wjets,
+    #         q.is_ggh_htautau,
+    #         q.is_vbf_htautau,
+    #         q.is_diboson,
+    #         nanoAOD.run,
+    #         q.lumi,
+    #         q.npartons,
+    #         nanoAOD.event,
+    #         q.puweight,
+    #         q.pt_1,
+    #         q.pt_2,
+    #         q.eta_1,
+    #         q.eta_2,
+    #         q.phi_1,
+    #         q.phi_2,
+    #         q.njets,
+    #         q.jpt_1,
+    #         q.jpt_2,
+    #         q.jeta_1,
+    #         q.jeta_2,
+    #         q.jphi_1,
+    #         q.jphi_2,
+    #         q.jtag_value_1,
+    #         q.jtag_value_2,
+    #         q.mjj,
+    #         q.m_vis,
+    #         q.deltaR_ditaupair,
+    #         q.pt_vis,
+    #         q.nbtag,
+    #         q.bpt_1,
+    #         q.bpt_2,
+    #         q.beta_1,
+    #         q.beta_2,
+    #         q.bphi_1,
+    #         q.bphi_2,
+    #         q.btag_value_1,
+    #         q.btag_value_2,
+    #         q.btag_weight,
+    #         q.mass_1,
+    #         q.mass_2,
+    #         q.dxy_1,
+    #         q.dxy_2,
+    #         q.dz_1,
+    #         q.dz_2,
+    #         q.q_1,
+    #         q.q_2,
+    #         q.iso_1,
+    #         q.iso_2,
+    #         q.gen_pt_1,
+    #         q.gen_eta_1,
+    #         q.gen_phi_1,
+    #         q.gen_mass_1,
+    #         q.gen_pdgid_1,
+    #         q.gen_pt_2,
+    #         q.gen_eta_2,
+    #         q.gen_phi_2,
+    #         q.gen_mass_2,
+    #         q.gen_pdgid_2,
+    #         q.gen_m_vis,
+    #         q.met,
+    #         q.metphi,
+    #         q.pfmet,
+    #         q.pfmetphi,
+    #         q.met_uncorrected,
+    #         q.metphi_uncorrected,
+    #         q.pfmet_uncorrected,
+    #         q.pfmetphi_uncorrected,
+    #         q.metSumEt,
+    #         q.metcov00,
+    #         q.metcov01,
+    #         q.metcov10,
+    #         q.metcov11,
+    #         q.pzetamissvis,
+    #         q.mTdileptonMET,
+    #         q.mt_1,
+    #         q.mt_2,
+    #         q.pt_tt,
+    #         q.pt_ttjj,
+    #         q.mt_tot,
+    #         q.genbosonmass,
+    #         q.gen_match_1,
+    #         q.gen_match_2,
+    #     ],
+    # )
     # add genWeight for everything but data
     if sample != "data":
         configuration.add_outputs(
             scopes,
             nanoAOD.genWeight,
         )
+    configuration.add_outputs(
+        "emt",
+        [
+            q.nelectrons,
+            q.nmuons,
+            q.ntaus,
+            scalefactors.Tau_3_VsJetTauID_lt_SF.output_group,
+            scalefactors.Tau_3_VsEleTauID_SF.output_group,
+            scalefactors.Tau_3_VsMuTauID_SF.output_group,
+            pairquantities.VsJetTauIDFlag_3.output_group,
+            pairquantities.VsEleTauIDFlag_3.output_group,
+            pairquantities.VsMuTauIDFlag_3.output_group,
+            q.taujet_pt_3,
+            # q.gen_taujet_pt_2,
+            q.decaymode_3,
+            q.tau_gen_match_3,
+            q.muon_veto_flag,
+            q.dimuon_veto,
+            q.electron_veto_flag,
+            # q.id_wgt_mu_1,
+            # q.iso_wgt_mu_1,
+            triggers.EMTGenerateSingleMuonTriggerFlags.output_group,
+            triggers.EMTGenerateSingleElectronTriggerFlags.output_group,
+        ],
+    )
     configuration.add_outputs(
         "mt",
         [
@@ -1566,7 +1836,7 @@ def build_config(
     #########################
     # Add additional producers and SFs related to embedded samples
     #########################
-    setup_embedding(configuration, scopes)
+    # setup_embedding(configuration, scopes)
 
     #########################
     # Jet energy resolution and jet energy scale
