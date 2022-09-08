@@ -917,6 +917,19 @@ def build_config(
         ],
     )
     configuration.add_modification_rule(
+        ["emt"],
+        RemoveProducer(
+            producers=[
+                scalefactors.Tau_3_VsMuTauID_SF,
+                scalefactors.Tau_3_VsJetTauID_lt_SF,
+                scalefactors.Tau_3_VsEleTauID_SF,
+                genparticles.EMTGenTripleQuantities,
+                pairquantities.tau_gen_match_3,
+            ],
+            samples="data",
+        ),
+    )
+    configuration.add_modification_rule(
         ["et", "mt"],
         RemoveProducer(
             producers=[
@@ -952,7 +965,7 @@ def build_config(
         ),
     )
     configuration.add_modification_rule(
-        ["et", "mt", "tt"],
+        ["et", "mt", "tt", "emt"],
         ReplaceProducer(
             producers=[taus.TauEnergyCorrection, taus.TauEnergyCorrection_data],
             samples="data",
