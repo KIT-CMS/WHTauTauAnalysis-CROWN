@@ -273,7 +273,7 @@ EleID_SF = ProducerGroup(
     call=None,
     input=None,
     output=None,
-    scopes=["em", "ee", "et"],
+    scopes=["em", "ee", "et", "emt"],
     subproducers={
         "em": [Ele_1_IDWP90_SF, Ele_1_IDWP80_SF],
         "ee": [
@@ -290,21 +290,21 @@ EleID_SF = ProducerGroup(
 ###################################
 # Trigger Scalefactors coming from our measurements
 ###################################
-MTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
-    name="MTGenerateSingleMuonTriggerSF_MC",
+EMTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
+    name="EMTGenerateSingleMuonTriggerSF_MC",
     call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}")',
-    input=[q.pt_1, q.eta_1],
+    input=[q.pt_2, q.eta_2],
     output="flagname",
-    scope=["mt"],
+    scope=["emt"],
     vec_config="singlemuon_trigger_sf_mc",
 )
 
-ETGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
-    name="ETGenerateSingleElectronTriggerSF_MC",
+EMTGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
+    name="EMTGenerateSingleElectronTriggerSF_MC",
     call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}")',
     input=[q.pt_1, q.eta_1],
     output="flagname",
-    scope=["et"],
+    scope=["emt"],
     vec_config="singlelectron_trigger_sf_mc",
 )
 

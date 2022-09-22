@@ -46,8 +46,6 @@ def build_config(
         available_eras,
         available_scopes,
     )
-    print("hi")
-    print(sample)
     # first add default parameters necessary for all scopes
     configuration.add_config_parameters(
         "global",
@@ -122,7 +120,7 @@ def build_config(
     #     },
     # )
     configuration.add_config_parameters(
-        ["emt", "et", "mt", "tt"],
+        ["emt"],
         {
             "tau_dms": "0,1,10,11",
             "tau_sf_file": EraModifier(
@@ -143,30 +141,6 @@ def build_config(
             "tau_elefake_es_DM1_barrel": "nom",
             "tau_elefake_es_DM1_endcap": "nom",
             "tau_mufake_es": "nom",
-        },
-    )
-    # muon base selection:
-    configuration.add_config_parameters(
-        "global",
-        {
-            "min_muon_pt": 10.0,
-            "max_muon_eta": 2.4,
-            "max_muon_dxy": 0.045,
-            "max_muon_dz": 0.2,
-            "muon_id": "Muon_mediumId",
-            "muon_iso_cut": 0.3,
-        },
-    )
-    # electron base selection:
-    configuration.add_config_parameters(
-        "global",
-        {
-            "min_ele_pt": 10.0,
-            "max_ele_eta": 2.5,
-            "max_ele_dxy": 0.045,
-            "max_ele_dz": 0.2,
-            "max_ele_iso": 0.3,
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
         },
     )
     # jet base selection:
@@ -266,86 +240,8 @@ def build_config(
             "dileptonveto_dR": 0.15,
         },
     )
-    ###### scope Specifics ######
-    # MT/TT/ET scope tau ID flags and SFs
-    # configuration.add_config_parameters(
-    #     ["mt", "tt", "et"],
-    #     {
-    #         "vsjet_tau_id": [
-    #             {
-    #                 "tau_id_discriminator": "DeepTau2017v2p1VSjet",
-    #                 "tau_1_vsjet_sf_outputname": "id_wgt_tau_vsJet_{wp}_1".format(
-    #                     wp=wp
-    #                 ),
-    #                 "tau_2_vsjet_sf_outputname": "id_wgt_tau_vsJet_{wp}_2".format(
-    #                     wp=wp
-    #                 ),
-    #                 "vsjet_tau_id_WP": "{wp}".format(wp=wp),
-    #                 "tau_1_vsjet_id_outputname": "id_tau_vsJet_{wp}_1".format(wp=wp),
-    #                 "tau_2_vsjet_id_outputname": "id_tau_vsJet_{wp}_2".format(wp=wp),
-    #                 "vsjet_tau_id_WPbit": bit,
-    #             }
-    #             for wp, bit in {
-    #                 "VVVLoose": 1,
-    #                 "VVLoose": 2,
-    #                 "VLoose": 3,
-    #                 "Loose": 4,
-    #                 "Medium": 5,
-    #                 "Tight": 6,
-    #                 "VTight": 7,
-    #                 "VVTight": 8,
-    #             }.items()
-    #         ],
-    #         "vsele_tau_id": [
-    #             {
-    #                 "tau_id_discriminator": "DeepTau2017v2p1VSe",
-    #                 "tau_1_vsele_sf_outputname": "id_wgt_tau_vsEle_{wp}_1".format(
-    #                     wp=wp
-    #                 ),
-    #                 "tau_2_vsele_sf_outputname": "id_wgt_tau_vsEle_{wp}_2".format(
-    #                     wp=wp
-    #                 ),
-    #                 "vsele_tau_id_WP": "{wp}".format(wp=wp),
-    #                 "tau_1_vsele_id_outputname": "id_tau_vsEle_{wp}_1".format(wp=wp),
-    #                 "tau_2_vsele_id_outputname": "id_tau_vsEle_{wp}_2".format(wp=wp),
-    #                 "vsele_tau_id_WPbit": bit,
-    #             }
-    #             for wp, bit in {
-    #                 "VVLoose": 2,
-    #                 "VLoose": 3,
-    #                 "Loose": 4,
-    #                 "Medium": 5,
-    #                 "Tight": 6,
-    #                 "VTight": 7,
-    #                 "VVTight": 8,
-    #             }.items()
-    #         ],
-    #         "vsmu_tau_id": [
-    #             {
-    #                 "tau_id_discriminator": "DeepTau2017v2p1VSmu",
-    #                 "tau_1_vsmu_sf_outputname": "id_wgt_tau_vsMu_{wp}_1".format(wp=wp),
-    #                 "tau_2_vsmu_sf_outputname": "id_wgt_tau_vsMu_{wp}_2".format(wp=wp),
-    #                 "vsmu_tau_id_WP": "{wp}".format(wp=wp),
-    #                 "tau_1_vsmu_id_outputname": "id_tau_vsMu_{wp}_1".format(wp=wp),
-    #                 "tau_2_vsmu_id_outputname": "id_tau_vsMu_{wp}_2".format(wp=wp),
-    #                 "vsmu_tau_id_WPbit": bit,
-    #             }
-    #             for wp, bit in {
-    #                 "VLoose": 1,
-    #                 "Loose": 2,
-    #                 "Medium": 3,
-    #                 "Tight": 4,
-    #             }.items()
-    #         ],
-    #         "tau_sf_vsele_barrel": "nom",  # or "up"/"down" for up/down variation
-    #         "tau_sf_vsele_endcap": "nom",  # or "up"/"down" for up/down variation
-    #         "tau_sf_vsmu_wheel1": "nom",
-    #         "tau_sf_vsmu_wheel2": "nom",
-    #         "tau_sf_vsmu_wheel3": "nom",
-    #         "tau_sf_vsmu_wheel4": "nom",
-    #         "tau_sf_vsmu_wheel5": "nom",
-    #     },
-    # )
+
+    # di tau id weights
     configuration.add_config_parameters(
         ["emt"],
         {
@@ -426,7 +322,7 @@ def build_config(
     )
     # MT / ET tau id sf variations
     configuration.add_config_parameters(
-        ["emt", "mt", "et"],
+        ["emt"],
         {
             "tau_sf_vsjet_tau30to35": "nom",
             "tau_sf_vsjet_tau35to40": "nom",
@@ -436,56 +332,9 @@ def build_config(
             "tau_vsjet_sf_dependence": "pt",  # or "dm", "eta"
         },
     )
-    # TT tau id sf variations
-    configuration.add_config_parameters(
-        ["tt"],
-        {
-            "tau_sf_vsjet_tauDM0": "nom",
-            "tau_sf_vsjet_tauDM1": "nom",
-            "tau_sf_vsjet_tauDM10": "nom",
-            "tau_sf_vsjet_tauDM11": "nom",
-            "tau_vsjet_sf_dependence": "dm",  # or "dm", "eta"
-        },
-    )
-
-    # MT / ET tau selection
-    configuration.add_config_parameters(
-        ["et", "mt"],
-        {
-            "min_tau_pt": 30.0,
-            "max_tau_eta": 2.3,
-            "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 4,
-            "vsele_tau_id_bit": 4,
-            "vsmu_tau_id_bit": 1,
-        },
-    )
-    # TT tau selection:
-    configuration.add_config_parameters(
-        ["tt"],
-        {
-            "min_tau_pt": 35.0,
-            "max_tau_eta": 2.3,
-            "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 4,
-            "vsele_tau_id_bit": 4,
-            "vsmu_tau_id_bit": 1,
-        },
-    )
-
-    # MT/MM scope Muon selection
-    configuration.add_config_parameters(
-        ["mt", "mm"],
-        {
-            "muon_index_in_pair": 0,
-            "min_muon_pt": 23.0,
-            "max_muon_eta": 2.1,
-            "muon_iso_cut": 0.15,
-        },
-    )
     # Muon scale factors configuration
     configuration.add_config_parameters(
-        ["emt", "mt", "mm", "em"],
+        ["emt"],
         {
             "muon_sf_file": EraModifier(
                 {
@@ -508,7 +357,7 @@ def build_config(
     )
     # electron scale factors configuration
     configuration.add_config_parameters(
-        ["emt", "et", "ee", "em"],
+        ["emt"],
         {
             "ele_sf_file": EraModifier(
                 {
@@ -530,6 +379,30 @@ def build_config(
             "ele_sf_varation": "sf",  # "sf" is nominal, "sfup"/"sfdown" are up/down variations
         },
     )
+    # muon base selection:
+    configuration.add_config_parameters(
+        "global",
+        {
+            "min_muon_pt": 10.0,
+            "max_muon_eta": 2.4,
+            "max_muon_dxy": 0.045,
+            "max_muon_dz": 0.2,
+            "muon_id": "Muon_mediumId",
+            "muon_iso_cut": 0.4,
+        },
+    )
+    # electron base selection:
+    configuration.add_config_parameters(
+        "global",
+        {
+            "min_ele_pt": 10.0,
+            "max_ele_eta": 2.5,
+            "max_ele_dxy": 0.045,
+            "max_ele_dz": 0.2,
+            "max_ele_iso": 0.3,
+            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+        },
+    )
     # EMT scope electron and selection
     configuration.add_config_parameters(
         ["emt"],
@@ -537,55 +410,46 @@ def build_config(
             "min_tau_pt": 20.0,
             "max_tau_eta": 2.3,
             "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 4,
-            "vsele_tau_id_bit": 4,
-            "vsmu_tau_id_bit": 1,
+            "vsjet_tau_id_bit": 7,
+            "vsele_tau_id_bit": 6,
+            "vsmu_tau_id_bit": 4,
             "electron_index_in_triple": 0,
-            "min_electron_pt": 25.0,
-            "max_electron_eta": 2.1,
-            "electron_iso_cut": 0.3,
+            "min_electron_pt": 15.0,
+            "max_electron_eta": 2.5,  # in paper 2.1
+            "electron_iso_cut": 0.15,
             "muon_index_in_triple": 1,
-            "min_muon_pt": 23.0,
-            "max_muon_eta": 2.1,
+            "min_muon_pt": 15.0,
+            "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.5,
             "tripleselection_min_dR_leplep": 0.3,
         },
     )
-    # ET scope electron selection
-    configuration.add_config_parameters(
-        ["et"],
-        {
-            "electron_index_in_pair": 0,
-            "min_electron_pt": 25.0,
-            "max_electron_eta": 2.1,
-            "electron_iso_cut": 0.3,
-        },
-    )
-    # EM scope selection
-    configuration.add_config_parameters(
-        ["em"],
-        {
-            "electron_index_in_pair": 0,
-            "min_electron_pt": 25.0,
-            "max_electron_eta": 2.1,
-            "electron_iso_cut": 0.3,
-            "muon_index_in_pair": 1,
-            "min_muon_pt": 23.0,
-            "max_muon_eta": 2.1,
-            "muon_iso_cut": 0.15,
-        },
-    )
-    configuration.add_config_parameters(
-        ["mm"],
-        {
-            "min_muon_pt": 20.0,
-            "max_muon_eta": 2.1,
-            "muon_iso_cut": 0.15,
-            "second_muon_index_in_pair": 1,
-        },
-    )
+
+    # # # test
+    # configuration.add_config_parameters(
+    #     ["emt"],
+    #     {
+    #         "min_tau_pt": 0.0,
+    #         "max_tau_eta": 23,
+    #         "max_tau_dz": 0.6,
+    #         "vsjet_tau_id_bit": 0,
+    #         "vsele_tau_id_bit": 0,
+    #         "vsmu_tau_id_bit": 0,
+    #         "electron_index_in_triple": 0,
+    #         "min_electron_pt": 0.0,
+    #         "max_electron_eta": 25,  # in paper 2.1
+    #         "electron_iso_cut": 0.5,
+    #         "muon_index_in_triple": 1,
+    #         "min_muon_pt": 0.0,
+    #         "max_muon_eta": 24,
+    #         "muon_iso_cut": 0.5,
+    #         "deltaR_jet_veto": 0.5,
+    #         "tripleselection_min_dR_leptau": 0.0,
+    #         "tripleselection_min_dR_leplep": 0.0,
+    #     },
+    # )
 
     ## all scopes misc settings
     configuration.add_config_parameters(
@@ -647,69 +511,6 @@ def build_config(
         },
     )
 
-    # add muon scalefactors from embedding measurements
-    configuration.add_config_parameters(
-        ["mt", "mm", "em"],
-        {
-            "mc_muon_sf_file": "data/embedding/muon_2018UL.json.gz",
-            "mc_muon_id_sf": "ID_pt_eta_bins",
-            "mc_muon_iso_sf": "Iso_pt_eta_bins",
-        },
-    )
-    # add electron scalefactors from embedding measurements
-    configuration.add_config_parameters(
-        ["et", "ee", "em"],
-        {
-            "mc_electron_sf_file": "data/embedding/electron_2018UL.json.gz",
-            "mc_electron_id_sf": "ID90_pt_eta_bins",
-            "mc_electron_iso_sf": "Iso_pt_eta_bins",
-        },
-    )
-    # muon trigger SF settings from embedding measurements
-    configuration.add_config_parameters(
-        ["mt"],
-        {
-            "singlemuon_trigger_sf_mc": [
-                {
-                    "flagname": "trg_wgt_single_mu24",
-                    "mc_trigger_sf": "Trg_IsoMu24_pt_eta_bins",
-                },
-                {
-                    "flagname": "trg_wgt_single_mu27",
-                    "mc_trigger_sf": "Trg_IsoMu27_pt_eta_bins",
-                },
-                {
-                    "flagname": "trg_wgt_single_mu24ormu27",
-                    "mc_trigger_sf": "Trg_IsoMu27_or_IsoMu24_pt_eta_bins",
-                },
-            ]
-        },
-    )
-    # electron trigger SF settings from embedding measurements
-    configuration.add_config_parameters(
-        ["et"],
-        {
-            "singlelectron_trigger_sf_mc": [
-                {
-                    "flagname": "trg_wgt_single_ele27",
-                    "mc_trigger_sf": "Trg27_Iso_pt_eta_bins",
-                },
-                {
-                    "flagname": "trg_wgt_single_ele32",
-                    "mc_trigger_sf": "Trg32_Iso_pt_eta_bins",
-                },
-                {
-                    "flagname": "trg_wgt_single_ele35",
-                    "mc_trigger_sf": "Trg35_Iso_pt_eta_bins",
-                },
-                {
-                    "flagname": "trg_wgt_single_ele27orele32orele35",
-                    "mc_trigger_sf": "Trg_Iso_pt_eta_bins",
-                },
-            ]
-        },
-    )
-
     configuration.add_producers(
         "global",
         [
@@ -764,7 +565,7 @@ def build_config(
             taus.GoodTaus,
             taus.NumberOfGoodTaus,
             pairselection.EMTTripleSelection,
-            # pairselection.GoodMTPairFilter,
+            pairselection.GoodEMTTripleFilter,
             pairselection.LVElWH1,
             pairselection.LVMuWH2,
             pairselection.LVTauWH3,
@@ -773,10 +574,15 @@ def build_config(
             pairselection.LVTau3Uncorrected,
             pairquantities.EMTTripleQuantities,
             genparticles.EMTGenTripleQuantities,
-            #  scalefactors.MuonIDIso_SF,
+            #  scalefactors
             scalefactors.Tau_3_VsJetTauID_lt_SF,
             scalefactors.Tau_3_VsEleTauID_SF,
             scalefactors.Tau_3_VsMuTauID_SF,
+            # scalefactors.Muon_2_ID_SF,
+            # scalefactors.EleID_SF,
+            # scalefactors.Muon_2_Iso_SF,
+            # scalefactors.EMTGenerateSingleMuonTriggerSF_MC,
+            # scalefactors.EMTGenerateSingleElectronTriggerSF_MC,
             # electrons
             electrons.GoodElectrons,
             electrons.NumberOfGoodElectrons,
@@ -786,136 +592,7 @@ def build_config(
             triggers.EMTGenerateSingleMuonTriggerFlags,
         ],
     )
-    configuration.add_producers(
-        "mm",
-        [
-            muons.GoodMuons,
-            muons.VetoMuons,
-            muons.VetoSecondMuon,
-            muons.ExtraMuonsVeto,
-            muons.NumberOfGoodMuons,
-            pairselection.ZMuMuPairSelection,
-            pairselection.GoodMuMuPairFilter,
-            pairselection.LVMu1,
-            pairselection.LVMu2,
-            pairselection.LVMu1Uncorrected,
-            pairselection.LVMu2Uncorrected,
-            pairquantities.MuMuPairQuantities,
-            genparticles.MuMuGenPairQuantities,
-            # scalefactors.MuonIDIso_SF,
-            triggers.MuMuGenerateSingleMuonTriggerFlags,
-        ],
-    )
-    configuration.add_producers(
-        "mt",
-        [
-            muons.GoodMuons,
-            muons.NumberOfGoodMuons,
-            muons.VetoMuons,
-            muons.ExtraMuonsVeto,
-            taus.TauEnergyCorrection,
-            # taus.BaseTaus,
-            taus.GoodTaus,
-            taus.NumberOfGoodTaus,
-            electrons.ExtraElectronsVeto,
-            pairselection.MTPairSelection,
-            pairselection.GoodMTPairFilter,
-            pairselection.LVMu1,
-            pairselection.LVTau2,
-            pairselection.LVMu1Uncorrected,
-            pairselection.LVTau2Uncorrected,
-            pairquantities.MTDiTauPairQuantities,
-            genparticles.MTGenDiTauPairQuantities,
-            #  scalefactors.MuonIDIso_SF,
-            scalefactors.Tau_2_VsJetTauID_lt_SF,
-            scalefactors.Tau_2_VsEleTauID_SF,
-            scalefactors.Tau_2_VsMuTauID_SF,
-            triggers.MTGenerateSingleMuonTriggerFlags,
-            triggers.MTGenerateCrossTriggerFlags,
-            triggers.GenerateSingleTrailingTauTriggerFlags,
-        ],
-    )
-    configuration.add_producers(
-        "et",
-        [
-            electrons.GoodElectrons,
-            taus.TauEnergyCorrection,
-            # taus.BaseTaus,
-            taus.GoodTaus,
-            taus.NumberOfGoodTaus,
-            electrons.NumberOfGoodElectrons,
-            electrons.VetoElectrons,
-            electrons.ExtraElectronsVeto,
-            muons.ExtraMuonsVeto,
-            pairselection.ETPairSelection,
-            pairselection.GoodETPairFilter,
-            pairselection.LVEl1,
-            pairselection.LVTau2,
-            pairselection.LVEl1Uncorrected,
-            pairselection.LVTau2Uncorrected,
-            pairquantities.ETDiTauPairQuantities,
-            genparticles.ETGenDiTauPairQuantities,
-            scalefactors.Tau_2_VsJetTauID_lt_SF,
-            scalefactors.Tau_2_VsEleTauID_SF,
-            scalefactors.Tau_2_VsMuTauID_SF,
-            # scalefactors.EleID_SF,
-            triggers.ETGenerateSingleElectronTriggerFlags,
-            triggers.ETGenerateCrossTriggerFlags,
-            triggers.GenerateSingleTrailingTauTriggerFlags,
-        ],
-    )
-    configuration.add_producers(
-        "tt",
-        [
-            taus.TauEnergyCorrection,
-            # taus.BaseTaus,
-            taus.GoodTaus,
-            taus.NumberOfGoodTaus,
-            pairselection.TTPairSelection,
-            pairselection.GoodTTPairFilter,
-            pairselection.LVTau1,
-            pairselection.LVTau2,
-            pairselection.LVTau1Uncorrected,
-            pairselection.LVTau2Uncorrected,
-            pairquantities.TTDiTauPairQuantities,
-            genparticles.TTGenDiTauPairQuantities,
-            scalefactors.Tau_1_VsJetTauID_SF,
-            scalefactors.Tau_1_VsEleTauID_SF,
-            scalefactors.Tau_1_VsMuTauID_SF,
-            scalefactors.Tau_2_VsJetTauID_tt_SF,
-            scalefactors.Tau_2_VsEleTauID_SF,
-            scalefactors.Tau_2_VsMuTauID_SF,
-            triggers.TTGenerateDoubleTriggerFlags,
-            triggers.GenerateSingleTrailingTauTriggerFlags,
-            triggers.GenerateSingleLeadingTauTriggerFlags,
-        ],
-    )
-    configuration.add_producers(
-        "em",
-        [
-            electrons.GoodElectrons,
-            electrons.NumberOfGoodElectrons,
-            electrons.VetoElectrons,
-            electrons.ExtraElectronsVeto,
-            muons.GoodMuons,
-            muons.NumberOfGoodMuons,
-            muons.VetoMuons,
-            muons.ExtraMuonsVeto,
-            pairselection.EMPairSelection,
-            pairselection.GoodEMPairFilter,
-            pairselection.LVEl1,
-            pairselection.LVMu2,
-            pairselection.LVEl1Uncorrected,
-            pairselection.LVMu2Uncorrected,
-            pairquantities.EMDiTauPairQuantities,
-            genparticles.EMGenDiTauPairQuantities,
-            # scalefactors.MuonIDIso_SF,
-            # scalefactors.EleID_SF,
-            triggers.EMGenerateSingleElectronTriggerFlags,
-            triggers.EMGenerateSingleMuonTriggerFlags,
-            triggers.EMGenerateCrossTriggerFlags,
-        ],
-    )
+
     configuration.add_modification_rule(
         ["emt"],
         RemoveProducer(
@@ -929,32 +606,7 @@ def build_config(
             samples="data",
         ),
     )
-    configuration.add_modification_rule(
-        ["et", "mt"],
-        RemoveProducer(
-            producers=[
-                scalefactors.Tau_2_VsMuTauID_SF,
-                scalefactors.Tau_2_VsJetTauID_lt_SF,
-                scalefactors.Tau_2_VsEleTauID_SF,
-            ],
-            samples="data",
-        ),
-    )
 
-    configuration.add_modification_rule(
-        ["tt"],
-        RemoveProducer(
-            producers=[
-                scalefactors.Tau_1_VsJetTauID_SF,
-                scalefactors.Tau_1_VsEleTauID_SF,
-                scalefactors.Tau_1_VsMuTauID_SF,
-                scalefactors.Tau_2_VsJetTauID_tt_SF,
-                scalefactors.Tau_2_VsEleTauID_SF,
-                scalefactors.Tau_2_VsMuTauID_SF,
-            ],
-            samples="data",
-        ),
-    )
     configuration.add_modification_rule(
         scopes,
         RemoveProducer(
@@ -965,7 +617,7 @@ def build_config(
         ),
     )
     configuration.add_modification_rule(
-        ["et", "mt", "tt", "emt"],
+        ["emt"],
         ReplaceProducer(
             producers=[taus.TauEnergyCorrection, taus.TauEnergyCorrection_data],
             samples="data",
@@ -997,24 +649,7 @@ def build_config(
             samples=["data", "embedding", "embedding_mc"],
         ),
     )
-    configuration.add_modification_rule(
-        ["et", "mt", "tt"],
-        RemoveProducer(
-            producers=[
-                pairquantities.tau_gen_match_2,
-            ],
-            samples="data",
-        ),
-    )
-    configuration.add_modification_rule(
-        ["tt"],
-        RemoveProducer(
-            producers=[
-                pairquantities.tau_gen_match_1,
-            ],
-            samples="data",
-        ),
-    )
+
     configuration.add_modification_rule(
         scopes,
         RemoveProducer(
@@ -1037,7 +672,9 @@ def build_config(
     )
     configuration.add_modification_rule(
         scopes,
-        AppendProducer(producers=event.TopPtReweighting, samples="ttbar"),
+        AppendProducer(
+            producers=event.TopPtReweighting, samples=["ttbar", "rem_ttbar"]
+        ),
     )
     configuration.add_modification_rule(
         scopes,
@@ -1056,129 +693,32 @@ def build_config(
         AppendProducer(producers=event.JSONFilter, samples=["data", "embedding"]),
     )
 
-    # scope specific
-    configuration.add_modification_rule(
-        "mt",
-        RemoveProducer(
-            producers=[genparticles.MTGenDiTauPairQuantities],
-            samples=["data"],
-        ),
-    )
-    configuration.add_modification_rule(
-        "et",
-        RemoveProducer(
-            producers=[genparticles.ETGenDiTauPairQuantities],
-            samples=["data"],
-        ),
-    )
-    configuration.add_modification_rule(
-        "tt",
-        RemoveProducer(
-            producers=[genparticles.TTGenDiTauPairQuantities],
-            samples=["data"],
-        ),
-    )
-    configuration.add_modification_rule(
-        "em",
-        RemoveProducer(
-            producers=[genparticles.EMGenDiTauPairQuantities],
-            samples=["data"],
-        ),
-    )
-    configuration.add_modification_rule(
-        "mm",
-        RemoveProducer(
-            producers=[genparticles.MuMuGenPairQuantities],
-            samples=["data"],
-        ),
-    )
-    # lepton scalefactors from our measurement
-    configuration.add_modification_rule(
-        ["mt"],
-        AppendProducer(
-            producers=[
-                scalefactors.TauEmbeddingMuonIDSF_1_MC,
-                scalefactors.TauEmbeddingMuonIsoSF_1_MC,
-            ],
-            samples=[
-                sample
-                for sample in available_sample_types
-                if sample not in ["data", "embedding", "embedding_mc"]
-            ],
-        ),
-    )
-    configuration.add_modification_rule(
-        ["et"],
-        AppendProducer(
-            producers=[
-                scalefactors.TauEmbeddingElectronIDSF_1_MC,
-                scalefactors.TauEmbeddingElectronIsoSF_1_MC,
-            ],
-            samples=[
-                sample
-                for sample in available_sample_types
-                if sample not in ["data", "embedding", "embedding_mc"]
-            ],
-        ),
-    )
-    configuration.add_modification_rule(
-        ["em"],
-        AppendProducer(
-            producers=[
-                scalefactors.TauEmbeddingElectronIDSF_1_MC,
-                scalefactors.TauEmbeddingElectronIsoSF_1_MC,
-                scalefactors.TauEmbeddingMuonIDSF_2_MC,
-                scalefactors.TauEmbeddingMuonIsoSF_2_MC,
-            ],
-            samples=[
-                sample
-                for sample in available_sample_types
-                if sample not in ["data", "embedding", "embedding_mc"]
-            ],
-        ),
-    )
-    configuration.add_modification_rule(
-        ["mm"],
-        AppendProducer(
-            producers=[
-                scalefactors.TauEmbeddingMuonIDSF_1_MC,
-                scalefactors.TauEmbeddingMuonIsoSF_1_MC,
-                scalefactors.TauEmbeddingMuonIDSF_2_MC,
-                scalefactors.TauEmbeddingMuonIsoSF_2_MC,
-            ],
-            samples=[
-                sample
-                for sample in available_sample_types
-                if sample not in ["data", "embedding", "embedding_mc"]
-            ],
-        ),
-    )
-    configuration.add_modification_rule(
-        ["mt"],
-        AppendProducer(
-            producers=[
-                scalefactors.MTGenerateSingleMuonTriggerSF_MC,
-            ],
-            samples=[
-                sample
-                for sample in available_sample_types
-                if sample not in ["data", "embedding", "embedding_mc"]
-            ],
-        ),
-    )
-    configuration.add_modification_rule(
-        ["et"],
-        AppendProducer(
-            producers=[
-                scalefactors.ETGenerateSingleElectronTriggerSF_MC,
-            ],
-            samples=[
-                sample
-                for sample in available_sample_types
-                if sample not in ["data", "embedding", "embedding_mc"]
-            ],
-        ),
-    )
+    # configuration.add_modification_rule(
+    #     ["mt"],
+    #     AppendProducer(
+    #         producers=[
+    #             scalefactors.MTGenerateSingleMuonTriggerSF_MC,
+    #         ],
+    #         samples=[
+    #             sample
+    #             for sample in available_sample_types
+    #             if sample not in ["data", "embedding", "embedding_mc"]
+    #         ],
+    #     ),
+    # )
+    # configuration.add_modification_rule(
+    #     ["et"],
+    #     AppendProducer(
+    #         producers=[
+    #             scalefactors.ETGenerateSingleElectronTriggerSF_MC,
+    #         ],
+    #         samples=[
+    #             sample
+    #             for sample in available_sample_types
+    #             if sample not in ["data", "embedding", "embedding_mc"]
+    #         ],
+    #     ),
+    # )
     configuration.add_outputs(
         scopes,
         [
@@ -1191,6 +731,10 @@ def build_config(
             q.is_vbf_htautau,
             q.is_diboson,
             q.is_whtautau,
+            q.is_rem_ttbar,
+            q.is_triboson,
+            q.is_rem_VH,
+            q.is_ggZZ,
             nanoAOD.run,
             q.lumi,
             q.npartons,
@@ -1288,97 +832,7 @@ def build_config(
             q.gen_match_3,
         ],
     )
-    # configuration.add_outputs(
-    #     scopes,
-    #     [
-    #         q.is_data,
-    #         q.is_embedding,
-    #         q.is_ttbar,
-    #         q.is_dyjets,
-    #         q.is_wjets,
-    #         q.is_ggh_htautau,
-    #         q.is_vbf_htautau,
-    #         q.is_diboson,
-    #         nanoAOD.run,
-    #         q.lumi,
-    #         q.npartons,
-    #         nanoAOD.event,
-    #         q.puweight,
-    #         q.pt_1,
-    #         q.pt_2,
-    #         q.eta_1,
-    #         q.eta_2,
-    #         q.phi_1,
-    #         q.phi_2,
-    #         q.njets,
-    #         q.jpt_1,
-    #         q.jpt_2,
-    #         q.jeta_1,
-    #         q.jeta_2,
-    #         q.jphi_1,
-    #         q.jphi_2,
-    #         q.jtag_value_1,
-    #         q.jtag_value_2,
-    #         q.mjj,
-    #         q.m_vis,
-    #         q.deltaR_ditaupair,
-    #         q.pt_vis,
-    #         q.nbtag,
-    #         q.bpt_1,
-    #         q.bpt_2,
-    #         q.beta_1,
-    #         q.beta_2,
-    #         q.bphi_1,
-    #         q.bphi_2,
-    #         q.btag_value_1,
-    #         q.btag_value_2,
-    #         q.btag_weight,
-    #         q.mass_1,
-    #         q.mass_2,
-    #         q.dxy_1,
-    #         q.dxy_2,
-    #         q.dz_1,
-    #         q.dz_2,
-    #         q.q_1,
-    #         q.q_2,
-    #         q.iso_1,
-    #         q.iso_2,
-    #         q.gen_pt_1,
-    #         q.gen_eta_1,
-    #         q.gen_phi_1,
-    #         q.gen_mass_1,
-    #         q.gen_pdgid_1,
-    #         q.gen_pt_2,
-    #         q.gen_eta_2,
-    #         q.gen_phi_2,
-    #         q.gen_mass_2,
-    #         q.gen_pdgid_2,
-    #         q.gen_m_vis,
-    #         q.met,
-    #         q.metphi,
-    #         q.pfmet,
-    #         q.pfmetphi,
-    #         q.met_uncorrected,
-    #         q.metphi_uncorrected,
-    #         q.pfmet_uncorrected,
-    #         q.pfmetphi_uncorrected,
-    #         q.metSumEt,
-    #         q.metcov00,
-    #         q.metcov01,
-    #         q.metcov10,
-    #         q.metcov11,
-    #         q.pzetamissvis,
-    #         q.mTdileptonMET,
-    #         q.mt_1,
-    #         q.mt_2,
-    #         q.pt_tt,
-    #         q.pt_ttjj,
-    #         q.mt_tot,
-    #         q.genbosonmass,
-    #         q.gen_match_1,
-    #         q.gen_match_2,
-    #     ],
-    # )
+
     # add genWeight for everything but data
     if sample != "data":
         configuration.add_outputs(
@@ -1404,122 +858,14 @@ def build_config(
             q.muon_veto_flag,
             q.dimuon_veto,
             q.electron_veto_flag,
-            # q.id_wgt_mu_1,
-            # q.iso_wgt_mu_1,
+            # q.id_wgt_ele_wp90nonIso_1,
+            # q.id_wgt_mu_2,
+            # q.iso_wgt_mu_2,
             triggers.EMTGenerateSingleMuonTriggerFlags.output_group,
             triggers.EMTGenerateSingleElectronTriggerFlags.output_group,
         ],
     )
-    configuration.add_outputs(
-        "mt",
-        [
-            q.nmuons,
-            q.ntaus,
-            scalefactors.Tau_2_VsJetTauID_lt_SF.output_group,
-            scalefactors.Tau_2_VsEleTauID_SF.output_group,
-            scalefactors.Tau_2_VsMuTauID_SF.output_group,
-            pairquantities.VsJetTauIDFlag_2.output_group,
-            pairquantities.VsEleTauIDFlag_2.output_group,
-            pairquantities.VsMuTauIDFlag_2.output_group,
-            triggers.MTGenerateSingleMuonTriggerFlags.output_group,
-            triggers.MTGenerateCrossTriggerFlags.output_group,
-            triggers.GenerateSingleTrailingTauTriggerFlags.output_group,
-            q.taujet_pt_2,
-            # q.gen_taujet_pt_2,
-            q.decaymode_2,
-            q.tau_gen_match_2,
-            q.muon_veto_flag,
-            q.dimuon_veto,
-            q.electron_veto_flag,
-            # q.id_wgt_mu_1,
-            # q.iso_wgt_mu_1,
-        ],
-    )
-    configuration.add_outputs(
-        "et",
-        [
-            q.nelectrons,
-            q.ntaus,
-            scalefactors.Tau_2_VsJetTauID_lt_SF.output_group,
-            scalefactors.Tau_2_VsEleTauID_SF.output_group,
-            scalefactors.Tau_2_VsMuTauID_SF.output_group,
-            pairquantities.VsJetTauIDFlag_2.output_group,
-            pairquantities.VsEleTauIDFlag_2.output_group,
-            pairquantities.VsMuTauIDFlag_2.output_group,
-            triggers.ETGenerateSingleElectronTriggerFlags.output_group,
-            triggers.ETGenerateCrossTriggerFlags.output_group,
-            triggers.GenerateSingleTrailingTauTriggerFlags.output_group,
-            q.taujet_pt_2,
-            # q.gen_taujet_pt_2,
-            q.decaymode_2,
-            q.tau_gen_match_2,
-            q.muon_veto_flag,
-            q.dimuon_veto,
-            q.electron_veto_flag,
-            # q.id_wgt_ele_wp90nonIso_1,
-            # q.id_wgt_ele_wp80nonIso_1,
-        ],
-    )
-    configuration.add_outputs(
-        "tt",
-        [
-            q.ntaus,
-            scalefactors.Tau_1_VsJetTauID_SF.output_group,
-            scalefactors.Tau_1_VsEleTauID_SF.output_group,
-            scalefactors.Tau_1_VsMuTauID_SF.output_group,
-            scalefactors.Tau_2_VsJetTauID_tt_SF.output_group,
-            scalefactors.Tau_2_VsEleTauID_SF.output_group,
-            scalefactors.Tau_2_VsMuTauID_SF.output_group,
-            pairquantities.VsJetTauIDFlag_1.output_group,
-            pairquantities.VsEleTauIDFlag_1.output_group,
-            pairquantities.VsMuTauIDFlag_1.output_group,
-            pairquantities.VsJetTauIDFlag_2.output_group,
-            pairquantities.VsEleTauIDFlag_2.output_group,
-            pairquantities.VsMuTauIDFlag_2.output_group,
-            triggers.TTGenerateDoubleTriggerFlags.output_group,
-            triggers.GenerateSingleTrailingTauTriggerFlags.output_group,
-            triggers.GenerateSingleLeadingTauTriggerFlags.output_group,
-            q.taujet_pt_1,
-            q.taujet_pt_2,
-            # q.gen_taujet_pt_2,
-            q.decaymode_1,
-            q.decaymode_2,
-            q.tau_gen_match_1,
-            q.tau_gen_match_2,
-            # q.muon_veto_flag,
-            # q.dimuon_veto,
-            # q.electron_veto_flag,
-        ],
-    )
-    configuration.add_outputs(
-        "em",
-        [
-            q.nelectrons,
-            q.nmuons,
-            triggers.EMGenerateSingleElectronTriggerFlags.output_group,
-            triggers.EMGenerateSingleMuonTriggerFlags.output_group,
-            triggers.EMGenerateCrossTriggerFlags.output_group,
-            q.muon_veto_flag,
-            q.dimuon_veto,
-            q.electron_veto_flag,
-            # q.id_wgt_ele_wp90nonIso_1,
-            # q.id_wgt_ele_wp80nonIso_1,
-            # q.id_wgt_mu_2,
-            # q.iso_wgt_mu_2,
-        ],
-    )
 
-    configuration.add_outputs(
-        "mm",
-        [
-            q.nmuons,
-            triggers.MuMuGenerateSingleMuonTriggerFlags.output_group,
-            # q.id_wgt_mu_1,
-            # q.iso_wgt_mu_1,
-            # q.id_wgt_mu_2,
-            # q.iso_wgt_mu_2,
-        ],
-    )
     if "data" not in sample and "embedding" not in sample:
         configuration.add_outputs(
             scopes,

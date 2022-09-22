@@ -248,6 +248,10 @@ is_ggh_htautau = Quantity("is_ggh_htautau")
 is_vbf_htautau = Quantity("is_vbf_htautau")
 is_diboson = Quantity("is_diboson")
 is_whtautau = Quantity("is_whtautau")
+is_rem_ttbar = Quantity("rem_ttbar")
+is_triboson = Quantity("triboson")
+is_rem_VH = Quantity("rem_VH")
+is_ggZZ = Quantity("ggZZ")
 
 # Electron Weights
 id_wgt_ele_wp90nonIso_1 = Quantity("id_wgt_ele_wp90nonIso_1")

@@ -100,7 +100,34 @@ is_whtautau = Producer(
     output=[q.is_whtautau],
     scopes=["global"],
 )
-
+is_rem_VH = Producer(
+    name="is_rem_VH",
+    call="basefunctions::DefineQuantity({df}, {output}, {is_rem_VH})",
+    input=[],
+    output=[q.is_rem_VH],
+    scopes=["global"],
+)
+is_ggZZ = Producer(
+    name="is_ggZZ",
+    call="basefunctions::DefineQuantity({df}, {output}, {is_ggZZ})",
+    input=[],
+    output=[q.is_ggZZ],
+    scopes=["global"],
+)
+is_triboson = Producer(
+    name="is_triboson",
+    call="basefunctions::DefineQuantity({df}, {output}, {is_triboson})",
+    input=[],
+    output=[q.is_triboson],
+    scopes=["global"],
+)
+is_rem_ttbar = Producer(
+    name="is_rem_ttbar",
+    call="basefunctions::DefineQuantity({df}, {output}, {is_rem_ttbar})",
+    input=[],
+    output=[q.is_rem_ttbar],
+    scopes=["global"],
+)
 SampleFlags = ProducerGroup(
     name="SampleFlags",
     call=None,
@@ -117,6 +144,10 @@ SampleFlags = ProducerGroup(
         is_vbf_htautau,
         is_diboson,
         is_whtautau,
+        is_rem_ttbar,
+        is_triboson,
+        is_rem_VH,
+        is_ggZZ,
     ],
 )
 

@@ -31,6 +31,22 @@ EMTTripleSelection = Producer(
     scopes=["emt"],
 )
 
+GoodEMTTripleFlag = Producer(
+    name="GoodEMTTripleFlag",
+    call="whtautau_tripleselection::flagGoodTriples({df}, {output}, {input})",
+    input=[q.leptontriple],
+    output=[],
+    scopes=["emt"],
+)
+
+GoodEMTTripleFilter = Filter(
+    name="GoodEMTTripleFilter",
+    call='basefunctions::FilterFlagsAny({df}, "GoodEleMuTauTriples", {input})',
+    input=[],
+    scopes=["emt"],
+    subproducers=[GoodEMTTripleFlag],
+)
+
 MTPairSelection = Producer(
     name="MTPairSelection",
     call="ditau_pairselection::mutau::PairSelection({df}, {input_vec}, {output}, {pairselection_min_dR})",

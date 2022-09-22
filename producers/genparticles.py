@@ -61,7 +61,7 @@ ElElGenPair = Producer(
 )
 MuMuTrueGenPair = Producer(
     name="GenPair",
-    call="ditau_pairselection::buildtruegenpair({df}, {input}, {output}, {truegen_mother_pdgid}, {truegen_daughter_1_pdgid}, {truegen_daugher_2_pdgid})",
+    call="ditau_pairselection::buildtruegenpair({df}, {input}, {output}, {truegen_mother_pdgid_1}, {truegen_mother_pdgid_23},{truegen_daughter_1_pdgid}, {truegen_daugher_2_pdgid}, {truegen_daugher_3_pdgid})",
     input=[
         nanoAOD.GenParticle_statusFlags,
         nanoAOD.GenParticle_status,

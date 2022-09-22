@@ -26,6 +26,10 @@ def run(args):
         "data",
         "electroweak_boson",
         "wminush_htautau",
+        "triboson",
+        "rem_ttbar",
+        "ggZZ",
+        "rem_VH",
     ]
     available_eras = ["2016", "2017", "2018"]
     available_scopes = ["et", "mt", "tt", "em", "ee", "mm", "emt"]
