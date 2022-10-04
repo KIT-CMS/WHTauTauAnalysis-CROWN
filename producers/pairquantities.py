@@ -133,13 +133,27 @@ deltaR_elemu_wh = Producer(
     output=[q.deltaR_elemu_wh],
     scopes=["emt"],
 )
-# pt_vis = Producer(
-#     name="pt_vis",
-#     call="quantities::pt_vis({df}, {output}, {input_vec})",
-#     input=[q.p4_1, q.p4_2],
-#     output=[q.pt_vis],
-#     scopes=["mt", "et", "tt", "em", "ee", "mm"],
-# )
+deltaPhi_elemu = Producer(
+    name="deltaPhi_elemu",
+    call="quantities::deltaPhi({df}, {output}, {input})",
+    input=[q.p4_1, q.p4_2],
+    output=[q.deltaPhi_elemu],
+    scopes=["emt"],
+)
+deltaPhi_eletau = Producer(
+    name="deltaPhi_eletau",
+    call="quantities::deltaPhi({df}, {output}, {input})",
+    input=[q.p4_1, q.p4_3],
+    output=[q.deltaPhi_eletau],
+    scopes=["emt"],
+)
+deltaPhi_WH = Producer(
+    name="deltaPhi_WH",
+    call="quantities::deltaPhi_WH({df}, {output}, {input})",
+    input=[q.p4_1, q.p4_2, q.p4_3],
+    output=[q.deltaPhi_WH],
+    scopes=["emt"],
+)
 pt_vis = Producer(
     name="pt_vis",
     call="quantities::pt_vis({df}, {output}, {input_vec})",
@@ -147,7 +161,20 @@ pt_vis = Producer(
     output=[q.pt_vis],
     scopes=["emt"],
 )
-
+eta_vis = Producer(
+    name="eta_vis",
+    call="quantities::eta_vis({df}, {output}, {input_vec})",
+    input=[q.p4_2, q.p4_3],
+    output=[q.eta_vis],
+    scopes=["emt"],
+)
+phi_vis = Producer(
+    name="phi_vis",
+    call="quantities::phi_vis({df}, {output}, {input_vec})",
+    input=[q.p4_2, q.p4_3],
+    output=[q.phi_vis],
+    scopes=["emt"],
+)
 Lt = Producer(
     name="Lt",
     call="quantities::Lt({df}, {output}, {input})",
@@ -758,10 +785,15 @@ EMTTripleQuantities = ProducerGroup(
         UnrollTauLV3,
         m_vis,
         pt_vis,
+        eta_vis,
+        phi_vis,
         Lt,
         deltaR_elemu_wh,
         deltaR_eletau_wh,
         deltaR_mutau_wh,
+        deltaPhi_elemu,
+        deltaPhi_eletau,
+        deltaPhi_WH,
     ],
 )
 MTDiTauPairQuantities = ProducerGroup(
