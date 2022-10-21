@@ -120,7 +120,7 @@ def build_config(
     #     },
     # )
     configuration.add_config_parameters(
-        ["emt"],
+        ["emt", "met"],
         {
             "tau_dms": "0,1,10,11",
             "tau_sf_file": EraModifier(
@@ -243,7 +243,7 @@ def build_config(
 
     # di tau id weights
     configuration.add_config_parameters(
-        ["emt"],
+        ["emt", "met"],
         {
             "vsjet_tau_id": [
                 {
@@ -320,9 +320,94 @@ def build_config(
             "tau_sf_vsmu_wheel5": "nom",
         },
     )
+    configuration.add_config_parameters(
+        scopes,
+        {
+            "ggHNNLOweightsRootfile": "data/htxs/NNLOPS_reweight.root",
+            "ggH_generator": "powheg",
+            "zptmass_file": EraModifier(
+                {
+                    "2016": "data/zpt/htt_scalefactors_legacy_2016.root",
+                    "2017": "data/zpt/htt_scalefactors_legacy_2017.root",
+                    "2018": "data/zpt/htt_scalefactors_legacy_2018.root",
+                }
+            ),
+            "zptmass_functor": "zptmass_weight_nom",
+            "zptmass_arguments": "z_gen_mass,z_gen_pt",
+        },
+    )
+
+    # add muon scalefactors from embedding measurements
+    configuration.add_config_parameters(
+        ["emt", "met"],
+        {
+            "mc_muon_sf_file": "data/embedding/muon_2018UL.json.gz",
+            "mc_muon_id_sf": "ID_pt_eta_bins",
+            "mc_muon_iso_sf": "Iso_pt_eta_bins",
+            "mc_muon_id_extrapolation": 1.0,  # for nominal case
+            "mc_muon_iso_extrapolation": 1.0,  # for nominal case
+        },
+    )
+    # add electron scalefactors from embedding measurements
+    configuration.add_config_parameters(
+        ["emt", "met"],
+        {
+            "mc_electron_sf_file": "data/embedding/electron_2018UL.json.gz",
+            "mc_electron_id_sf": "ID90_pt_eta_bins",
+            "mc_electron_iso_sf": "Iso_pt_eta_bins",
+            "mc_electron_id_extrapolation": 1.0,  # for nominal case
+            "mc_electron_iso_extrapolation": 1.0,  # for nominal case
+        },
+    )
+    # muon trigger SF settings from embedding measurements
+    configuration.add_config_parameters(
+        ["emt", "met"],
+        {
+            "singlemuon_trigger_sf_mc": [
+                {
+                    "flagname": "trg_wgt_single_mu24",
+                    "mc_trigger_sf": "Trg_IsoMu24_pt_eta_bins",
+                    "mc_muon_trg_extrapolation": 1.0,  # for nominal case
+                },
+                {
+                    "flagname": "trg_wgt_single_mu27",
+                    "mc_trigger_sf": "Trg_IsoMu27_pt_eta_bins",
+                    "mc_muon_trg_extrapolation": 1.0,  # for nominal case
+                },
+                {
+                    "flagname": "trg_wgt_single_mu24ormu27",
+                    "mc_trigger_sf": "Trg_IsoMu27_or_IsoMu24_pt_eta_bins",
+                    "mc_muon_trg_extrapolation": 1.0,  # for nominal case
+                },
+            ]
+        },
+    )
+    # electron trigger SF settings from embedding measurements
+    configuration.add_config_parameters(
+        ["emt", "met"],
+        {
+            "singlelectron_trigger_sf_mc": [
+                {
+                    "flagname": "trg_wgt_single_ele32",
+                    "mc_trigger_sf": "Trg32_Iso_pt_eta_bins",
+                    "mc_electron_trg_extrapolation": 1.0,  # for nominal case
+                },
+                {
+                    "flagname": "trg_wgt_single_ele35",
+                    "mc_trigger_sf": "Trg35_Iso_pt_eta_bins",
+                    "mc_electron_trg_extrapolation": 1.0,  # for nominal case
+                },
+                {
+                    "flagname": "trg_wgt_single_ele32orele35",
+                    "mc_trigger_sf": "Trg32_or_Trg35_Iso_pt_eta_bins",
+                    "mc_electron_trg_extrapolation": 1.0,  # for nominal case
+                },
+            ]
+        },
+    )
     # MT / ET tau id sf variations
     configuration.add_config_parameters(
-        ["emt"],
+        ["emt", "met"],
         {
             "tau_sf_vsjet_tau30to35": "nom",
             "tau_sf_vsjet_tau35to40": "nom",
@@ -334,7 +419,7 @@ def build_config(
     )
     # Muon scale factors configuration
     configuration.add_config_parameters(
-        ["emt"],
+        ["emt", "met"],
         {
             "muon_sf_file": EraModifier(
                 {
@@ -357,7 +442,7 @@ def build_config(
     )
     # electron scale factors configuration
     configuration.add_config_parameters(
-        ["emt"],
+        ["emt", "met"],
         {
             "ele_sf_file": EraModifier(
                 {
@@ -410,47 +495,60 @@ def build_config(
             "min_tau_pt": 20.0,
             "max_tau_eta": 2.3,
             "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 3,  # 7,
-            "vsele_tau_id_bit": 3,  # 6,
-            "vsmu_tau_id_bit": 1,  # 4,
+            "vsjet_tau_id_bit": 3,  # vloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 3,  # vloose, 6 (tight) in paper
+            "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
             "electron_index_in_triple": 0,
-            "min_electron_pt": 15.0,
-            "max_electron_eta": 2.5,  # in paper 2.1
-            "electron_iso_cut": 0.15,
+            "min_electron_pt": 5.0,  # 15 in paper
+            "max_electron_eta": 3.0,  # in paper 2.1
+            "electron_iso_cut": 0.5,  # 0.15 in paper
             "muon_index_in_triple": 1,
             "min_muon_pt": 15.0,
             "max_muon_eta": 2.4,
-            "muon_iso_cut": 0.15,
+            "muon_iso_cut": 0.5,
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.5,
             "tripleselection_min_dR_leplep": 0.3,
         },
     )
-
-    # # # test
+    # MET scope electron and selection
+    configuration.add_config_parameters(
+        ["met"],
+        {
+            "min_tau_pt": 20.0,
+            "max_tau_eta": 2.3,
+            "max_tau_dz": 0.2,
+            "vsjet_tau_id_bit": 3,  # vloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 3,  # vloose, 6 (tight) in paper
+            "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
+            "electron_index_in_triple": 1,
+            "min_electron_pt": 5.0,  # 15 in paper
+            "max_electron_eta": 3.0,  # in paper 2.1
+            "electron_iso_cut": 0.5,  # 0.15 in paper
+            "muon_index_in_triple": 0,
+            "min_muon_pt": 15.0,
+            "max_muon_eta": 2.4,
+            "muon_iso_cut": 0.5,
+            "deltaR_jet_veto": 0.5,
+            "tripleselection_min_dR_leptau": 0.5,
+            "tripleselection_min_dR_leplep": 0.3,
+        },
+    )
+    # # EMT TrueGenTriple
     # configuration.add_config_parameters(
     #     ["emt"],
     #     {
-    #         "min_tau_pt": 0.0,
-    #         "max_tau_eta": 23,
-    #         "max_tau_dz": 0.6,
-    #         "vsjet_tau_id_bit": 0,
-    #         "vsele_tau_id_bit": 0,
-    #         "vsmu_tau_id_bit": 0,
-    #         "electron_index_in_triple": 0,
-    #         "min_electron_pt": 0.0,
-    #         "max_electron_eta": 25,  # in paper 2.1
-    #         "electron_iso_cut": 0.5,
-    #         "muon_index_in_triple": 1,
-    #         "min_muon_pt": 0.0,
-    #         "max_muon_eta": 24,
-    #         "muon_iso_cut": 0.5,
-    #         "deltaR_jet_veto": 0.5,
-    #         "tripleselection_min_dR_leptau": 0.0,
-    #         "tripleselection_min_dR_leplep": 0.0,
+    #         "truegen_mother_pdgid_23": SampleModifier(
+    #             {"rem_htautau": 25, "tt": 6, "vv": 24}, default=None
+    #         ),
+    #         "truegen_mother_pdgid_1": SampleModifier(
+    #             {"rem_htautau": 24, "tt": 6, "vv": 24}, default=None
+    #         ),
+    #         "truegen_daughter_1_pdgid": 11,
+    #         "truegen_daugher_2_pdgid": 15,
+    #         "truegen_daugher_3_pdgid": 15,
     #     },
     # )
-
     ## all scopes misc settings
     configuration.add_config_parameters(
         scopes,
@@ -539,7 +637,7 @@ def build_config(
         )
     # common
     configuration.add_producers(
-        scopes,
+        ["emt", "met"],
         [
             jets.JetCollection,
             jets.BasicJetQuantities,
@@ -548,13 +646,7 @@ def build_config(
             scalefactors.btagging_SF,
             met.MetCorrections,
             met.PFMetCorrections,
-            # pairquantities.DiTauPairMETQuantities,
             genparticles.GenMatching,
-        ],
-    )
-    configuration.add_producers(
-        "emt",
-        [
             # muons taus
             muons.GoodMuons,
             muons.NumberOfGoodMuons,
@@ -564,37 +656,66 @@ def build_config(
             # taus.BaseTaus,
             taus.GoodTaus,
             taus.NumberOfGoodTaus,
-            pairselection.EMTTripleSelection,
-            pairselection.GoodEMTTripleFilter,
-            pairselection.LVElWH1,
-            pairselection.LVMuWH2,
-            pairselection.LVTauWH3,
-            pairselection.LVEl1Uncorrected,
-            pairselection.LVMu2Uncorrected,
             pairselection.LVTau3Uncorrected,
-            pairquantities.EMTTripleQuantities,
-            genparticles.EMTGenTripleQuantities,
+            pairselection.LVTau3,
             #  scalefactors
             scalefactors.Tau_3_VsJetTauID_lt_SF,
             scalefactors.Tau_3_VsEleTauID_SF,
             scalefactors.Tau_3_VsMuTauID_SF,
-            scalefactors.Muon_2_ID_SF,
-            scalefactors.EleID_SF,
-            scalefactors.Muon_2_Iso_SF,
-            # scalefactors.EMTGenerateSingleMuonTriggerSF_MC,
-            # scalefactors.EMTGenerateSingleElectronTriggerSF_MC,
             # electrons
             electrons.GoodElectrons,
             electrons.NumberOfGoodElectrons,
             electrons.VetoElectrons,
             electrons.ExtraElectronsVeto,
-            triggers.EMTGenerateSingleElectronTriggerFlags,
-            triggers.EMTGenerateSingleMuonTriggerFlags,
+            pairquantities.mt,
+            pairselection.GoodTripleFilter,
         ],
     )
-
+    configuration.add_producers(
+        "emt",
+        [
+            pairselection.EMTTripleSelection,
+            # pairselection.EMTTripleSelectionWOEle,
+            pairselection.LVEl1,
+            pairselection.LVMu2,
+            pairselection.LVEl1Uncorrected,
+            pairselection.LVMu2Uncorrected,
+            pairquantities.EMTTripleQuantities,
+            genparticles.EMTGenTripleQuantities,
+            scalefactors.Muon_2_ID_SF,
+            scalefactors.EleID_SF,
+            scalefactors.Muon_2_Iso_SF,
+            scalefactors.EMTGenerateSingleMuonTriggerSF_MC,
+            scalefactors.EMTGenerateSingleElectronTriggerSF_MC,
+            triggers.EMTGenerateSingleElectronTriggerFlags,
+            triggers.EMTGenerateSingleMuonTriggerFlags,
+            # genparticles.EMTTrueGenTriple,
+        ],
+    )
+    configuration.add_producers(
+        "met",
+        [
+            pairselection.METTripleSelection,
+            # pairselection.EMTTripleSelectionWOEle,
+            pairselection.LVEl2,
+            pairselection.LVMu1,
+            pairselection.LVEl2Uncorrected,
+            pairselection.LVMu1Uncorrected,
+            pairquantities.METTripleQuantities,
+            genparticles.METGenTripleQuantities,
+            #  scalefactors
+            scalefactors.Muon_1_ID_SF,
+            scalefactors.EleID_SF,
+            scalefactors.Muon_1_Iso_SF,
+            triggers.METGenerateSingleElectronTriggerFlags,
+            triggers.METGenerateSingleMuonTriggerFlags,
+            scalefactors.METGenerateSingleMuonTriggerSF_MC,
+            scalefactors.METGenerateSingleElectronTriggerSF_MC,
+            # genparticles.EMTTrueGenTriple,
+        ],
+    )
     configuration.add_modification_rule(
-        ["emt"],
+        "emt",
         RemoveProducer(
             producers=[
                 scalefactors.Tau_3_VsMuTauID_SF,
@@ -602,6 +723,25 @@ def build_config(
                 scalefactors.Tau_3_VsEleTauID_SF,
                 genparticles.EMTGenTripleQuantities,
                 pairquantities.tau_gen_match_3,
+                scalefactors.EMTGenerateSingleMuonTriggerSF_MC,
+                scalefactors.EMTGenerateSingleElectronTriggerSF_MC,
+                #          genparticles.EMTTrueGenTriple,
+            ],
+            samples="data",
+        ),
+    )
+    configuration.add_modification_rule(
+        "met",
+        RemoveProducer(
+            producers=[
+                scalefactors.Tau_3_VsMuTauID_SF,
+                scalefactors.Tau_3_VsJetTauID_lt_SF,
+                scalefactors.Tau_3_VsEleTauID_SF,
+                genparticles.METGenTripleQuantities,
+                pairquantities.tau_gen_match_3,
+                scalefactors.METGenerateSingleMuonTriggerSF_MC,
+                scalefactors.METGenerateSingleElectronTriggerSF_MC,
+                #          genparticles.EMTTrueGenTriple,
             ],
             samples="data",
         ),
@@ -678,7 +818,7 @@ def build_config(
     )
     configuration.add_modification_rule(
         scopes,
-        AppendProducer(producers=event.ZPtMassReweighting, samples="dy"),
+        AppendProducer(producers=event.ZPtMassReweighting, samples="dyjets"),
     )
     # changes needed for data
     # global scope
@@ -693,32 +833,6 @@ def build_config(
         AppendProducer(producers=event.JSONFilter, samples=["data", "embedding"]),
     )
 
-    # configuration.add_modification_rule(
-    #     ["mt"],
-    #     AppendProducer(
-    #         producers=[
-    #             scalefactors.MTGenerateSingleMuonTriggerSF_MC,
-    #         ],
-    #         samples=[
-    #             sample
-    #             for sample in available_sample_types
-    #             if sample not in ["data", "embedding", "embedding_mc"]
-    #         ],
-    #     ),
-    # )
-    # configuration.add_modification_rule(
-    #     ["et"],
-    #     AppendProducer(
-    #         producers=[
-    #             scalefactors.ETGenerateSingleElectronTriggerSF_MC,
-    #         ],
-    #         samples=[
-    #             sample
-    #             for sample in available_sample_types
-    #             if sample not in ["data", "embedding", "embedding_mc"]
-    #         ],
-    #     ),
-    # )
     configuration.add_outputs(
         scopes,
         [
@@ -760,11 +874,13 @@ def build_config(
             q.jtag_value_2,
             q.mjj,
             q.m_vis,
-            q.deltaR_elemu_wh,
-            q.deltaR_eletau_wh,
-            q.deltaR_mutau_wh,
-            q.deltaPhi_elemu,
-            q.deltaPhi_eletau,
+            q.m_tt_lt,
+            q.pt_W_lt,
+            q.deltaR_12,
+            q.deltaR_13,
+            q.deltaR_23,
+            q.deltaPhi_12,
+            q.deltaPhi_13,
             q.deltaPhi_WH,
             q.eta_vis,
             q.phi_vis,
@@ -810,6 +926,7 @@ def build_config(
             q.gen_mass_3,
             q.gen_pdgid_3,
             q.gen_m_vis,
+            # q.truegentriple,
             q.met,
             q.metphi,
             q.pfmet,
@@ -823,14 +940,9 @@ def build_config(
             q.metcov01,
             q.metcov10,
             q.metcov11,
-            # q.pzetamissvis,
-            # q.mTdileptonMET,
-            # q.mt_1,
-            # q.mt_2,
-            # q.mt_3,
-            # q.pt_tt,
-            # q.pt_ttjj,
-            # q.mt_tot,
+            q.mt_1,
+            q.mt_2,
+            q.mt_3,
             q.genbosonmass,
             q.gen_match_1,
             q.gen_match_2,
@@ -843,6 +955,16 @@ def build_config(
         configuration.add_outputs(
             scopes,
             nanoAOD.genWeight,
+        )
+    if sample == "dyjets":
+        configuration.add_outputs(
+            scopes,
+            q.ZPtMassReweightWeight,
+        )
+    if sample in ["rem_ttbar", "ttbar"]:
+        configuration.add_outputs(
+            scopes,
+            q.topPtReweightWeight,
         )
     configuration.add_outputs(
         "emt",
@@ -860,14 +982,44 @@ def build_config(
             # q.gen_taujet_pt_2,
             q.decaymode_3,
             q.tau_gen_match_3,
-            q.muon_veto_flag,
-            q.dimuon_veto,
-            q.electron_veto_flag,
+            # q.muon_veto_flag,
+            # q.dimuon_veto,
+            # q.electron_veto_flag,
             q.id_wgt_ele_wp90nonIso_1,
             q.id_wgt_mu_2,
             q.iso_wgt_mu_2,
             triggers.EMTGenerateSingleMuonTriggerFlags.output_group,
             triggers.EMTGenerateSingleElectronTriggerFlags.output_group,
+            scalefactors.EMTGenerateSingleElectronTriggerSF_MC.output_group,
+            scalefactors.EMTGenerateSingleMuonTriggerSF_MC.output_group,
+        ],
+    )
+    configuration.add_outputs(
+        "met",
+        [
+            q.nelectrons,
+            q.nmuons,
+            q.ntaus,
+            scalefactors.Tau_3_VsJetTauID_lt_SF.output_group,
+            scalefactors.Tau_3_VsEleTauID_SF.output_group,
+            scalefactors.Tau_3_VsMuTauID_SF.output_group,
+            pairquantities.VsJetTauIDFlag_3.output_group,
+            pairquantities.VsEleTauIDFlag_3.output_group,
+            pairquantities.VsMuTauIDFlag_3.output_group,
+            q.taujet_pt_3,
+            # q.gen_taujet_pt_2,
+            q.decaymode_3,
+            q.tau_gen_match_3,
+            # q.muon_veto_flag,
+            # q.dimuon_veto,
+            # q.electron_veto_flag,
+            q.id_wgt_ele_wp90nonIso_2,
+            q.id_wgt_mu_1,
+            q.iso_wgt_mu_1,
+            triggers.METGenerateSingleMuonTriggerFlags.output_group,
+            triggers.METGenerateSingleElectronTriggerFlags.output_group,
+            scalefactors.METGenerateSingleElectronTriggerSF_MC.output_group,
+            scalefactors.METGenerateSingleMuonTriggerSF_MC.output_group,
         ],
     )
 
@@ -1062,90 +1214,90 @@ def build_config(
     #########################
     # MET Recoil Shifts
     #########################
-    configuration.add_shift(
-        SystematicShift(
-            name="metRecoilResponseUp",
-            shift_config={
-                ("et", "mt", "tt", "em", "ee", "mm"): {
-                    "apply_recoil_resolution_systematic": False,
-                    "apply_recoil_response_systematic": True,
-                    "recoil_systematic_shift_up": True,
-                    "recoil_systematic_shift_down": False,
-                },
-            },
-            producers={
-                ("et", "mt", "tt", "em", "ee", "mm"): met.ApplyRecoilCorrections
-            },
-        ),
-        samples=[
-            sample
-            for sample in available_sample_types
-            if sample not in ["data", "embedding", "embedding_mc"]
-        ],
-    )
-    configuration.add_shift(
-        SystematicShift(
-            name="metRecoilResponseDown",
-            shift_config={
-                ("et", "mt", "tt", "em", "ee", "mm"): {
-                    "apply_recoil_resolution_systematic": False,
-                    "apply_recoil_response_systematic": True,
-                    "recoil_systematic_shift_up": False,
-                    "recoil_systematic_shift_down": True,
-                },
-            },
-            producers={
-                ("et", "mt", "tt", "em", "ee", "mm"): met.ApplyRecoilCorrections
-            },
-        ),
-        samples=[
-            sample
-            for sample in available_sample_types
-            if sample not in ["data", "embedding", "embedding_mc"]
-        ],
-    )
-    configuration.add_shift(
-        SystematicShift(
-            name="metRecoilResolutionUp",
-            shift_config={
-                ("et", "mt", "tt", "em", "ee", "mm"): {
-                    "apply_recoil_resolution_systematic": True,
-                    "apply_recoil_response_systematic": False,
-                    "recoil_systematic_shift_up": True,
-                    "recoil_systematic_shift_down": False,
-                },
-            },
-            producers={
-                ("et", "mt", "tt", "em", "ee", "mm"): met.ApplyRecoilCorrections
-            },
-        ),
-        samples=[
-            sample
-            for sample in available_sample_types
-            if sample not in ["data", "embedding", "embedding_mc"]
-        ],
-    )
-    configuration.add_shift(
-        SystematicShift(
-            name="metRecoilResolutionDown",
-            shift_config={
-                ("et", "mt", "tt", "em", "ee", "mm"): {
-                    "apply_recoil_resolution_systematic": True,
-                    "apply_recoil_response_systematic": False,
-                    "recoil_systematic_shift_up": False,
-                    "recoil_systematic_shift_down": True,
-                },
-            },
-            producers={
-                ("et", "mt", "tt", "em", "ee", "mm"): met.ApplyRecoilCorrections
-            },
-        ),
-        samples=[
-            sample
-            for sample in available_sample_types
-            if sample not in ["data", "embedding", "embedding_mc"]
-        ],
-    )
+    # configuration.add_shift(
+    #     SystematicShift(
+    #         name="metRecoilResponseUp",
+    #         shift_config={
+    #             ("et", "mt", "tt", "em", "ee", "mm"): {
+    #                 "apply_recoil_resolution_systematic": False,
+    #                 "apply_recoil_response_systematic": True,
+    #                 "recoil_systematic_shift_up": True,
+    #                 "recoil_systematic_shift_down": False,
+    #             },
+    #         },
+    #         producers={
+    #             ("et", "mt", "tt", "em", "ee", "mm"): met.ApplyRecoilCorrections
+    #         },
+    #     ),
+    #     samples=[
+    #         sample
+    #         for sample in available_sample_types
+    #         if sample not in ["data", "embedding", "embedding_mc"]
+    #     ],
+    # )
+    # configuration.add_shift(
+    #     SystematicShift(
+    #         name="metRecoilResponseDown",
+    #         shift_config={
+    #             ("et", "mt", "tt", "em", "ee", "mm"): {
+    #                 "apply_recoil_resolution_systematic": False,
+    #                 "apply_recoil_response_systematic": True,
+    #                 "recoil_systematic_shift_up": False,
+    #                 "recoil_systematic_shift_down": True,
+    #             },
+    #         },
+    #         producers={
+    #             ("et", "mt", "tt", "em", "ee", "mm"): met.ApplyRecoilCorrections
+    #         },
+    #     ),
+    #     samples=[
+    #         sample
+    #         for sample in available_sample_types
+    #         if sample not in ["data", "embedding", "embedding_mc"]
+    #     ],
+    # )
+    # configuration.add_shift(
+    #     SystematicShift(
+    #         name="metRecoilResolutionUp",
+    #         shift_config={
+    #             ("et", "mt", "tt", "em", "ee", "mm"): {
+    #                 "apply_recoil_resolution_systematic": True,
+    #                 "apply_recoil_response_systematic": False,
+    #                 "recoil_systematic_shift_up": True,
+    #                 "recoil_systematic_shift_down": False,
+    #             },
+    #         },
+    #         producers={
+    #             ("et", "mt", "tt", "em", "ee", "mm"): met.ApplyRecoilCorrections
+    #         },
+    #     ),
+    #     samples=[
+    #         sample
+    #         for sample in available_sample_types
+    #         if sample not in ["data", "embedding", "embedding_mc"]
+    #     ],
+    # )
+    # configuration.add_shift(
+    #     SystematicShift(
+    #         name="metRecoilResolutionDown",
+    #         shift_config={
+    #             ("et", "mt", "tt", "em", "ee", "mm"): {
+    #                 "apply_recoil_resolution_systematic": True,
+    #                 "apply_recoil_response_systematic": False,
+    #                 "recoil_systematic_shift_up": False,
+    #                 "recoil_systematic_shift_down": True,
+    #             },
+    #         },
+    #         producers={
+    #             ("et", "mt", "tt", "em", "ee", "mm"): met.ApplyRecoilCorrections
+    #         },
+    #     ),
+    #     samples=[
+    #         sample
+    #         for sample in available_sample_types
+    #         if sample not in ["data", "embedding", "embedding_mc"]
+    #     ],
+    # )
     #########################
     # Pileup Shifts
     #########################

@@ -71,11 +71,15 @@ def build_config(
             "min_muon_pt": 15.0,
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
-            "truegen_mother_pdgid": SampleModifier(
-                {"emb_mc": 23, "tt": 6, "vv": 24}, default=None
+            "truegen_mother_pdgid_23": SampleModifier(
+                {"rem_htautau": 25, "tt": 6, "vv": 24}, default=None
             ),
-            "truegen_daughter_1_pdgid": 13,
-            "truegen_daugher_2_pdgid": 13,
+            "truegen_mother_pdgid_1": SampleModifier(
+                {"rem_htautau": 24, "tt": 6, "vv": 24}, default=None
+            ),
+            "truegen_daughter_1_pdgid": 11,
+            "truegen_daugher_2_pdgid": 15,
+            "truegen_daugher_3_pdgid": 15,
         },
     )
 
