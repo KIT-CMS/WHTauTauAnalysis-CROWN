@@ -30,6 +30,31 @@ EMTTrueGenTriple = Producer(
     output=[q.truegentriple],
     scopes=["emt", "met"],
 )
+MMTGenTriple = Producer(
+    name="MMTGenTriple",
+    call="whtautau_tripleselection::buildgentriple({df}, {input}, {output})",
+    input=[
+        q.leptontriple,
+        nanoAOD.Muon_indexToGen,
+        nanoAOD.Muon_indexToGen,
+        nanoAOD.Tau_indexToGen,
+    ],
+    output=[q.gen_leptontriple],
+    scopes=["mmt"],
+)
+MMTTrueGenTriple = Producer(
+    name="MMTTrueGenTriple",
+    call="whtautau_tripleselection::buildtruegentriple({df}, {input}, {output}, {truegen_mother_pdgid_1}, {truegen_mother_pdgid_23},{truegen_daughter_1_pdgid}, {truegen_daugher_2_pdgid}, {truegen_daugher_3_pdgid})",
+    input=[
+        nanoAOD.GenParticle_statusFlags,
+        nanoAOD.GenParticle_status,
+        nanoAOD.GenParticle_pdgId,
+        nanoAOD.GenParticle_motheridx,
+        nanoAOD.GenParticle_pt,
+    ],
+    output=[q.truegentriple],
+    scopes=["mmt"],
+)
 ####################
 # Set of general producers for Gen DiTauPair Quantities
 ####################
@@ -44,7 +69,7 @@ LVGenParticle1 = Producer(
         nanoAOD.GenParticle_mass,
     ],
     output=[q.gen_p4_1],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 LVGenParticle2 = Producer(
     name="LVGenParticle2",
@@ -57,7 +82,7 @@ LVGenParticle2 = Producer(
         nanoAOD.GenParticle_mass,
     ],
     output=[q.gen_p4_2],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 LVGenParticle3 = Producer(
     name="LVGenParticle3",
@@ -70,20 +95,7 @@ LVGenParticle3 = Producer(
         nanoAOD.GenParticle_mass,
     ],
     output=[q.gen_p4_3],
-    scopes=["emt", "met"],
-)
-LVTrueGenParticle1 = Producer(
-    name="LVTrueGenParticle1",
-    call="lorentzvectors::build({df}, {input_vec}, 0, {output})",
-    input=[
-        q.truegenpair,
-        nanoAOD.GenParticle_pt,
-        nanoAOD.GenParticle_eta,
-        nanoAOD.GenParticle_phi,
-        nanoAOD.GenParticle_mass,
-    ],
-    output=[q.gen_p4_1],
-    scopes=["mt", "et", "tt", "em", "mm", "ee"],
+    scopes=["emt", "met", "mmt"],
 )
 LVTrueGenParticle_WH1 = Producer(
     name="LVTrueGenParticleWH1",
@@ -96,20 +108,7 @@ LVTrueGenParticle_WH1 = Producer(
         nanoAOD.GenParticle_mass,
     ],
     output=[q.gen_p4_1],
-    scopes=["emt", "met"],
-)
-LVTrueGenParticle2 = Producer(
-    name="LVTrueGenParticle2",
-    call="lorentzvectors::build({df}, {input_vec}, 1, {output})",
-    input=[
-        q.truegenpair,
-        nanoAOD.GenParticle_pt,
-        nanoAOD.GenParticle_eta,
-        nanoAOD.GenParticle_phi,
-        nanoAOD.GenParticle_mass,
-    ],
-    output=[q.gen_p4_2],
-    scopes=["mt", "et", "tt", "em", "mm"],
+    scopes=["emt", "met", "mmt"],
 )
 LVTrueGenParticleWH2 = Producer(
     name="LVTrueGenParticleWH2",
@@ -122,7 +121,7 @@ LVTrueGenParticleWH2 = Producer(
         nanoAOD.GenParticle_mass,
     ],
     output=[q.gen_p4_2],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 LVTrueGenParticleWH3 = Producer(
     name="LVTrueGenParticleWH3",
@@ -135,133 +134,133 @@ LVTrueGenParticleWH3 = Producer(
         nanoAOD.GenParticle_mass,
     ],
     output=[q.gen_p4_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_pt_1 = Producer(
     name="gen_pt_1",
     call="quantities::pt({df}, {output}, {input})",
     input=[q.gen_p4_1],
     output=[q.gen_pt_1],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "mmt"],
 )
 gen_pt_2 = Producer(
     name="gen_pt_2",
     call="quantities::pt({df}, {output}, {input})",
     input=[q.gen_p4_2],
     output=[q.gen_pt_2],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "mmt"],
 )
 gen_pt_3 = Producer(
     name="gen_pt_3",
     call="quantities::pt({df}, {output}, {input})",
     input=[q.gen_p4_3],
     output=[q.gen_pt_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_eta_1 = Producer(
     name="gen_eta_1",
     call="quantities::eta({df}, {output}, {input})",
     input=[q.gen_p4_1],
     output=[q.gen_eta_1],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "mmt"],
 )
 gen_eta_2 = Producer(
     name="gen_eta_2",
     call="quantities::eta({df}, {output}, {input})",
     input=[q.gen_p4_2],
     output=[q.gen_eta_2],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "mmt"],
 )
 gen_eta_3 = Producer(
     name="gen_eta_3",
     call="quantities::eta({df}, {output}, {input})",
     input=[q.gen_p4_3],
     output=[q.gen_eta_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_phi_1 = Producer(
     name="gen_phi_1",
     call="quantities::phi({df}, {output}, {input})",
     input=[q.gen_p4_1],
     output=[q.gen_phi_1],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "met"],
+    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "met", "mmt"],
 )
 gen_phi_2 = Producer(
     name="gen_phi_2",
     call="quantities::phi({df}, {output}, {input})",
     input=[q.gen_p4_2],
     output=[q.gen_phi_2],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "mmt"],
 )
 gen_phi_3 = Producer(
     name="gen_phi_2",
     call="quantities::phi({df}, {output}, {input})",
     input=[q.gen_p4_3],
     output=[q.gen_phi_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_mass_1 = Producer(
     name="gen_mass_1",
     call="quantities::mass({df}, {output}, {input})",
     input=[q.gen_p4_1],
     output=[q.gen_mass_1],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "mmt"],
 )
 gen_mass_2 = Producer(
     name="gen_mass_2",
     call="quantities::mass({df}, {output}, {input})",
     input=[q.gen_p4_2],
     output=[q.gen_mass_2],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "mm", "emt", "met", "mmt"],
 )
 gen_mass_3 = Producer(
     name="gen_mass_3",
     call="quantities::mass({df}, {output}, {input})",
     input=[q.gen_p4_3],
     output=[q.gen_mass_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_pdgid_1 = Producer(
     name="gen_pdgid_1",
     call="quantities::pdgid({df}, {output}, 0, {input})",
     input=[q.gen_dileptonpair, nanoAOD.GenParticle_pdgId],
     output=[q.gen_pdgid_1],
-    scopes=["mt", "et", "tt", "em", "mm"],
+    scopes=["mt", "et", "tt", "em", "mm", "mmt"],
 )
 gen_pdgid_WH_1 = Producer(
     name="gen_pdgid_WH_1",
     call="quantities::pdgid({df}, {output}, 0, {input})",
     input=[q.gen_leptontriple, nanoAOD.GenParticle_pdgId],
     output=[q.gen_pdgid_1],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_pdgid_2 = Producer(
     name="gen_pdgid_2",
     call="quantities::pdgid({df}, {output}, 1, {input})",
     input=[q.gen_dileptonpair, nanoAOD.GenParticle_pdgId],
     output=[q.gen_pdgid_2],
-    scopes=["mt", "et", "tt", "em", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "mm"],
 )
 gen_pdgid_WH_2 = Producer(
     name="gen_pdgid_WH_2",
     call="quantities::pdgid({df}, {output}, 1, {input})",
     input=[q.gen_leptontriple, nanoAOD.GenParticle_pdgId],
     output=[q.gen_pdgid_2],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_pdgid_WH_3 = Producer(
     name="gen_pdgid_WH_3",
     call="quantities::pdgid({df}, {output}, 2, {input})",
     input=[q.gen_leptontriple, nanoAOD.GenParticle_pdgId],
     output=[q.gen_pdgid_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_m_vis_WH = Producer(
     name="gen_m_vis_WH",
     call="quantities::m_vis({df}, {output}, {input_vec})",
     input=[q.gen_p4_2, q.gen_p4_3],
     output=[q.gen_m_vis],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 gen_taujet_WH_pt_3 = Producer(
     name="gen_taujet_WH_pt_3",
@@ -273,14 +272,14 @@ gen_taujet_WH_pt_3 = Producer(
         nanoAOD.GenJet_pt,
     ],
     output=[q.gen_taujet_pt_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 UnrollGenMuLV2 = ProducerGroup(
     name="UnrollGenMuLV2",
     call=None,
     input=None,
     output=None,
-    scopes=["emt"],
+    scopes=["emt", "mmt"],
     subproducers=[gen_pt_2, gen_eta_2, gen_phi_2, gen_mass_2, gen_pdgid_WH_2],
 )
 UnrollGenElLV1 = ProducerGroup(
@@ -296,7 +295,7 @@ UnrollGenMuLV1 = ProducerGroup(
     call=None,
     input=None,
     output=None,
-    scopes=["met"],
+    scopes=["met", "mmt"],
     subproducers=[gen_pt_1, gen_eta_1, gen_phi_1, gen_mass_1, gen_pdgid_WH_1],
 )
 UnrollGenElLV2 = ProducerGroup(
@@ -312,7 +311,7 @@ UnrollGenTauLV3 = ProducerGroup(
     call=None,
     input=None,
     output=None,
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
     subproducers=[
         gen_pt_3,
         gen_eta_3,
@@ -356,6 +355,23 @@ METGenTripleQuantities = ProducerGroup(
         gen_m_vis_WH,
     ],
 )
+MMTGenTripleQuantities = ProducerGroup(
+    name="MMTGenTripleQuantities",
+    call=None,
+    input=None,
+    output=None,
+    scopes=["mmt"],
+    subproducers=[
+        MMTGenTriple,
+        LVGenParticle1,
+        LVGenParticle2,
+        LVGenParticle3,
+        UnrollGenMuLV2,
+        UnrollGenMuLV1,
+        UnrollGenTauLV3,
+        gen_m_vis_WH,
+    ],
+)
 #######################
 # DiTau Genmatching
 #######################
@@ -369,7 +385,7 @@ GenPairForGenMatching = Producer(
         nanoAOD.GenParticle_motheridx,
     ],
     output=[q.hadronic_gen_taus],
-    scopes=["mt", "et", "tt", "em", "ee", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "ee", "mm", "emt", "met", "mmt"],
 )
 GenMatchP1 = Producer(
     name="GenMatchP1",
@@ -387,7 +403,7 @@ GenMatchP1 = Producer(
         q.p4_1,
     ],
     output=[q.gen_match_1],
-    scopes=["mt", "et", "tt", "em", "ee", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "ee", "mm", "emt", "met", "mmt"],
 )
 
 GenMatchP2 = Producer(
@@ -406,7 +422,7 @@ GenMatchP2 = Producer(
         q.p4_2,
     ],
     output=[q.gen_match_2],
-    scopes=["mt", "et", "tt", "em", "ee", "mm", "emt", "met"],
+    scopes=["mt", "et", "tt", "em", "ee", "mm", "emt", "met", "mmt"],
 )
 
 GenMatchP3 = Producer(
@@ -425,7 +441,7 @@ GenMatchP3 = Producer(
         q.p4_3,
     ],
     output=[q.gen_match_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 
 # GenMatching = ProducerGroup(
@@ -445,7 +461,7 @@ GenMatching = ProducerGroup(
     call=None,
     input=None,
     output=None,
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
     subproducers=[
         GenPairForGenMatching,
         GenMatchP1,

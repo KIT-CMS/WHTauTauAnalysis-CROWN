@@ -32,7 +32,7 @@ def run(args):
         "rem_VH",
     ]
     available_eras = ["2016", "2017", "2018"]
-    available_scopes = ["mt", "et", "tt", "em", "mm", "ee", "emt", "met"]
+    available_scopes = ["mt", "et", "tt", "em", "mm", "ee", "emt", "met", "mmt"]
 
     ## setup variables
     shifts = set([shift.lower() for shift in args.shifts])

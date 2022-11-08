@@ -54,6 +54,25 @@ METTripleSelection = Producer(
     output=[q.leptontriple],
     scopes=["met"],
 )
+MMTTripleSelection = Producer(
+    name="MMTTripleSelection",
+    call="whtautau_tripleselection::mumutau::TripleSelection({df}, {input_vec}, {output}, {tripleselection_min_dR_leptau}, {tripleselection_min_dR_leplep})",
+    input=[
+        q.Tau_pt_corrected,
+        nanoAOD.Tau_eta,
+        nanoAOD.Tau_phi,
+        nanoAOD.Tau_mass,
+        nanoAOD.Tau_IDraw,
+        nanoAOD.Muon_pt,
+        nanoAOD.Muon_eta,
+        nanoAOD.Muon_phi,
+        nanoAOD.Muon_mass,
+        q.good_muons_mask,
+        q.good_taus_mask,
+    ],
+    output=[q.leptontriple],
+    scopes=["mmt"],
+)
 EMTTripleSelectionWOEle = Producer(
     name="EMTTripleSelectionWOEle",
     call="whtautau_tripleselection::elemutau::TripleSelectionWOEle({df}, {input_vec}, {output}, {tripleselection_min_dR_leptau})",
@@ -85,18 +104,18 @@ GoodTripleFlag = Producer(
     call="whtautau_tripleselection::flagGoodTriples({df}, {output}, {input})",
     input=[q.leptontriple],
     output=[],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 
 GoodTripleFilter = Filter(
     name="GoodTripleFilter",
     call='basefunctions::FilterFlagsAny({df}, "GoodTriples", {input})',
     input=[],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
     subproducers=[GoodTripleFlag],
 )
 LVMu1 = Producer(
-    name="LVMu2",
+    name="LVMu1",
     call="lorentzvectors::build({df}, {input_vec}, 0, {output})",
     input=[
         q.leptontriple,
@@ -106,7 +125,7 @@ LVMu1 = Producer(
         nanoAOD.Muon_mass,
     ],
     output=[q.p4_1],
-    scopes=["met"],
+    scopes=["met", "mmt"],
 )
 LVMu2 = Producer(
     name="LVMu2",
@@ -119,7 +138,7 @@ LVMu2 = Producer(
         nanoAOD.Muon_mass,
     ],
     output=[q.p4_2],
-    scopes=["emt"],
+    scopes=["emt", "mmt"],
 )
 LVEl2 = Producer(
     name="LVEl2",
@@ -158,7 +177,7 @@ LVTau3 = Producer(
         q.Tau_mass_corrected,
     ],
     output=[q.p4_3],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 ## uncorrected versions of all particles, used for MET propagation
 LVMu1Uncorrected = Producer(
@@ -172,7 +191,7 @@ LVMu1Uncorrected = Producer(
         nanoAOD.Muon_mass,
     ],
     output=[q.p4_1_uncorrected],
-    scopes=["met"],
+    scopes=["met", "mmt"],
 )
 LVMu2Uncorrected = Producer(
     name="LVMu2Uncorrected",
@@ -185,10 +204,10 @@ LVMu2Uncorrected = Producer(
         nanoAOD.Muon_mass,
     ],
     output=[q.p4_2_uncorrected],
-    scopes=["emt"],
+    scopes=["emt", "mmt"],
 )
 LVEl2Uncorrected = Producer(
-    name="LVEl1Uncorrected",
+    name="LVEl2Uncorrected",
     call="lorentzvectors::build({df}, {input_vec}, 1, {output})",
     input=[
         q.leptontriple,
@@ -224,5 +243,5 @@ LVTau3Uncorrected = Producer(
         nanoAOD.Tau_mass,
     ],
     output=[q.p4_3_uncorrected],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )

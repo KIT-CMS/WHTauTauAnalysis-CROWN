@@ -73,28 +73,28 @@ GoodMuonPtCut = Producer(
     call="physicsobject::CutPt({df}, {input}, {output}, {min_muon_pt})",
     input=[nanoAOD.Muon_pt],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
 )
 GoodMuonEtaCut = Producer(
     name="GoodMuonEtaCut",
     call="physicsobject::CutEta({df}, {input}, {output}, {max_muon_eta})",
     input=[nanoAOD.Muon_eta],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
 )
 GoodMuonIsoCut = Producer(
     name="GoodMuonIsoCut",
     call="physicsobject::electron::CutIsolation({df}, {output}, {input}, {muon_iso_cut})",
     input=[nanoAOD.Muon_iso],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
 )
 GoodMuons = ProducerGroup(
     name="GoodMuons",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
     input=[q.base_muons_mask],
     output=[q.good_muons_mask],
-    scopes=["em", "mt", "mm", "emt", "met"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
     subproducers=[
         GoodMuonPtCut,
         GoodMuonEtaCut,
@@ -106,7 +106,7 @@ NumberOfGoodMuons = Producer(
     call="quantities::NumberOfGoodLeptons({df}, {output}, {input})",
     input=[q.good_muons_mask],
     output=[q.nmuons],
-    scopes=["em", "mt", "mm", "emt", "met"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
 )
 # VetoMuons = Producer(
 #     name="VetoMuons",
@@ -120,14 +120,14 @@ VetoMuons = Producer(
     call="physicsobject::VetoCandInMask({df}, {output}, {input}, {muon_index_in_triple})",
     input=[q.base_muons_mask, q.leptontriple],
     output=[q.veto_muons_mask],
-    scopes=["emt", "met"],
+    scopes=["emt", "met", "mmt"],
 )
 VetoSecondMuon = Producer(
     name="VetoSecondMuon",
-    call="physicsobject::VetoCandInMask({df}, {output}, {input}, {second_muon_index_in_pair})",
-    input=[q.veto_muons_mask, q.dileptonpair],
+    call="physicsobject::VetoCandInMask({df}, {output}, {input}, {second_muon_index_in_triple})",
+    input=[q.veto_muons_mask, q.leptontriple],
     output=[q.veto_muons_mask_2],
-    scopes=["mm"],
+    scopes=["mmt"],
 )
 
 ExtraMuonsVeto = Producer(
@@ -137,13 +137,14 @@ ExtraMuonsVeto = Producer(
         "mm": [q.veto_muons_mask_2],
         "emt": [q.veto_muons_mask],
         "met": [q.veto_muons_mask],
+        "mmt": [q.veto_muons_mask_2],
         "em": [q.veto_muons_mask],
         "et": [q.base_muons_mask],
         "mt": [q.veto_muons_mask],
         "tt": [q.base_muons_mask],
     },
     output=[q.muon_veto_flag],
-    scopes=["em", "et", "mt", "tt", "mm", "emt", "met"],
+    scopes=["em", "et", "mt", "tt", "mm", "emt", "met", "mmt"],
 )
 
 ####################
