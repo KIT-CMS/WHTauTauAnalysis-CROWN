@@ -1,4 +1,5 @@
 from code_generation.quantity import Quantity
+from code_generation.quantity import NanoAODQuantity
 
 lumi = Quantity("lumi")
 puweight = Quantity("puweight")
@@ -35,6 +36,13 @@ gen_leptontriple = Quantity("gen_leptontriple")
 truegentriple = Quantity("truegentriple")
 good_jet_collection = Quantity("good_jet_collection")
 good_bjet_collection = Quantity("good_bjet_collection")
+
+# for fake rate measurements
+base_electrons_mask_fake = Quantity("base_electrons_mask_fake")
+base_muons_mask_fake = Quantity("base_muons_mask_fake")
+electron_is_nonisowp90_3 = Quantity("electron_is_nonisowp90_3")
+muon_is_mediumid_3 = Quantity("muon_is_mediumid_3")
+muon_is_tracker_3 = Quantity("muon_is_tracker_3")
 
 nelectrons = Quantity("nelectrons")
 nmuons = Quantity("nmuons")
@@ -106,6 +114,10 @@ m_vis = Quantity("m_vis")
 p4_miss_lt = Quantity("p4_miss_lt")
 m_tt_lt = Quantity("m_tt_lt")
 pt_W_lt = Quantity("pt_W_lt")
+p4_miss_tt = Quantity("p4_miss_tt")
+m_tt_tt = Quantity("m_tt_tt")
+pt_W_tt = Quantity("pt_W_tt")
+pt_123 = Quantity("pt_123")
 pt_vis = Quantity("pt_vis")
 eta_vis = Quantity("eta_vis")
 phi_vis = Quantity("phi_vis")
@@ -264,12 +276,16 @@ is_ggZZ = Quantity("ggZZ")
 # Electron Weights
 id_wgt_ele_wp90nonIso_1 = Quantity("id_wgt_ele_wp90nonIso_1")
 id_wgt_ele_wp90nonIso_2 = Quantity("id_wgt_ele_wp90nonIso_2")
+id_wgt_ele_wp90nonIso_3 = Quantity("id_wgt_ele_wp90nonIso_3")
 id_wgt_ele_wp80nonIso_1 = Quantity("id_wgt_ele_wp80nonIso_1")
 id_wgt_ele_wp80nonIso_2 = Quantity("id_wgt_ele_wp80nonIso_2")
+id_wgt_ele_wp80nonIso_3 = Quantity("id_wgt_ele_wp80nonIso_3")
 # Muon weights
 id_wgt_mu_1 = Quantity("id_wgt_mu_1")
 id_wgt_mu_2 = Quantity("id_wgt_mu_2")
+id_wgt_mu_3 = Quantity("id_wgt_mu_3")
 iso_wgt_mu_1 = Quantity("iso_wgt_mu_1")
 iso_wgt_mu_2 = Quantity("iso_wgt_mu_2")
+iso_wgt_mu_3 = Quantity("iso_wgt_mu_3")
 # btag weight
 btag_weight = Quantity("btag_weight")

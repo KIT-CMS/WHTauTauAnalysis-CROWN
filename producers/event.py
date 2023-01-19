@@ -199,7 +199,21 @@ ZPtMassReweighting = Producer(
         q.recoil_genboson_p4_vec,
     ],
     output=[q.ZPtMassReweightWeight],
-    scopes=["global", "em", "et", "mt", "tt", "mm", "emt", "met", "mmt"],
+    scopes=[
+        "global",
+        "em",
+        "et",
+        "mt",
+        "tt",
+        "mm",
+        "emt",
+        "met",
+        "mmt",
+        "ett",
+        "mtt",
+        "mme",
+        "eem",
+    ],
 )
 
 TopPtReweighting = Producer(
@@ -211,7 +225,21 @@ TopPtReweighting = Producer(
         nanoAOD.GenParticle_pt,
     ],
     output=[q.topPtReweightWeight],
-    scopes=["global", "em", "et", "mt", "tt", "mm", "emt", "met", "mmt"],
+    scopes=[
+        "global",
+        "em",
+        "et",
+        "mt",
+        "tt",
+        "mm",
+        "emt",
+        "met",
+        "mmt",
+        "ett",
+        "mtt",
+        "mme",
+        "eem",
+    ],
 )
 
 DiLeptonVeto = ProducerGroup(
@@ -228,7 +256,21 @@ GGH_NNLO_Reweighting = Producer(
     call='htxs::ggHNNLOWeights({df}, {output}, "{ggHNNLOweightsRootfile}", "{ggH_generator}", {input})',
     input=[nanoAOD.HTXS_Higgs_pt, nanoAOD.HTXS_njets30],
     output=[q.ggh_NNLO_weight],
-    scopes=["global", "em", "et", "mt", "tt", "mm", "emt", "met", "mmt"],
+    scopes=[
+        "global",
+        "em",
+        "et",
+        "mt",
+        "tt",
+        "mm",
+        "emt",
+        "met",
+        "mmt",
+        "ett",
+        "mtt",
+        "mme",
+        "eem",
+    ],
 )
 
 GGH_WG1_Uncertainties = Producer(
@@ -250,7 +292,21 @@ GGH_WG1_Uncertainties = Producer(
         q.THU_ggH_PT120,
         q.THU_ggH_qmtop,
     ],
-    scopes=["global", "em", "et", "mt", "tt", "mm", "emt", "met", "mmt"],
+    scopes=[
+        "global",
+        "em",
+        "et",
+        "mt",
+        "tt",
+        "mm",
+        "emt",
+        "met",
+        "mmt",
+        "ett",
+        "mtt",
+        "mme",
+        "eem",
+    ],
 )
 
 QQH_WG1_Uncertainties = Producer(
@@ -271,5 +327,19 @@ QQH_WG1_Uncertainties = Producer(
         q.THU_qqH_25,
         q.THU_qqH_JET01,
     ],
-    scopes=["global", "em", "et", "mt", "tt", "mm", "emt", "met", "mmt"],
+    scopes=[
+        "global",
+        "em",
+        "et",
+        "mt",
+        "tt",
+        "mm",
+        "emt",
+        "met",
+        "mmt",
+        "ett",
+        "mtt",
+        "mme",
+        "eem",
+    ],
 )

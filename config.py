@@ -120,7 +120,7 @@ def build_config(
     #     },
     # )
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "mmt", "ett", "mtt"],
         {
             "tau_dms": "0,1,10,11",
             "tau_sf_file": EraModifier(
@@ -243,7 +243,7 @@ def build_config(
 
     # di tau id weights
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "mmt", "ett", "mtt"],
         {
             "vsjet_tau_id": [
                 {
@@ -320,6 +320,17 @@ def build_config(
             "tau_sf_vsmu_wheel5": "nom",
         },
     )
+    # ETT/MTT tau id sf variations
+    configuration.add_config_parameters(
+        ["ett", "mtt"],
+        {
+            "tau_sf_vsjet_tauDM0": "nom",
+            "tau_sf_vsjet_tauDM1": "nom",
+            "tau_sf_vsjet_tauDM10": "nom",
+            "tau_sf_vsjet_tauDM11": "nom",
+            "tau_vsjet_sf_dependence": "dm",  # or "dm", "eta"
+        },
+    )
     configuration.add_config_parameters(
         scopes,
         {
@@ -339,7 +350,7 @@ def build_config(
 
     # add muon scalefactors from embedding measurements
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "mmt", "mtt", "mme", "eem"],
         {
             "mc_muon_sf_file": "data/embedding/muon_2018UL.json.gz",
             "mc_muon_id_sf": "ID_pt_eta_bins",
@@ -350,7 +361,7 @@ def build_config(
     )
     # add electron scalefactors from embedding measurements
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "ett", "mme", "eem"],
         {
             "mc_electron_sf_file": "data/embedding/electron_2018UL.json.gz",
             "mc_electron_id_sf": "ID90_pt_eta_bins",
@@ -361,7 +372,7 @@ def build_config(
     )
     # muon trigger SF settings from embedding measurements
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "mmt", "mtt", "mme", "eem"],
         {
             "singlemuon_trigger_sf_mc": [
                 {
@@ -384,7 +395,7 @@ def build_config(
     )
     # electron trigger SF settings from embedding measurements
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "ett", "mme", "eem"],
         {
             "singlelectron_trigger_sf_mc": [
                 {
@@ -407,7 +418,7 @@ def build_config(
     )
     # MT / ET tau id sf variations
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "mmt", "ett", "mtt"],
         {
             "tau_sf_vsjet_tau30to35": "nom",
             "tau_sf_vsjet_tau35to40": "nom",
@@ -417,9 +428,9 @@ def build_config(
             "tau_vsjet_sf_dependence": "pt",  # or "dm", "eta"
         },
     )
-    # Muon scale factors configuration
+    # Muon scale factors configuration / right now we use this scale factors (official)
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "mmt", "mtt", "mme", "eem"],
         {
             "muon_sf_file": EraModifier(
                 {
@@ -442,7 +453,7 @@ def build_config(
     )
     # electron scale factors configuration
     configuration.add_config_parameters(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "ett", "mme", "eem"],
         {
             "ele_sf_file": EraModifier(
                 {
@@ -470,10 +481,10 @@ def build_config(
         {
             "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
-            "max_muon_dxy": 0.045,
-            "max_muon_dz": 0.2,
-            "muon_id": "Muon_mediumId",
-            "muon_iso_cut": 0.4,
+            # "max_muon_dxy": 0.045,
+            # "max_muon_dz": 0.2,
+            # "muon_id": "Muon_mediumId",
+            # "muon_iso_cut": 0.5,
         },
     )
     # electron base selection:
@@ -482,10 +493,10 @@ def build_config(
         {
             "min_ele_pt": 10.0,
             "max_ele_eta": 2.5,
-            "max_ele_dxy": 0.045,
-            "max_ele_dz": 0.2,
-            "max_ele_iso": 0.3,
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            # "max_ele_dxy": 0.045,
+            # "max_ele_dz": 0.2,
+            # "max_ele_iso": 0.5,
+            # "ele_id": "Electron_mvaFall17V2noIso_WP90",
         },
     )
     # EMT scope electron and selection
@@ -541,8 +552,8 @@ def build_config(
             "min_tau_pt": 20.0,
             "max_tau_eta": 2.3,
             "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 1,  # vloose, 7 (vtight in paper)
-            "vsele_tau_id_bit": 2,  # vloose, 6 (tight) in paper
+            "vsjet_tau_id_bit": 1,  # vvvloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 1,  # vvloose, 6 (tight) in paper
             "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
             "muon_index_in_triple": 0,
             "second_muon_index_in_triple": 1,
@@ -552,6 +563,82 @@ def build_config(
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.0,
             "tripleselection_min_dR_leplep": 0.3,
+        },
+    )
+    # ETT scope electron and selection, also for fake rate measurements
+    configuration.add_config_parameters(
+        ["ett"],
+        {
+            "min_tau_pt": 20.0,
+            "max_tau_eta": 2.3,
+            "max_tau_dz": 0.2,
+            "vsjet_tau_id_bit": 3,  # vloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 3,  # vloose, 6 (tight) in paper
+            "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
+            "electron_index_in_triple": 0,
+            "min_electron_pt": 28.0,
+            "max_electron_eta": 2.1,
+            "electron_iso_cut": 0.5,
+            "deltaR_jet_veto": 0.5,
+            "tripleselection_min_dR_leptau": 0.5,
+            "tripleselection_min_dR_tautau": 0.5,
+        },
+    )
+    # MTT scope electron and selection, also for fake rate measurements
+    configuration.add_config_parameters(
+        ["mtt"],
+        {
+            "min_tau_pt": 20.0,
+            "max_tau_eta": 2.3,
+            "max_tau_dz": 0.2,
+            "vsjet_tau_id_bit": 3,  # vloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 3,  # vloose, 6 (tight) in paper
+            "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
+            "muon_index_in_triple": 0,
+            "min_muon_pt": 15.0,
+            "max_muon_eta": 2.4,
+            "muon_iso_cut": 0.5,
+            "deltaR_jet_veto": 0.5,
+            "tripleselection_min_dR_leptau": 0.5,
+            "tripleselection_min_dR_tautau": 0.5,
+        },
+    )
+    # MME scope electron and selection, also for fake rate measurements
+    configuration.add_config_parameters(
+        ["mme"],
+        {
+            "muon_index_in_triple": 0,
+            "second_muon_index_in_triple": 1,
+            "electron_index_in_triple": 2,
+            "min_muon_pt": 15.0,
+            "max_muon_eta": 2.4,
+            "muon_iso_cut": 0.5,
+            "deltaR_jet_veto": 0.5,
+            "tripleselection_min_dR_lep1lep1": 0.3,
+            "tripleselection_min_dR_lep1lep2": 0.3,
+            "min_electron_pt": 10.0,
+            "max_electron_eta": 2.5,
+            "electron_iso_cut": 3.0,  # no iso cut
+            "min_ele_pt_fake": 10.0,
+            "max_ele_eta_fake": 2.5,
+        },
+    )
+    # EEM scope electron and selection, also for fake rate measurements
+    configuration.add_config_parameters(
+        ["eem"],
+        {
+            "electron_index_in_triple": 0,
+            "second_electron_index_in_triple": 1,
+            "muon_index_in_triple": 2,
+            "min_muon_pt": 15.0,
+            "max_muon_eta": 2.4,
+            "muon_iso_cut": 0.5,
+            "min_electron_pt": 10.0,
+            "max_electron_eta": 2.5,
+            "electron_iso_cut": 3.0,  # no iso cut
+            "deltaR_jet_veto": 0.5,
+            "tripleselection_min_dR_lep1lep1": 0.3,
+            "tripleselection_min_dR_lep1lep2": 0.3,
         },
     )
     # # EMT TrueGenTriple
@@ -750,6 +837,7 @@ def build_config(
             muons.VetoMuons,
             muons.VetoSecondMuon,
             muons.ExtraMuonsVeto,
+            electrons.ExtraElectronsVeto,
             taus.TauEnergyCorrection,
             # taus.BaseTaus,
             taus.GoodTaus,
@@ -777,6 +865,175 @@ def build_config(
             scalefactors.Muon_2_Iso_SF,
             triggers.MMTGenerateSingleMuonTriggerFlags,
             scalefactors.MMTGenerateSingleMuonTriggerSF_MC,
+            # genparticles.EMTTrueGenTriple,
+        ],
+    )
+    configuration.add_producers(
+        ["ett"],
+        [
+            jets.JetCollection,
+            jets.BasicJetQuantities,
+            jets.BJetCollection,
+            jets.BasicBJetQuantities,
+            scalefactors.btagging_SF,
+            met.MetCorrections,
+            met.PFMetCorrections,
+            genparticles.GenMatching,
+            # muons taus
+            muons.ExtraMuonsVeto,
+            taus.TauEnergyCorrection,
+            taus.GoodTaus,
+            taus.NumberOfGoodTaus,
+            pairselection.LVTau2Uncorrected,
+            pairselection.LVTau2,
+            pairselection.LVTau3Uncorrected,
+            pairselection.LVTau3,
+            #  scalefactors
+            scalefactors.Tau_2_VsJetTauID_tt_SF,
+            scalefactors.Tau_2_VsEleTauID_SF,
+            scalefactors.Tau_2_VsMuTauID_SF,
+            scalefactors.Tau_3_VsJetTauID_tt_SF,
+            scalefactors.Tau_3_VsEleTauID_SF,
+            scalefactors.Tau_3_VsMuTauID_SF,
+            # electrons
+            electrons.GoodElectrons,
+            electrons.NumberOfGoodElectrons,
+            electrons.VetoElectrons,
+            electrons.ExtraElectronsVeto,
+            pairquantities.mt,
+            pairselection.GoodTripleFilter,
+            pairselection.ETTTripleSelection,
+            pairselection.LVEl1,
+            pairselection.LVEl1Uncorrected,
+            pairquantities.ETTTripleQuantities,
+            genparticles.ETTGenTripleQuantities,
+            scalefactors.EleID_SF,
+            scalefactors.ETTGenerateSingleElectronTriggerSF_MC,
+            triggers.ETTGenerateSingleElectronTriggerFlags,
+            # genparticles.EMTTrueGenTriple,
+        ],
+    )
+    configuration.add_producers(
+        ["mtt"],
+        [
+            jets.JetCollection,
+            jets.BasicJetQuantities,
+            jets.BJetCollection,
+            jets.BasicBJetQuantities,
+            scalefactors.btagging_SF,
+            met.MetCorrections,
+            met.PFMetCorrections,
+            genparticles.GenMatching,
+            # muons taus
+            electrons.ExtraElectronsVeto,
+            muons.GoodMuons,
+            muons.NumberOfGoodMuons,
+            muons.VetoMuons,
+            muons.ExtraMuonsVeto,
+            taus.TauEnergyCorrection,
+            # taus.BaseTaus,
+            taus.GoodTaus,
+            taus.NumberOfGoodTaus,
+            pairselection.LVTau2Uncorrected,
+            pairselection.LVTau2,
+            pairselection.LVTau3Uncorrected,
+            pairselection.LVTau3,
+            #  scalefactors
+            scalefactors.Tau_2_VsJetTauID_tt_SF,
+            scalefactors.Tau_2_VsEleTauID_SF,
+            scalefactors.Tau_2_VsMuTauID_SF,
+            scalefactors.Tau_3_VsJetTauID_tt_SF,
+            scalefactors.Tau_3_VsEleTauID_SF,
+            scalefactors.Tau_3_VsMuTauID_SF,
+            pairquantities.mt,
+            pairselection.GoodTripleFilter,
+            pairselection.MTTTripleSelection,
+            pairselection.LVMu1,
+            pairselection.LVMu1Uncorrected,
+            pairquantities.MTTTripleQuantities,
+            genparticles.MTTGenTripleQuantities,
+            scalefactors.Muon_1_ID_SF,
+            scalefactors.Muon_1_Iso_SF,
+            scalefactors.MTTGenerateSingleMuonTriggerSF_MC,
+            triggers.MTTGenerateSingleMuonTriggerFlags,
+            # genparticles.EMTTrueGenTriple,
+        ],
+    )
+    configuration.add_producers(
+        "mme",
+        [
+            jets.JetCollection,
+            jets.BasicJetQuantities,
+            jets.BJetCollection,
+            jets.BasicBJetQuantities,
+            scalefactors.btagging_SF,
+            met.MetCorrections,
+            met.PFMetCorrections,
+            genparticles.GenMatching,
+            # muons taus
+            muons.GoodMuons,
+            muons.NumberOfGoodMuons,
+            # muons.VetoMuons,
+            # muons.VetoSecondMuon,
+            # muons.ExtraMuonsVeto,
+            electrons.BaseElectrons_fake,
+            electrons.GoodElectrons,
+            pairquantities.mt,
+            pairselection.GoodTripleFilter,
+            pairselection.MMETripleSelection,
+            pairselection.LVMu2,
+            pairselection.LVMu1,
+            pairselection.LVEl3,
+            pairselection.LVEl3Uncorrected,
+            pairselection.LVMu2Uncorrected,
+            pairselection.LVMu1Uncorrected,
+            pairquantities.MMETripleQuantities,
+            genparticles.MMEGenTripleQuantities,
+            #  scalefactors
+            scalefactors.Muon_1_ID_SF,
+            scalefactors.Muon_1_Iso_SF,
+            scalefactors.Muon_2_ID_SF,
+            scalefactors.Muon_2_Iso_SF,
+            scalefactors.EleID_SF,
+            triggers.MMEGenerateSingleMuonTriggerFlags,
+            scalefactors.MMEGenerateSingleMuonTriggerSF_MC,
+            # genparticles.EMTTrueGenTriple,
+        ],
+    )
+    configuration.add_producers(
+        ["eem"],
+        [
+            jets.JetCollection,
+            jets.BasicJetQuantities,
+            jets.BJetCollection,
+            jets.BasicBJetQuantities,
+            scalefactors.btagging_SF,
+            met.MetCorrections,
+            met.PFMetCorrections,
+            genparticles.GenMatching,
+            # muons taus
+            muons.BaseMuons_fake,
+            muons.GoodMuons,
+            scalefactors.MuonIDIso_SF,
+            # electrons
+            electrons.GoodElectrons,
+            electrons.NumberOfGoodElectrons,
+            # electrons.VetoElectrons,
+            # electrons.ExtraElectronsVeto,
+            pairquantities.mt,
+            pairselection.GoodTripleFilter,
+            pairselection.EEMTripleSelection,
+            pairselection.LVEl1,
+            pairselection.LVEl1Uncorrected,
+            pairselection.LVEl2,
+            pairselection.LVEl2Uncorrected,
+            pairselection.LVMu3,
+            pairselection.LVMu3Uncorrected,
+            pairquantities.EEMTripleQuantities,
+            genparticles.EEMGenTripleQuantities,
+            scalefactors.EleID_SF,
+            scalefactors.EEMGenerateSingleElectronTriggerSF_MC,
+            triggers.EEMGenerateSingleElectronTriggerFlags,
             # genparticles.EMTTrueGenTriple,
         ],
     )
@@ -828,7 +1085,72 @@ def build_config(
         ),
     )
     configuration.add_modification_rule(
-        ["emt", "met", "mmt"],
+        "ett",
+        RemoveProducer(
+            producers=[
+                scalefactors.Tau_2_VsMuTauID_SF,
+                scalefactors.Tau_2_VsJetTauID_tt_SF,
+                scalefactors.Tau_2_VsEleTauID_SF,
+                scalefactors.Tau_3_VsMuTauID_SF,
+                scalefactors.Tau_3_VsJetTauID_tt_SF,
+                scalefactors.Tau_3_VsEleTauID_SF,
+                genparticles.ETTGenTripleQuantities,
+                pairquantities.tau_gen_match_3,
+                pairquantities.tau_gen_match_2,
+                scalefactors.ETTGenerateSingleElectronTriggerSF_MC,
+                #          genparticles.EMTTrueGenTriple,
+            ],
+            samples="data",
+        ),
+    )
+    configuration.add_modification_rule(
+        "mtt",
+        RemoveProducer(
+            producers=[
+                scalefactors.Tau_2_VsMuTauID_SF,
+                scalefactors.Tau_2_VsJetTauID_tt_SF,
+                scalefactors.Tau_2_VsEleTauID_SF,
+                scalefactors.Tau_3_VsMuTauID_SF,
+                scalefactors.Tau_3_VsJetTauID_tt_SF,
+                scalefactors.Tau_3_VsEleTauID_SF,
+                genparticles.MTTGenTripleQuantities,
+                pairquantities.tau_gen_match_3,
+                pairquantities.tau_gen_match_2,
+                scalefactors.MTTGenerateSingleMuonTriggerSF_MC,
+                #          genparticles.EMTTrueGenTriple,
+            ],
+            samples="data",
+        ),
+    )
+    configuration.add_modification_rule(
+        "mme",
+        RemoveProducer(
+            producers=[
+                genparticles.MMEGenTripleQuantities,
+                scalefactors.MMEGenerateSingleMuonTriggerSF_MC,
+            ],
+            samples="data",
+        ),
+    )
+    configuration.add_modification_rule(
+        "eem",
+        RemoveProducer(
+            producers=[
+                genparticles.EEMGenTripleQuantities,
+                scalefactors.EEMGenerateSingleElectronTriggerSF_MC,
+            ],
+            samples="data",
+        ),
+    )
+    # configuration.add_modification_rule(
+    #     "eem",
+    #     ReplaceProducer(
+    #         producers=[muons.BaseMuons, muons.BaseMuons_fake],
+    #         samples=[sample for sample in available_sample_types],
+    #     ),
+    # )
+    configuration.add_modification_rule(
+        ["emt", "met", "mmt", "ett", "mtt", "mme", "eem"],
         RemoveProducer(
             producers=[
                 scalefactors.btagging_SF,
@@ -837,7 +1159,7 @@ def build_config(
         ),
     )
     configuration.add_modification_rule(
-        ["emt", "met", "mmt"],
+        ["emt", "met", "mmt", "ett", "mtt"],
         ReplaceProducer(
             producers=[taus.TauEnergyCorrection, taus.TauEnergyCorrection_data],
             samples="data",
@@ -954,8 +1276,6 @@ def build_config(
             q.jtag_value_2,
             q.mjj,
             q.m_vis,
-            q.m_tt_lt,
-            q.pt_W_lt,
             q.deltaR_12,
             q.deltaR_13,
             q.deltaR_23,
@@ -1072,6 +1392,8 @@ def build_config(
             triggers.EMTGenerateSingleElectronTriggerFlags.output_group,
             scalefactors.EMTGenerateSingleElectronTriggerSF_MC.output_group,
             scalefactors.EMTGenerateSingleMuonTriggerSF_MC.output_group,
+            q.m_tt_lt,
+            q.pt_W_lt,
         ],
     )
     configuration.add_outputs(
@@ -1100,6 +1422,8 @@ def build_config(
             triggers.METGenerateSingleElectronTriggerFlags.output_group,
             scalefactors.METGenerateSingleElectronTriggerSF_MC.output_group,
             scalefactors.METGenerateSingleMuonTriggerSF_MC.output_group,
+            q.m_tt_lt,
+            q.pt_W_lt,
         ],
     )
     configuration.add_outputs(
@@ -1122,9 +1446,110 @@ def build_config(
             q.iso_wgt_mu_2,
             triggers.MMTGenerateSingleMuonTriggerFlags.output_group,
             scalefactors.MMTGenerateSingleMuonTriggerSF_MC.output_group,
+            q.muon_veto_flag,
+            q.electron_veto_flag,
+            q.m_tt_lt,
+            q.pt_W_lt,
         ],
     )
-
+    configuration.add_outputs(
+        "ett",
+        [
+            q.nelectrons,
+            q.ntaus,
+            scalefactors.Tau_2_VsJetTauID_tt_SF.output_group,
+            scalefactors.Tau_2_VsEleTauID_SF.output_group,
+            scalefactors.Tau_2_VsMuTauID_SF.output_group,
+            scalefactors.Tau_3_VsJetTauID_tt_SF.output_group,
+            scalefactors.Tau_3_VsEleTauID_SF.output_group,
+            scalefactors.Tau_3_VsMuTauID_SF.output_group,
+            pairquantities.VsJetTauIDFlag_2.output_group,
+            pairquantities.VsEleTauIDFlag_2.output_group,
+            pairquantities.VsMuTauIDFlag_2.output_group,
+            pairquantities.VsJetTauIDFlag_3.output_group,
+            pairquantities.VsEleTauIDFlag_3.output_group,
+            pairquantities.VsMuTauIDFlag_3.output_group,
+            q.taujet_pt_2,
+            q.taujet_pt_3,
+            q.decaymode_2,
+            q.decaymode_3,
+            q.tau_gen_match_2,
+            q.tau_gen_match_3,
+            q.muon_veto_flag,
+            q.electron_veto_flag,
+            q.id_wgt_ele_wp90nonIso_1,
+            triggers.ETTGenerateSingleElectronTriggerFlags.output_group,
+            scalefactors.ETTGenerateSingleElectronTriggerSF_MC.output_group,
+            q.m_tt_tt,
+            q.pt_W_tt,
+            q.pt_123,
+        ],
+    )
+    configuration.add_outputs(
+        "mtt",
+        [
+            q.nmuons,
+            q.ntaus,
+            scalefactors.Tau_2_VsJetTauID_tt_SF.output_group,
+            scalefactors.Tau_2_VsEleTauID_SF.output_group,
+            scalefactors.Tau_2_VsMuTauID_SF.output_group,
+            scalefactors.Tau_3_VsJetTauID_tt_SF.output_group,
+            scalefactors.Tau_3_VsEleTauID_SF.output_group,
+            scalefactors.Tau_3_VsMuTauID_SF.output_group,
+            pairquantities.VsJetTauIDFlag_2.output_group,
+            pairquantities.VsEleTauIDFlag_2.output_group,
+            pairquantities.VsMuTauIDFlag_2.output_group,
+            pairquantities.VsJetTauIDFlag_3.output_group,
+            pairquantities.VsEleTauIDFlag_3.output_group,
+            pairquantities.VsMuTauIDFlag_3.output_group,
+            q.taujet_pt_2,
+            q.taujet_pt_3,
+            q.decaymode_2,
+            q.decaymode_3,
+            q.tau_gen_match_2,
+            q.tau_gen_match_3,
+            q.muon_veto_flag,
+            q.electron_veto_flag,
+            q.id_wgt_mu_1,
+            q.iso_wgt_mu_1,
+            triggers.MTTGenerateSingleMuonTriggerFlags.output_group,
+            scalefactors.MTTGenerateSingleMuonTriggerSF_MC.output_group,
+            q.m_tt_tt,
+            q.pt_W_tt,
+            q.pt_123,
+        ],
+    )
+    configuration.add_outputs(
+        "eem",
+        [
+            q.id_wgt_ele_wp90nonIso_1,
+            q.id_wgt_ele_wp90nonIso_2,
+            q.muon_is_mediumid_3,
+            q.muon_is_tracker_3,
+            q.id_wgt_mu_3,
+            q.iso_wgt_mu_3,
+            q.is_global_3,
+            triggers.EEMGenerateSingleElectronTriggerFlags.output_group,
+            scalefactors.EEMGenerateSingleElectronTriggerSF_MC.output_group,
+            q.m_tt_lt,
+            q.pt_W_lt,
+        ],
+    )
+    configuration.add_outputs(
+        "mme",
+        [
+            q.id_wgt_ele_wp90nonIso_3,
+            q.id_wgt_mu_2,
+            q.iso_wgt_mu_2,
+            q.id_wgt_mu_1,
+            q.iso_wgt_mu_1,
+            q.electron_is_nonisowp90_3,
+            triggers.MMEGenerateSingleMuonTriggerFlags.output_group,
+            scalefactors.MMEGenerateSingleMuonTriggerSF_MC.output_group,
+            q.m_tt_lt,
+            q.pt_W_lt,
+        ],
+    )
     if "data" not in sample and "embedding" not in sample:
         configuration.add_outputs(
             scopes,

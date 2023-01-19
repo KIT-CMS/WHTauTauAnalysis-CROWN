@@ -20,6 +20,20 @@ MuonEtaCut = Producer(
     output=[],
     scopes=["global"],
 )
+MuonPtCut_fake = Producer(
+    name="MuonPtCut_fake",
+    call="physicsobject::CutPt({df}, {input}, {output}, {min_muon_pt})",
+    input=[nanoAOD.Muon_pt],
+    output=[],
+    scopes=["eem"],
+)
+MuonEtaCut_fake = Producer(
+    name="MuonEtaCut_fake",
+    call="physicsobject::CutEta({df}, {input}, {output}, {max_muon_eta})",
+    input=[nanoAOD.Muon_eta],
+    output=[],
+    scopes=["eem"],
+)
 MuonDxyCut = Producer(
     name="MuonDxyCut",
     call="physicsobject::CutDxy({df}, {input}, {output}, {max_muon_dxy})",
@@ -63,7 +77,17 @@ BaseMuons = ProducerGroup(
         MuonIsoCut,
     ],
 )
-
+BaseMuons_fake = ProducerGroup(
+    name="BaseMuons_fake",
+    call="physicsobject::CombineMasks({df}, {output}, {input})",
+    input=[],
+    output=[q.base_muons_mask_fake],
+    scopes=["eem"],
+    subproducers=[
+        MuonPtCut_fake,
+        MuonEtaCut_fake,
+    ],
+)
 ####################
 # Set of producers used for more specific selection of muons in channels
 ####################
@@ -73,28 +97,28 @@ GoodMuonPtCut = Producer(
     call="physicsobject::CutPt({df}, {input}, {output}, {min_muon_pt})",
     input=[nanoAOD.Muon_pt],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
 )
 GoodMuonEtaCut = Producer(
     name="GoodMuonEtaCut",
     call="physicsobject::CutEta({df}, {input}, {output}, {max_muon_eta})",
     input=[nanoAOD.Muon_eta],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
 )
 GoodMuonIsoCut = Producer(
     name="GoodMuonIsoCut",
     call="physicsobject::electron::CutIsolation({df}, {output}, {input}, {muon_iso_cut})",
     input=[nanoAOD.Muon_iso],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
 )
 GoodMuons = ProducerGroup(
     name="GoodMuons",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
     input=[q.base_muons_mask],
     output=[q.good_muons_mask],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
     subproducers=[
         GoodMuonPtCut,
         GoodMuonEtaCut,
@@ -106,7 +130,7 @@ NumberOfGoodMuons = Producer(
     call="quantities::NumberOfGoodLeptons({df}, {output}, {input})",
     input=[q.good_muons_mask],
     output=[q.nmuons],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
 )
 # VetoMuons = Producer(
 #     name="VetoMuons",
@@ -120,14 +144,14 @@ VetoMuons = Producer(
     call="physicsobject::VetoCandInMask({df}, {output}, {input}, {muon_index_in_triple})",
     input=[q.base_muons_mask, q.leptontriple],
     output=[q.veto_muons_mask],
-    scopes=["emt", "met", "mmt"],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem"],
 )
 VetoSecondMuon = Producer(
     name="VetoSecondMuon",
     call="physicsobject::VetoCandInMask({df}, {output}, {input}, {second_muon_index_in_triple})",
     input=[q.veto_muons_mask, q.leptontriple],
     output=[q.veto_muons_mask_2],
-    scopes=["mmt"],
+    scopes=["mmt", "mme"],
 )
 
 ExtraMuonsVeto = Producer(
@@ -135,8 +159,12 @@ ExtraMuonsVeto = Producer(
     call="physicsobject::LeptonVetoFlag({df}, {output}, {input})",
     input={
         "mm": [q.veto_muons_mask_2],
+        "mme": [q.veto_muons_mask],
+        "eem": [q.veto_muons_mask],
         "emt": [q.veto_muons_mask],
         "met": [q.veto_muons_mask],
+        "mtt": [q.veto_muons_mask],
+        "ett": [q.base_muons_mask],
         "mmt": [q.veto_muons_mask_2],
         "em": [q.veto_muons_mask],
         "et": [q.base_muons_mask],
@@ -144,7 +172,20 @@ ExtraMuonsVeto = Producer(
         "tt": [q.base_muons_mask],
     },
     output=[q.muon_veto_flag],
-    scopes=["em", "et", "mt", "tt", "mm", "emt", "met", "mmt"],
+    scopes=[
+        "em",
+        "et",
+        "mt",
+        "tt",
+        "mm",
+        "emt",
+        "met",
+        "mmt",
+        "mtt",
+        "ett",
+        "mme",
+        "eem",
+    ],
 )
 
 ####################
