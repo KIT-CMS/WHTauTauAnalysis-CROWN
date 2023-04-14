@@ -37,12 +37,17 @@ truegentriple = Quantity("truegentriple")
 good_jet_collection = Quantity("good_jet_collection")
 good_bjet_collection = Quantity("good_bjet_collection")
 
-# for fake rate measurements
-base_electrons_mask_fake = Quantity("base_electrons_mask_fake")
-base_muons_mask_fake = Quantity("base_muons_mask_fake")
 electron_is_nonisowp90_3 = Quantity("electron_is_nonisowp90_3")
 muon_is_mediumid_3 = Quantity("muon_is_mediumid_3")
+electron_is_nonisowp90_2 = Quantity("electron_is_nonisowp90_2")
+muon_is_mediumid_2 = Quantity("muon_is_mediumid_2")
+electron_is_nonisowp90_1 = Quantity("electron_is_nonisowp90_1")
+muon_is_mediumid_1 = Quantity("muon_is_mediumid_1")
 muon_is_tracker_3 = Quantity("muon_is_tracker_3")
+
+pt_1_uncorrected = Quantity("pt_1_uncorrected")
+pt_2_uncorrected = Quantity("pt_2_uncorrected")
+pt_3_uncorrected = Quantity("pt_3_uncorrected")
 
 nelectrons = Quantity("nelectrons")
 nmuons = Quantity("nmuons")

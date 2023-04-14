@@ -13,13 +13,6 @@ ElectronPtCut = Producer(
     output=[],
     scopes=["global"],
 )
-# ElectronPtCut_fake = Producer(
-#     name="ElectronPtCut_fake",
-#     call="physicsobject::CutPt({df}, {input}, {output}, {min_ele_pt_fake})",
-#     input=[nanoAOD.Electron_pt],
-#     output=[],
-#     scopes=["mme"],
-# )
 ElectronEtaCut = Producer(
     name="ElectronEtaCut",
     call="physicsobject::CutEta({df}, {input}, {output}, {max_ele_eta})",
@@ -27,13 +20,6 @@ ElectronEtaCut = Producer(
     output=[],
     scopes=["global"],
 )
-# ElectronEtaCut_fake = Producer(
-#     name="ElectronEtaCut_fake",
-#     call="physicsobject::CutEta({df}, {input}, {output}, {max_ele_eta_fake})",
-#     input=[nanoAOD.Electron_eta],
-#     output=[],
-#     scopes=["mme"],
-# )
 ElectronDxyCut = Producer(
     name="ElectronDxyCut",
     call="physicsobject::CutDxy({df}, {input}, {output}, {max_ele_dxy})",
@@ -53,14 +39,7 @@ ElectronIDCut = Producer(
     call='physicsobject::electron::CutID({df}, {output}, "{ele_id}")',
     input=[],
     output=[],
-    scopes=["global"],
-)
-ElectronIsoCut = Producer(
-    name="ElectronIsoCut",
-    call="physicsobject::electron::CutIsolation({df}, {output}, {input}, {max_ele_iso})",
-    input=[nanoAOD.Electron_iso],
-    output=[],
-    scopes=["global"],
+    scopes=["em", "et", "ee", "emt", "met", "ett", "eem", "mme", "mtt", "mmt"],
 )
 BaseElectrons = ProducerGroup(
     name="BaseElectrons",
@@ -71,12 +50,25 @@ BaseElectrons = ProducerGroup(
     subproducers=[
         ElectronPtCut,
         ElectronEtaCut,
-        # ElectronDxyCut,
-        # ElectronDzCut,
-        # ElectronIDCut,
-        # ElectronIsoCut,
+        ElectronDxyCut,
+        ElectronDzCut,
+        # ElectronIDCut
     ],
 )
+# ElectronPtCut_fake = Producer(
+#     name="ElectronPtCut_fake",
+#     call="physicsobject::CutPt({df}, {input}, {output}, {min_ele_pt_fake})",
+#     input=[nanoAOD.Electron_pt],
+#     output=[],
+#     scopes=["mme"],
+# )
+# ElectronEtaCut_fake = Producer(
+#     name="ElectronEtaCut_fake",
+#     call="physicsobject::CutEta({df}, {input}, {output}, {max_ele_eta_fake})",
+#     input=[nanoAOD.Electron_eta],
+#     output=[],
+#     scopes=["mme"],
+# )
 # BaseElectrons_fake = ProducerGroup(
 #     name="BaseElectrons_fake",
 #     call="physicsobject::CombineMasks({df}, {output}, {input})",
@@ -91,56 +83,53 @@ BaseElectrons = ProducerGroup(
 ####################
 # Set of producers used for more specific selection of electrons in channels
 ####################
-
+ElectronIsoCut = Producer(
+    name="ElectronIsoCut",
+    call="physicsobject::electron::CutIsolation({df}, {output}, {input}, {max_ele_iso})",
+    input=[nanoAOD.Electron_iso],
+    output=[],
+    scopes=["emt", "met"],
+)
 GoodElectronPtCut = Producer(
     name="GoodElectronPtCut",
     call="physicsobject::CutPt({df}, {input}, {output}, {min_electron_pt})",
     input=[nanoAOD.Electron_pt],
     output=[],
-    scopes=["em", "et", "ee", "emt", "met", "ett", "mme", "eem"],
+    scopes=["em", "et", "ee", "emt", "met", "ett", "mme", "eem", "mtt", "mmt"],
 )
 GoodElectronEtaCut = Producer(
     name="GoodElectronEtaCut",
     call="physicsobject::CutEta({df}, {input}, {output}, {max_electron_eta})",
     input=[nanoAOD.Electron_eta],
     output=[],
-    scopes=["em", "et", "ee", "emt", "met", "ett", "mme", "eem"],
+    scopes=["em", "et", "ee", "emt", "met", "ett", "mme", "eem", "mtt", "mmt"],
 )
 GoodElectronIsoCut = Producer(
     name="GoodElectronIsoCut",
     call="physicsobject::electron::CutIsolation({df}, {output}, {input}, {electron_iso_cut})",
     input=[nanoAOD.Electron_iso],
     output=[],
-    scopes=["em", "et", "ee", "emt", "met", "ett", "mme", "eem"],
+    scopes=["em", "et", "ee", "emt", "met", "ett", "mme", "eem", "mtt", "mmt"],
 )
 GoodElectrons = ProducerGroup(
     name="GoodElectrons",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
     input=[q.base_electrons_mask],
     output=[q.good_electrons_mask],
-    scopes=["em", "et", "ee", "emt", "met", "ett", "eem", "mme"],
+    scopes=["em", "et", "ee", "emt", "met", "ett", "eem", "mme", "mtt", "mmt"],
     subproducers=[
         GoodElectronPtCut,
         GoodElectronEtaCut,
         GoodElectronIsoCut,
-        ElectronDxyCut,
-        ElectronDzCut,
         ElectronIDCut,
     ],
 )
-# VetoElectrons = Producer(
-#     name="VetoElectrons",
-#     call="physicsobject::VetoCandInMask({df}, {output}, {input}, {electron_index_in_pair})",
-#     input=[q.base_electrons_mask, q.dileptonpair],
-#     output=[q.veto_electrons_mask],
-#     scopes=["em", "et", "ee"],
-# )
 VetoElectrons = Producer(
     name="VetoElectrons",
     call="physicsobject::VetoCandInMask({df}, {output}, {input}, {electron_index_in_triple})",
-    input=[q.base_electrons_mask, q.leptontriple],
+    input=[q.good_electrons_mask, q.leptontriple],
     output=[q.veto_electrons_mask],
-    scopes=["emt", "met", "ett", "mme", "eem"],
+    scopes=["emt", "met", "ett", "mme", "eem", "mme", "mtt", "mmt"],
 )
 VetoSecondElectron = Producer(
     name="VetoSecondElectron",
@@ -158,8 +147,8 @@ ExtraElectronsVeto = Producer(
         "met": [q.veto_electrons_mask],
         "emt": [q.veto_electrons_mask],
         "ett": [q.veto_electrons_mask],
-        "mmt": [q.base_electrons_mask],
-        "mtt": [q.base_electrons_mask],
+        "mmt": [q.good_electrons_mask],
+        "mtt": [q.good_electrons_mask],
         "em": [q.veto_electrons_mask],
         "et": [q.veto_electrons_mask],
         "mt": [q.base_electrons_mask],

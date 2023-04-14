@@ -20,20 +20,6 @@ MuonEtaCut = Producer(
     output=[],
     scopes=["global"],
 )
-MuonPtCut_fake = Producer(
-    name="MuonPtCut_fake",
-    call="physicsobject::CutPt({df}, {input}, {output}, {min_muon_pt})",
-    input=[nanoAOD.Muon_pt],
-    output=[],
-    scopes=["eem"],
-)
-MuonEtaCut_fake = Producer(
-    name="MuonEtaCut_fake",
-    call="physicsobject::CutEta({df}, {input}, {output}, {max_muon_eta})",
-    input=[nanoAOD.Muon_eta],
-    output=[],
-    scopes=["eem"],
-)
 MuonDxyCut = Producer(
     name="MuonDxyCut",
     call="physicsobject::CutDxy({df}, {input}, {output}, {max_muon_dxy})",
@@ -48,19 +34,19 @@ MuonDzCut = Producer(
     output=[],
     scopes=["global"],
 )
+MuonIsTrackerOrIsGlobalCut = Producer(
+    name="MuonIsTrackerOrIsGlobalCut",
+    call="physicsobject::muon::CutIsTrackerOrIsGlobal({df}, {input}, {output})",
+    input=[nanoAOD.Muon_isTracker, nanoAOD.Muon_isGlobal],
+    output=[],
+    scopes=["global"],
+)
 MuonIDCut = Producer(
     name="MuonIDCut",
     call='physicsobject::muon::CutID({df}, {output}, "{muon_id}")',
     input=[],
     output=[],
-    scopes=["global"],
-)
-MuonIsoCut = Producer(
-    name="MuonIsoCut",
-    call="physicsobject::muon::CutIsolation({df}, {output}, {input}, {muon_iso_cut})",
-    input=[nanoAOD.Muon_iso],
-    output=[],
-    scopes=["global"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 BaseMuons = ProducerGroup(
     name="BaseMuons",
@@ -73,56 +59,77 @@ BaseMuons = ProducerGroup(
         MuonEtaCut,
         MuonDxyCut,
         MuonDzCut,
-        MuonIDCut,
-        MuonIsoCut,
+        MuonIsTrackerOrIsGlobalCut,
+        # MuonIDCut
     ],
 )
-BaseMuons_fake = ProducerGroup(
-    name="BaseMuons_fake",
-    call="physicsobject::CombineMasks({df}, {output}, {input})",
-    input=[],
-    output=[q.base_muons_mask_fake],
-    scopes=["eem"],
-    subproducers=[
-        MuonPtCut_fake,
-        MuonEtaCut_fake,
-    ],
-)
+# MuonPtCut_fake = Producer(
+#     name="MuonPtCut_fake",
+#     call="physicsobject::CutPt({df}, {input}, {output}, {min_muon_pt})",
+#     input=[nanoAOD.Muon_pt],
+#     output=[],
+#     scopes=["eem"],
+# )
+# MuonEtaCut_fake = Producer(
+#     name="MuonEtaCut_fake",
+#     call="physicsobject::CutEta({df}, {input}, {output}, {max_muon_eta})",
+#     input=[nanoAOD.Muon_eta],
+#     output=[],
+#     scopes=["eem"],
+# )
+# BaseMuons_fake = ProducerGroup(
+#     name="BaseMuons_fake",
+#     call="physicsobject::CombineMasks({df}, {output}, {input})",
+#     input=[],
+#     output=[q.base_muons_mask_fake],
+#     scopes=["eem"],
+#     subproducers=[
+#         MuonPtCut_fake,
+#         MuonEtaCut_fake,
+#     ],
+# )
 ####################
 # Set of producers used for more specific selection of muons in channels
 ####################
-
+MuonIsoCut = Producer(
+    name="MuonIsoCut",
+    call="physicsobject::muon::CutIsolation({df}, {output}, {input}, {muon_iso_cut})",
+    input=[nanoAOD.Muon_iso],
+    output=[],
+    scopes=["emt", "met", "mmt", "mme", "mtt"],
+)
 GoodMuonPtCut = Producer(
     name="GoodMuonPtCut",
     call="physicsobject::CutPt({df}, {input}, {output}, {min_muon_pt})",
     input=[nanoAOD.Muon_pt],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 GoodMuonEtaCut = Producer(
     name="GoodMuonEtaCut",
     call="physicsobject::CutEta({df}, {input}, {output}, {max_muon_eta})",
     input=[nanoAOD.Muon_eta],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 GoodMuonIsoCut = Producer(
     name="GoodMuonIsoCut",
     call="physicsobject::electron::CutIsolation({df}, {output}, {input}, {muon_iso_cut})",
     input=[nanoAOD.Muon_iso],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 GoodMuons = ProducerGroup(
     name="GoodMuons",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
     input=[q.base_muons_mask],
     output=[q.good_muons_mask],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
     subproducers=[
         GoodMuonPtCut,
         GoodMuonEtaCut,
         GoodMuonIsoCut,
+        MuonIDCut,
     ],
 )
 NumberOfGoodMuons = Producer(
@@ -130,21 +137,14 @@ NumberOfGoodMuons = Producer(
     call="quantities::NumberOfGoodLeptons({df}, {output}, {input})",
     input=[q.good_muons_mask],
     output=[q.nmuons],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem"],
+    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
-# VetoMuons = Producer(
-#     name="VetoMuons",
-#     call="physicsobject::VetoCandInMask({df}, {output}, {input}, {muon_index_in_pair})",
-#     input=[q.base_muons_mask, q.dileptonpair],
-#     output=[q.veto_muons_mask],
-#     scopes=["em", "mt", "mm"],
-# )
 VetoMuons = Producer(
     name="VetoMuons",
     call="physicsobject::VetoCandInMask({df}, {output}, {input}, {muon_index_in_triple})",
-    input=[q.base_muons_mask, q.leptontriple],
+    input=[q.good_muons_mask, q.leptontriple],
     output=[q.veto_muons_mask],
-    scopes=["emt", "met", "mmt", "mtt", "mme", "eem"],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 VetoSecondMuon = Producer(
     name="VetoSecondMuon",
@@ -159,12 +159,12 @@ ExtraMuonsVeto = Producer(
     call="physicsobject::LeptonVetoFlag({df}, {output}, {input})",
     input={
         "mm": [q.veto_muons_mask_2],
-        "mme": [q.veto_muons_mask],
+        "mme": [q.veto_muons_mask_2],
         "eem": [q.veto_muons_mask],
         "emt": [q.veto_muons_mask],
         "met": [q.veto_muons_mask],
         "mtt": [q.veto_muons_mask],
-        "ett": [q.base_muons_mask],
+        "ett": [q.good_muons_mask],
         "mmt": [q.veto_muons_mask_2],
         "em": [q.veto_muons_mask],
         "et": [q.base_muons_mask],

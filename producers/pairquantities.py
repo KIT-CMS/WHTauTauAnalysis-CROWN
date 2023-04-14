@@ -6,7 +6,27 @@ from code_generation.producer import Producer, ProducerGroup, ExtendedVectorProd
 ####################
 # Set of general producers for DiTauPair Quantities
 ####################
-
+pt_1_uncorrected = Producer(
+    name="pt_1_uncorrected",
+    call="quantities::pt({df}, {output}, {input})",
+    input=[q.p4_1_uncorrected],
+    output=[q.pt_1_uncorrected],
+    scopes=["eem"]
+)
+pt_2_uncorrected = Producer(
+    name="pt_2_uncorrected",
+    call="quantities::pt({df}, {output}, {input})",
+    input=[q.p4_2_uncorrected],
+    output=[q.pt_2_uncorrected],
+    scopes=["eem"]
+)
+pt_3_uncorrected = Producer(
+    name="pt_3_uncorrected",
+    call="quantities::pt({df}, {output}, {input})",
+    input=[q.p4_3_uncorrected],
+    output=[q.pt_3_uncorrected],
+    scopes=["eem"]
+)
 pt_1 = Producer(
     name="pt_1",
     call="quantities::pt({df}, {output}, {input})",
@@ -347,6 +367,20 @@ muon_dxy_wh_3 = Producer(
     output=[q.dxy_3],
     scopes=["eem"],
 )
+muon_is_mediumid_1 = Producer(
+    name="muon_is_mediumid_1",
+    call="quantities::muon::id({df}, {output}, 0, {input})",
+    input=[q.leptontriple, nanoAOD.Muon_id_medium],
+    output=[q.muon_is_mediumid_1],
+    scopes=["met", "mmt", "mme", "mtt"],
+)
+muon_is_mediumid_2 = Producer(
+    name="muon_is_mediumid_2",
+    call="quantities::muon::id({df}, {output}, 1, {input})",
+    input=[q.leptontriple, nanoAOD.Muon_id_medium],
+    output=[q.muon_is_mediumid_2],
+    scopes=["mmt", "mme", "emt"],
+)
 muon_is_mediumid_3 = Producer(
     name="muon_is_mediumid_3",
     call="quantities::muon::id({df}, {output}, 2, {input})",
@@ -410,6 +444,20 @@ electron_dxy_wh_3 = Producer(
     input=[q.leptontriple, nanoAOD.Electron_dxy],
     output=[q.dxy_3],
     scopes=["mme"],
+)
+electron_is_nonisowp90_1 = Producer(
+    name="electron_is_nonisowp90_1",
+    call="quantities::electron::id({df}, {output}, 0, {input})",
+    input=[q.leptontriple, nanoAOD.Electron_IDWP90],
+    output=[q.electron_is_nonisowp90_1],
+    scopes=["emt", "eem", "ett"],
+)
+electron_is_nonisowp90_2 = Producer(
+    name="electron_is_nonisowp90_2",
+    call="quantities::electron::id({df}, {output}, 1, {input})",
+    input=[q.leptontriple, nanoAOD.Electron_IDWP90],
+    output=[q.electron_is_nonisowp90_2],
+    scopes=["met", "eem"],
 )
 electron_is_nonisowp90_3 = Producer(
     name="electron_is_nonisowp90_3",
@@ -706,6 +754,7 @@ UnrollMuLV1 = ProducerGroup(
         muon_q_wh_1,
         muon_iso_wh_1,
         muon_is_global_wh_1,
+        muon_is_mediumid_1,
     ],
 )
 UnrollMuLV2 = ProducerGroup(
@@ -724,6 +773,7 @@ UnrollMuLV2 = ProducerGroup(
         muon_q_wh_2,
         muon_iso_wh_2,
         muon_is_global_wh_2,
+        muon_is_mediumid_2,
     ],
 )
 UnrollMuLV3 = ProducerGroup(
@@ -761,6 +811,7 @@ UnrollElLV1 = ProducerGroup(
         electron_dz_wh_1,
         electron_q_wh_1,
         electron_iso_wh_1,
+        electron_is_nonisowp90_1,
     ],
 )
 UnrollElLV2 = ProducerGroup(
@@ -778,6 +829,7 @@ UnrollElLV2 = ProducerGroup(
         electron_dz_wh_2,
         electron_q_wh_2,
         electron_iso_wh_2,
+        electron_is_nonisowp90_2,
     ],
 )
 UnrollElLV3 = ProducerGroup(

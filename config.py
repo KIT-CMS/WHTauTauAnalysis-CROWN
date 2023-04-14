@@ -481,10 +481,9 @@ def build_config(
         {
             "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
-            # "max_muon_dxy": 0.045,
-            # "max_muon_dz": 0.2,
+            "max_muon_dxy": 0.045,
+            "max_muon_dz": 0.2,
             # "muon_id": "Muon_mediumId",
-            # "muon_iso_cut": 0.5,
         },
     )
     # electron base selection:
@@ -493,12 +492,12 @@ def build_config(
         {
             "min_ele_pt": 10.0,
             "max_ele_eta": 2.5,
-            # "max_ele_dxy": 0.045,
-            # "max_ele_dz": 0.2,
-            # "max_ele_iso": 0.5,
+            "max_ele_dxy": 0.045,
+            "max_ele_dz": 0.2,
             # "ele_id": "Electron_mvaFall17V2noIso_WP90",
         },
     )
+    # in the channels for the signal extraction, the base selection is also taken into account for the base masks to estimate the jet to lepton fake contribution. so execpt of the tau id working point, one can choose the good particles properties here
     # EMT scope electron and selection
     configuration.add_config_parameters(
         ["emt"],
@@ -506,18 +505,21 @@ def build_config(
             "min_tau_pt": 20.0,
             "max_tau_eta": 2.3,
             "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 3,  # vloose, 7 (vtight in paper)
-            "vsele_tau_id_bit": 3,  # vloose, 6 (tight) in paper
+            "vsjet_tau_id_bit": 1,  # vloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 1,  # vloose, 6 (tight) in paper
             "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
             "electron_index_in_triple": 0,
             "min_electron_pt": 15.0,  # 15 in paper
             "max_electron_eta": 2.5,  # in paper 2.1
-            "electron_iso_cut": 0.5,  # 0.15 in paper
+            "electron_iso_cut": 0.15,  # 0.15 in paper
+            "max_ele_iso": 0.15,
+            "ele_id": "Electron_mvaFall17V2noIso_WP90",
             "muon_index_in_triple": 1,
-            "min_muon_pt": 15.0,
+            "muon_id": "Muon_mediumId",
+            "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
-            "muon_iso_cut": 0.5,
-            "deltaR_jet_veto": 0.5,
+            "muon_iso_cut": 0.15,
+            "deltaR_jet_veto": 0.15,
             "tripleselection_min_dR_leptau": 0.5,
             "tripleselection_min_dR_leplep": 0.3,
         },
@@ -529,17 +531,20 @@ def build_config(
             "min_tau_pt": 20.0,
             "max_tau_eta": 2.3,
             "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 3,  # vloose, 7 (vtight in paper)
-            "vsele_tau_id_bit": 3,  # vloose, 6 (tight) in paper
+            "vsjet_tau_id_bit": 1,  # vloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 1,  # vloose, 6 (tight) in paper
             "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
             "electron_index_in_triple": 1,
             "min_electron_pt": 15.0,  # 15 in paper
             "max_electron_eta": 2.5,  # in paper 2.1
             "electron_iso_cut": 0.5,  # 0.15 in paper
+            "max_ele_iso": 0.15,
+            "ele_id": "Electron_mvaFall17V2noIso_WP90",
             "muon_index_in_triple": 0,
-            "min_muon_pt": 15.0,
+            "muon_id": "Muon_mediumId",
+            "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
-            "muon_iso_cut": 0.5,
+            "muon_iso_cut": 0.15,
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.5,
             "tripleselection_min_dR_leplep": 0.3,
@@ -555,14 +560,20 @@ def build_config(
             "vsjet_tau_id_bit": 1,  # vvvloose, 7 (vtight in paper)
             "vsele_tau_id_bit": 1,  # vvloose, 6 (tight) in paper
             "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
+            "muon_id": "Muon_mediumId",
             "muon_index_in_triple": 0,
             "second_muon_index_in_triple": 1,
-            "min_muon_pt": 15.0,
+            "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
-            "muon_iso_cut": 0.5,
+            "muon_iso_cut": 0.15,
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.0,
             "tripleselection_min_dR_leplep": 0.3,
+            "min_electron_pt": 15.0,  # 15 in paper
+            "max_electron_eta": 2.5,  # in paper 2.1
+            "electron_iso_cut": 0.15,  # 0.15 in paper
+            "max_ele_iso": 0.15,
+            "ele_id": "Electron_mvaFall17V2noIso_WP90",
         },
     )
     # ETT scope electron and selection, also for fake rate measurements
@@ -572,16 +583,21 @@ def build_config(
             "min_tau_pt": 20.0,
             "max_tau_eta": 2.3,
             "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 3,  # vloose, 7 (vtight in paper)
-            "vsele_tau_id_bit": 3,  # vloose, 6 (tight) in paper
+            "vsjet_tau_id_bit": 1,  # vloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 1,  # vloose, 6 (tight) in paper
             "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
             "electron_index_in_triple": 0,
             "min_electron_pt": 28.0,
             "max_electron_eta": 2.1,
-            "electron_iso_cut": 0.5,
+            "electron_iso_cut": 0.15,  # 0.15 in paper
+            "ele_id": "Electron_mvaFall17V2noIso_WP90",
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.5,
             "tripleselection_min_dR_tautau": 0.5,
+            "muon_id": "Muon_mediumId",
+            "min_muon_pt": 10.0,
+            "max_muon_eta": 2.4,
+            "muon_iso_cut": 0.15,
         },
     )
     # MTT scope electron and selection, also for fake rate measurements
@@ -591,16 +607,21 @@ def build_config(
             "min_tau_pt": 20.0,
             "max_tau_eta": 2.3,
             "max_tau_dz": 0.2,
-            "vsjet_tau_id_bit": 3,  # vloose, 7 (vtight in paper)
-            "vsele_tau_id_bit": 3,  # vloose, 6 (tight) in paper
+            "vsjet_tau_id_bit": 1,  # vloose, 7 (vtight in paper)
+            "vsele_tau_id_bit": 1,  # vloose, 6 (tight) in paper
             "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
             "muon_index_in_triple": 0,
-            "min_muon_pt": 15.0,
+            "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.5,
+            "muon_id": "Muon_mediumId",
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.5,
             "tripleselection_min_dR_tautau": 0.5,
+            "min_electron_pt": 15.0,
+            "max_electron_eta": 2.5,
+            "electron_iso_cut": 0.15,  # 0.15 in paper
+            "ele_id": "Electron_mvaFall17V2noIso_WP90",
         },
     )
     # MME scope electron and selection, also for fake rate measurements
@@ -612,15 +633,14 @@ def build_config(
             "electron_index_in_triple": 2,
             "min_muon_pt": 15.0,
             "max_muon_eta": 2.4,
-            "muon_iso_cut": 0.5,
+            "muon_iso_cut": 0.15,
+            "muon_id": "Muon_mediumId",
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_lep1lep1": 0.3,
             "tripleselection_min_dR_lep1lep2": 0.3,
             "min_electron_pt": 10.0,
             "max_electron_eta": 2.5,
-            "electron_iso_cut": 3.0,  # no iso cut
-            "min_ele_pt_fake": 10.0,
-            "max_ele_eta_fake": 2.5,
+            "electron_iso_cut": 0.15,  # 0.15 in paper
         },
     )
     # EEM scope electron and selection, also for fake rate measurements
@@ -630,15 +650,17 @@ def build_config(
             "electron_index_in_triple": 0,
             "second_electron_index_in_triple": 1,
             "muon_index_in_triple": 2,
-            "min_muon_pt": 15.0,
+            "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
-            "muon_iso_cut": 0.5,
             "min_electron_pt": 10.0,
             "max_electron_eta": 2.5,
-            "electron_iso_cut": 3.0,  # no iso cut
+            "electron_iso_cut": 0.15,
+            "ele_id": "Electron_mvaFall17V2noIso_WP90",
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_lep1lep1": 0.3,
             "tripleselection_min_dR_lep1lep2": 0.3,
+            "muon_iso_cut": 0.15,
+            "muon_id": "Muon_mediumId",
         },
     )
     # # EMT TrueGenTriple
@@ -837,6 +859,7 @@ def build_config(
             muons.VetoMuons,
             muons.VetoSecondMuon,
             muons.ExtraMuonsVeto,
+            electrons.GoodElectrons,
             electrons.ExtraElectronsVeto,
             taus.TauEnergyCorrection,
             # taus.BaseTaus,
@@ -880,6 +903,7 @@ def build_config(
             met.PFMetCorrections,
             genparticles.GenMatching,
             # muons taus
+            muons.GoodMuons,
             muons.ExtraMuonsVeto,
             taus.TauEnergyCorrection,
             taus.GoodTaus,
@@ -925,6 +949,7 @@ def build_config(
             met.PFMetCorrections,
             genparticles.GenMatching,
             # muons taus
+            electrons.GoodElectrons,
             electrons.ExtraElectronsVeto,
             muons.GoodMuons,
             muons.NumberOfGoodMuons,
@@ -973,11 +998,14 @@ def build_config(
             # muons taus
             muons.GoodMuons,
             muons.NumberOfGoodMuons,
-            # muons.VetoMuons,
-            # muons.VetoSecondMuon,
-            # muons.ExtraMuonsVeto,
-            electrons.BaseElectrons_fake,
+            muons.VetoMuons,
+            muons.VetoSecondMuon,
+            muons.ExtraMuonsVeto,
             electrons.GoodElectrons,
+            electrons.VetoElectrons,
+            electrons.ExtraElectronsVeto,
+            # electrons.BaseElectrons_fake,
+            # electrons.GoodElectrons,
             pairquantities.mt,
             pairselection.GoodTripleFilter,
             pairselection.MMETripleSelection,
@@ -1012,14 +1040,16 @@ def build_config(
             met.PFMetCorrections,
             genparticles.GenMatching,
             # muons taus
-            muons.BaseMuons_fake,
+            # muons.BaseMuons_fake,
+            muons.VetoMuons,
+            muons.ExtraMuonsVeto,
             muons.GoodMuons,
             scalefactors.MuonIDIso_SF,
             # electrons
             electrons.GoodElectrons,
             electrons.NumberOfGoodElectrons,
-            # electrons.VetoElectrons,
-            # electrons.ExtraElectronsVeto,
+            electrons.VetoElectrons,
+            electrons.ExtraElectronsVeto,
             pairquantities.mt,
             pairselection.GoodTripleFilter,
             pairselection.EEMTripleSelection,
@@ -1369,6 +1399,8 @@ def build_config(
     configuration.add_outputs(
         "emt",
         [
+            q.muon_is_mediumid_2,
+            q.electron_is_nonisowp90_1,
             q.nelectrons,
             q.nmuons,
             q.ntaus,
@@ -1382,9 +1414,8 @@ def build_config(
             # q.gen_taujet_pt_2,
             q.decaymode_3,
             q.tau_gen_match_3,
-            # q.muon_veto_flag,
-            # q.dimuon_veto,
-            # q.electron_veto_flag,
+            q.muon_veto_flag,
+            q.electron_veto_flag,
             q.id_wgt_ele_wp90nonIso_1,
             q.id_wgt_mu_2,
             q.iso_wgt_mu_2,
@@ -1399,6 +1430,8 @@ def build_config(
     configuration.add_outputs(
         "met",
         [
+            q.muon_is_mediumid_1,
+            q.electron_is_nonisowp90_2,
             q.nelectrons,
             q.nmuons,
             q.ntaus,
@@ -1412,9 +1445,8 @@ def build_config(
             # q.gen_taujet_pt_2,
             q.decaymode_3,
             q.tau_gen_match_3,
-            # q.muon_veto_flag,
-            # q.dimuon_veto,
-            # q.electron_veto_flag,
+            q.muon_veto_flag,
+            q.electron_veto_flag,
             q.id_wgt_ele_wp90nonIso_2,
             q.id_wgt_mu_1,
             q.iso_wgt_mu_1,
@@ -1429,6 +1461,8 @@ def build_config(
     configuration.add_outputs(
         "mmt",
         [
+            q.muon_is_mediumid_1,
+            q.muon_is_mediumid_2,
             q.nmuons,
             q.ntaus,
             scalefactors.Tau_3_VsJetTauID_lt_SF.output_group,
@@ -1455,6 +1489,7 @@ def build_config(
     configuration.add_outputs(
         "ett",
         [
+            q.electron_is_nonisowp90_1,
             q.nelectrons,
             q.ntaus,
             scalefactors.Tau_2_VsJetTauID_tt_SF.output_group,
@@ -1490,6 +1525,7 @@ def build_config(
         [
             q.nmuons,
             q.ntaus,
+            q.muon_is_mediumid_1,
             scalefactors.Tau_2_VsJetTauID_tt_SF.output_group,
             scalefactors.Tau_2_VsEleTauID_SF.output_group,
             scalefactors.Tau_2_VsMuTauID_SF.output_group,
@@ -1524,6 +1560,8 @@ def build_config(
         [
             q.id_wgt_ele_wp90nonIso_1,
             q.id_wgt_ele_wp90nonIso_2,
+            q.electron_is_nonisowp90_1,
+            q.electron_is_nonisowp90_2,
             q.muon_is_mediumid_3,
             q.muon_is_tracker_3,
             q.id_wgt_mu_3,
@@ -1533,6 +1571,8 @@ def build_config(
             scalefactors.EEMGenerateSingleElectronTriggerSF_MC.output_group,
             q.m_tt_lt,
             q.pt_W_lt,
+            q.muon_veto_flag,
+            q.electron_veto_flag,
         ],
     )
     configuration.add_outputs(
@@ -1544,10 +1584,14 @@ def build_config(
             q.id_wgt_mu_1,
             q.iso_wgt_mu_1,
             q.electron_is_nonisowp90_3,
+            q.muon_is_mediumid_1,
+            q.muon_is_mediumid_2,
             triggers.MMEGenerateSingleMuonTriggerFlags.output_group,
             scalefactors.MMEGenerateSingleMuonTriggerSF_MC.output_group,
             q.m_tt_lt,
             q.pt_W_lt,
+            q.muon_veto_flag,
+            q.electron_veto_flag,
         ],
     )
     if "data" not in sample and "embedding" not in sample:
