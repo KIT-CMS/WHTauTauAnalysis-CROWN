@@ -46,7 +46,7 @@ MuonIDCut = Producer(
     call='physicsobject::muon::CutID({df}, {output}, "{muon_id}")',
     input=[],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 BaseMuons = ProducerGroup(
     name="BaseMuons",
@@ -103,28 +103,28 @@ GoodMuonPtCut = Producer(
     call="physicsobject::CutPt({df}, {input}, {output}, {min_muon_pt})",
     input=[nanoAOD.Muon_pt],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 GoodMuonEtaCut = Producer(
     name="GoodMuonEtaCut",
     call="physicsobject::CutEta({df}, {input}, {output}, {max_muon_eta})",
     input=[nanoAOD.Muon_eta],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 GoodMuonIsoCut = Producer(
     name="GoodMuonIsoCut",
     call="physicsobject::electron::CutIsolation({df}, {output}, {input}, {muon_iso_cut})",
     input=[nanoAOD.Muon_iso],
     output=[],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 GoodMuons = ProducerGroup(
     name="GoodMuons",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
     input=[q.base_muons_mask],
     output=[q.good_muons_mask],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
     subproducers=[
         GoodMuonPtCut,
         GoodMuonEtaCut,
@@ -137,7 +137,7 @@ NumberOfGoodMuons = Producer(
     call="quantities::NumberOfGoodLeptons({df}, {output}, {input})",
     input=[q.good_muons_mask],
     output=[q.nmuons],
-    scopes=["em", "mt", "mm", "emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
 VetoMuons = Producer(
     name="VetoMuons",
@@ -158,7 +158,6 @@ ExtraMuonsVeto = Producer(
     name="ExtraMuonsVeto",
     call="physicsobject::LeptonVetoFlag({df}, {output}, {input})",
     input={
-        "mm": [q.veto_muons_mask_2],
         "mme": [q.veto_muons_mask_2],
         "eem": [q.veto_muons_mask],
         "emt": [q.veto_muons_mask],
@@ -166,18 +165,9 @@ ExtraMuonsVeto = Producer(
         "mtt": [q.veto_muons_mask],
         "ett": [q.good_muons_mask],
         "mmt": [q.veto_muons_mask_2],
-        "em": [q.veto_muons_mask],
-        "et": [q.base_muons_mask],
-        "mt": [q.veto_muons_mask],
-        "tt": [q.base_muons_mask],
     },
     output=[q.muon_veto_flag],
     scopes=[
-        "em",
-        "et",
-        "mt",
-        "tt",
-        "mm",
         "emt",
         "met",
         "mmt",

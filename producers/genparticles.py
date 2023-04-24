@@ -253,11 +253,6 @@ gen_pt_1 = Producer(
     input=[q.gen_p4_1],
     output=[q.gen_pt_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -273,11 +268,6 @@ gen_pt_2 = Producer(
     input=[q.gen_p4_2],
     output=[q.gen_pt_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -300,11 +290,6 @@ gen_eta_1 = Producer(
     input=[q.gen_p4_1],
     output=[q.gen_eta_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -320,11 +305,6 @@ gen_eta_2 = Producer(
     input=[q.gen_p4_2],
     output=[q.gen_eta_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -347,11 +327,6 @@ gen_phi_1 = Producer(
     input=[q.gen_p4_1],
     output=[q.gen_phi_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "mm",
         "emt",
         "met",
         "met",
@@ -368,11 +343,6 @@ gen_phi_2 = Producer(
     input=[q.gen_p4_2],
     output=[q.gen_phi_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -395,11 +365,6 @@ gen_mass_1 = Producer(
     input=[q.gen_p4_1],
     output=[q.gen_mass_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -415,11 +380,6 @@ gen_mass_2 = Producer(
     input=[q.gen_p4_2],
     output=[q.gen_mass_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -441,7 +401,7 @@ gen_pdgid_1 = Producer(
     call="quantities::pdgid({df}, {output}, 0, {input})",
     input=[q.gen_dileptonpair, nanoAOD.GenParticle_pdgId],
     output=[q.gen_pdgid_1],
-    scopes=["mt", "et", "tt", "em", "mm", "mmt", "ett", "mtt", "mme", "eem"],
+    scopes=["mmt", "ett", "mtt", "mme", "eem"],
 )
 gen_pdgid_WH_1 = Producer(
     name="gen_pdgid_WH_1",
@@ -449,13 +409,6 @@ gen_pdgid_WH_1 = Producer(
     input=[q.gen_leptontriple, nanoAOD.GenParticle_pdgId],
     output=[q.gen_pdgid_1],
     scopes=["emt", "met", "mmt", "ett", "mtt", "mme", "eem"],
-)
-gen_pdgid_2 = Producer(
-    name="gen_pdgid_2",
-    call="quantities::pdgid({df}, {output}, 1, {input})",
-    input=[q.gen_dileptonpair, nanoAOD.GenParticle_pdgId],
-    output=[q.gen_pdgid_2],
-    scopes=["mt", "et", "tt", "em", "mm"],
 )
 gen_pdgid_WH_2 = Producer(
     name="gen_pdgid_WH_2",
@@ -713,12 +666,6 @@ GenPairForGenMatching = Producer(
     ],
     output=[q.hadronic_gen_taus],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -730,7 +677,7 @@ GenPairForGenMatching = Producer(
 )
 GenMatchP1 = Producer(
     name="GenMatchP1",
-    call="genmatching::tau::genmatching({df}, {output}, {input})",
+    call="genmatching::tau::genmatching_wh({df}, {output}, {input})",
     input=[
         q.hadronic_gen_taus,
         nanoAOD.GenParticle_pdgId,
@@ -745,12 +692,6 @@ GenMatchP1 = Producer(
     ],
     output=[q.gen_match_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -763,7 +704,7 @@ GenMatchP1 = Producer(
 
 GenMatchP2 = Producer(
     name="GenMatchP2",
-    call="genmatching::tau::genmatching({df}, {output}, {input})",
+    call="genmatching::tau::genmatching_wh({df}, {output}, {input})",
     input=[
         q.hadronic_gen_taus,
         nanoAOD.GenParticle_pdgId,
@@ -778,12 +719,6 @@ GenMatchP2 = Producer(
     ],
     output=[q.gen_match_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -796,7 +731,7 @@ GenMatchP2 = Producer(
 
 GenMatchP3 = Producer(
     name="GenMatch_WH_P3",
-    call="genmatching::tau::genmatching({df}, {output}, {input})",
+    call="genmatching::tau::genmatching_wh({df}, {output}, {input})",
     input=[
         q.hadronic_gen_taus,
         nanoAOD.GenParticle_pdgId,
@@ -812,19 +747,6 @@ GenMatchP3 = Producer(
     output=[q.gen_match_3],
     scopes=["emt", "met", "mmt", "ett", "mtt", "mme", "eem"],
 )
-
-# GenMatching = ProducerGroup(
-#     name="GenMatching",
-#     call=None,
-#     input=None,
-#     output=None,
-#     scopes=["mt", "et", "tt", "em", "ee", "mm"],
-#     subproducers=[
-#         GenPairForGenMatching,
-#         GenMatchP1,
-#         GenMatchP2,
-#     ],
-# )
 GenMatching = ProducerGroup(
     name="GenMatching",
     call=None,

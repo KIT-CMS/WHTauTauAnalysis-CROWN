@@ -143,15 +143,6 @@ MetBasics = ProducerGroup(
         GenBosonMass,
     ],
 )
-
-
-# PropagateLeptonsToMet = Producer(
-#     name="PropagateLeptonsToMet",
-#     call="met::propagateLeptonsToMet({df}, {input}, {output}, {propagateLeptons})",
-#     input=[q.met_p4, q.p4_1_uncorrected, q.p4_2_uncorrected, q.p4_1, q.p4_2],
-#     output=[q.met_p4_leptoncorrected],
-#     scopes=["et", "mt", "tt", "em", "mm", "ee"],
-# )
 PropagateLeptonsToMet = Producer(
     name="PropagateLeptonsToMet",
     call="met::propagateLeptonsToMet({df}, {input}, {output}, {propagateLeptons})",
@@ -167,13 +158,6 @@ PropagateLeptonsToMet = Producer(
     output=[q.met_p4_leptoncorrected],
     scopes=["emt", "met", "mmt", "ett", "mtt", "mme", "eem"],
 )
-# PropagateLeptonsToPFMet = Producer(
-#     name="PropagateLeptonsToPFMet",
-#     call="met::propagateLeptonsToMet({df}, {input}, {output}, {propagateLeptons})",
-#     input=[q.pfmet_p4, q.p4_1_uncorrected, q.p4_2_uncorrected, q.p4_1, q.p4_2],
-#     output=[q.pfmet_p4_leptoncorrected],
-#     scopes=["et", "mt", "tt", "em", "mm", "ee"],
-# )
 PropagateLeptonsToPFMet = Producer(
     name="PropagateLeptonsToPFMet",
     call="met::propagateLeptonsToMet({df}, {input}, {output}, {propagateLeptons})",
@@ -205,12 +189,6 @@ PropagateJetsToMet = Producer(
     ],
     output=[q.met_p4_jetcorrected],
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -236,12 +214,6 @@ PropagateJetsToPFMet = Producer(
     ],
     output=[q.pfmet_p4_jetcorrected],
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -251,7 +223,6 @@ PropagateJetsToPFMet = Producer(
         "eem",
     ],
 )
-
 ApplyRecoilCorrections = Producer(
     name="ApplyRecoilCorrections",
     call='met::applyRecoilCorrections({df}, {input}, {output}, "{recoil_corrections_file}", "{recoil_systematics_file}", {applyRecoilCorrections}, {apply_recoil_resolution_systematic}, {apply_recoil_response_systematic}, {recoil_systematic_shift_up}, {recoil_systematic_shift_down}, {is_wjets})',
@@ -262,12 +233,6 @@ ApplyRecoilCorrections = Producer(
     ],
     output=[q.met_p4_recoilcorrected],
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -287,12 +252,6 @@ ApplyRecoilCorrectionsPFMet = Producer(
     ],
     output=[q.pfmet_p4_recoilcorrected],
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -308,12 +267,6 @@ MetPt = Producer(
     input=[q.met_p4_recoilcorrected],
     output=[q.met],
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -329,12 +282,6 @@ PFMetPt = Producer(
     input=[q.pfmet_p4_recoilcorrected],
     output=[q.pfmet],
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -350,12 +297,6 @@ MetPhi = Producer(
     input=[q.met_p4_recoilcorrected],
     output=[q.metphi],
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -371,12 +312,6 @@ PFMetPhi = Producer(
     input=[q.pfmet_p4_recoilcorrected],
     output=[q.pfmetphi],
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -392,12 +327,6 @@ MetCorrections = ProducerGroup(
     input=None,
     output=None,
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",
@@ -420,12 +349,6 @@ PFMetCorrections = ProducerGroup(
     input=None,
     output=None,
     scopes=[
-        "et",
-        "mt",
-        "tt",
-        "em",
-        "mm",
-        "ee",
         "emt",
         "met",
         "mmt",

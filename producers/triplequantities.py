@@ -11,21 +11,21 @@ pt_1_uncorrected = Producer(
     call="quantities::pt({df}, {output}, {input})",
     input=[q.p4_1_uncorrected],
     output=[q.pt_1_uncorrected],
-    scopes=["eem"]
+    scopes=["eem"],
 )
 pt_2_uncorrected = Producer(
     name="pt_2_uncorrected",
     call="quantities::pt({df}, {output}, {input})",
     input=[q.p4_2_uncorrected],
     output=[q.pt_2_uncorrected],
-    scopes=["eem"]
+    scopes=["eem"],
 )
 pt_3_uncorrected = Producer(
     name="pt_3_uncorrected",
     call="quantities::pt({df}, {output}, {input})",
     input=[q.p4_3_uncorrected],
     output=[q.pt_3_uncorrected],
-    scopes=["eem"]
+    scopes=["eem"],
 )
 pt_1 = Producer(
     name="pt_1",
@@ -33,12 +33,6 @@ pt_1 = Producer(
     input=[q.p4_1],
     output=[q.pt_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -54,12 +48,6 @@ pt_2 = Producer(
     input=[q.p4_2],
     output=[q.pt_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -82,12 +70,6 @@ eta_1 = Producer(
     input=[q.p4_1],
     output=[q.eta_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -103,12 +85,6 @@ eta_2 = Producer(
     input=[q.p4_2],
     output=[q.eta_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -131,12 +107,6 @@ phi_1 = Producer(
     input=[q.p4_1],
     output=[q.phi_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -152,12 +122,6 @@ phi_2 = Producer(
     input=[q.p4_2],
     output=[q.phi_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -187,12 +151,6 @@ mass_2 = Producer(
     input=[q.p4_2],
     output=[q.mass_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -271,13 +229,6 @@ pt_W_lt = Producer(
     input=[q.p4_1, q.met_p4_recoilcorrected, q.p4_miss_lt],
     output=[q.pt_W_lt],
     scopes=["emt", "met", "mmt", "ett", "mtt", "mme", "eem"],
-)
-deltaR_ditaupair = Producer(
-    name="deltaR_ditaupair",
-    call="quantities::deltaR({df}, {output}, {input})",
-    input=[q.p4_1, q.p4_2],
-    output=[q.deltaR_ditaupair],
-    scopes=["mt", "et", "tt", "em", "ee", "mm"],
 )
 deltaR_13 = Producer(
     name="deltaR_13",
@@ -1094,32 +1045,12 @@ EEMTripleQuantities = ProducerGroup(
 ## jets: good_jet_collection (if only the leading two are needed: q.jet_p4_1, q.jet_p4_2
 ## bjets: gen_bjet_collection
 
-Pzetamissvis = Producer(
-    name="Pzetamissvis",
-    call="quantities::pzetamissvis({df}, {output}, {input})",
-    input=[q.p4_1, q.p4_2, q.met_p4_recoilcorrected],
-    output=[q.pzetamissvis],
-    scopes=["mt", "et", "tt", "em", "ee", "mm"],
-)
-mTdileptonMET = Producer(
-    name="mTdileptonMET",
-    call="quantities::mTdileptonMET({df}, {output}, {input})",
-    input=[q.p4_1, q.p4_2, q.met_p4_recoilcorrected],
-    output=[q.mTdileptonMET],
-    scopes=["mt", "et", "tt", "em", "ee", "mm"],
-)
 mt_1 = Producer(
     name="mt_1",
     call="quantities::mT({df}, {output}, {input})",
     input=[q.p4_1, q.met_p4_recoilcorrected],
     output=[q.mt_1],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",
@@ -1135,12 +1066,6 @@ mt_2 = Producer(
     input=[q.p4_2, q.met_p4_recoilcorrected],
     output=[q.mt_2],
     scopes=[
-        "mt",
-        "et",
-        "tt",
-        "em",
-        "ee",
-        "mm",
         "emt",
         "met",
         "mmt",

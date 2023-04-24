@@ -1,7 +1,7 @@
 from code_generation.configuration import Configuration
 from code_generation.systematics import SystematicShift
 from .producers import scalefactors as scalefactors
-from .producers import pairselection as pairselection
+from .producers import tripleselection as tripleselection
 from .producers import muons as muons
 from .producers import electrons as electrons
 from .producers import taus as taus
@@ -433,20 +433,20 @@ def add_tauVariations(configuration: Configuration, sample: str):
             producers={("emt", "met", "mmt"): taus.TauPtCorrection_genTau},
             ignore_producers={
                 "emt": [
-                    pairselection.LVEl1,
-                    pairselection.LVMu2,
+                    tripleselection.LVEl1,
+                    tripleselection.LVMu2,
                     electrons.VetoElectrons,
                     muons.VetoMuons,
                 ],
                 "met": [
-                    pairselection.LVMu1,
-                    pairselection.LVEl2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVEl2,
                     muons.VetoMuons,
                     electrons.VetoElectrons,
                 ],
                 "mmt": [
-                    pairselection.LVMu1,
-                    pairselection.LVMu2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVMu2,
                     muons.VetoMuons,
                 ],
             },
@@ -459,20 +459,20 @@ def add_tauVariations(configuration: Configuration, sample: str):
             producers={("emt", "met", "mmt"): taus.TauPtCorrection_genTau},
             ignore_producers={
                 "emt": [
-                    pairselection.LVEl1,
-                    pairselection.LVMu2,
+                    tripleselection.LVEl1,
+                    tripleselection.LVMu2,
                     electrons.VetoElectrons,
                     muons.VetoMuons,
                 ],
                 "met": [
-                    pairselection.LVMu1,
-                    pairselection.LVEl2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVEl2,
                     muons.VetoMuons,
                     electrons.VetoElectrons,
                 ],
                 "mmt": [
-                    pairselection.LVMu1,
-                    pairselection.LVMu2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVMu2,
                     muons.VetoMuons,
                 ],
             },
@@ -485,20 +485,20 @@ def add_tauVariations(configuration: Configuration, sample: str):
             producers={("emt", "met", "mmt"): taus.TauPtCorrection_genTau},
             ignore_producers={
                 "emt": [
-                    pairselection.LVEl1,
-                    pairselection.LVMu2,
+                    tripleselection.LVEl1,
+                    tripleselection.LVMu2,
                     electrons.VetoElectrons,
                     muons.VetoMuons,
                 ],
                 "met": [
-                    pairselection.LVMu1,
-                    pairselection.LVEl2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVEl2,
                     muons.VetoMuons,
                     electrons.VetoElectrons,
                 ],
                 "mmt": [
-                    pairselection.LVMu1,
-                    pairselection.LVMu2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVMu2,
                     muons.VetoMuons,
                 ],
             },
@@ -511,20 +511,20 @@ def add_tauVariations(configuration: Configuration, sample: str):
             producers={("emt", "met", "mmt"): taus.TauPtCorrection_genTau},
             ignore_producers={
                 "emt": [
-                    pairselection.LVEl1,
-                    pairselection.LVMu2,
+                    tripleselection.LVEl1,
+                    tripleselection.LVMu2,
                     electrons.VetoElectrons,
                     muons.VetoMuons,
                 ],
                 "met": [
-                    pairselection.LVMu1,
-                    pairselection.LVEl2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVEl2,
                     muons.VetoMuons,
                     electrons.VetoElectrons,
                 ],
                 "mmt": [
-                    pairselection.LVMu1,
-                    pairselection.LVMu2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVMu2,
                     muons.VetoMuons,
                 ],
             },
@@ -537,20 +537,20 @@ def add_tauVariations(configuration: Configuration, sample: str):
             producers={("emt", "met", "mmt"): taus.TauPtCorrection_genTau},
             ignore_producers={
                 "emt": [
-                    pairselection.LVEl1,
-                    pairselection.LVMu2,
+                    tripleselection.LVEl1,
+                    tripleselection.LVMu2,
                     electrons.VetoElectrons,
                     muons.VetoMuons,
                 ],
                 "met": [
-                    pairselection.LVMu1,
-                    pairselection.LVEl2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVEl2,
                     muons.VetoMuons,
                     electrons.VetoElectrons,
                 ],
                 "mmt": [
-                    pairselection.LVMu1,
-                    pairselection.LVMu2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVMu2,
                     muons.VetoMuons,
                 ],
             },
@@ -563,20 +563,20 @@ def add_tauVariations(configuration: Configuration, sample: str):
             producers={("emt", "met", "mmt"): taus.TauPtCorrection_genTau},
             ignore_producers={
                 "emt": [
-                    pairselection.LVEl1,
-                    pairselection.LVMu2,
+                    tripleselection.LVEl1,
+                    tripleselection.LVMu2,
                     electrons.VetoElectrons,
                     muons.VetoMuons,
                 ],
                 "met": [
-                    pairselection.LVMu1,
-                    pairselection.LVEl2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVEl2,
                     muons.VetoMuons,
                     electrons.VetoElectrons,
                 ],
                 "mmt": [
-                    pairselection.LVMu1,
-                    pairselection.LVMu2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVMu2,
                     muons.VetoMuons,
                 ],
             },
@@ -589,20 +589,20 @@ def add_tauVariations(configuration: Configuration, sample: str):
             producers={("emt", "met", "mmt"): taus.TauPtCorrection_genTau},
             ignore_producers={
                 "emt": [
-                    pairselection.LVEl1,
-                    pairselection.LVMu2,
+                    tripleselection.LVEl1,
+                    tripleselection.LVMu2,
                     electrons.VetoElectrons,
                     muons.VetoMuons,
                 ],
                 "met": [
-                    pairselection.LVMu1,
-                    pairselection.LVEl2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVEl2,
                     muons.VetoMuons,
                     electrons.VetoElectrons,
                 ],
                 "mmt": [
-                    pairselection.LVMu1,
-                    pairselection.LVMu2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVMu2,
                     muons.VetoMuons,
                 ],
             },
@@ -615,20 +615,20 @@ def add_tauVariations(configuration: Configuration, sample: str):
             producers={("emt", "met", "mmt"): taus.TauPtCorrection_genTau},
             ignore_producers={
                 "emt": [
-                    pairselection.LVEl1,
-                    pairselection.LVMu2,
+                    tripleselection.LVEl1,
+                    tripleselection.LVMu2,
                     electrons.VetoElectrons,
                     muons.VetoMuons,
                 ],
                 "met": [
-                    pairselection.LVMu1,
-                    pairselection.LVEl2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVEl2,
                     muons.VetoMuons,
                     electrons.VetoElectrons,
                 ],
                 "mmt": [
-                    pairselection.LVMu1,
-                    pairselection.LVMu2,
+                    tripleselection.LVMu1,
+                    tripleselection.LVMu2,
                     muons.VetoMuons,
                 ],
             },
