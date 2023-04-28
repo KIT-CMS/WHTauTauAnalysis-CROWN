@@ -523,7 +523,7 @@ def build_config(
             "deltaR_jet_veto": 0.15,
             "tripleselection_min_dR_leptau": 0.5,
             "tripleselection_min_dR_leplep": 0.3,
-            "p4_miss_sf": 0.69,
+            "p4_23_miss_sf": 0.69,
         },
     )
     # MET scope electron and selection
@@ -550,7 +550,7 @@ def build_config(
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.5,
             "tripleselection_min_dR_leplep": 0.3,
-            "p4_miss_sf": 0.69,
+            "p4_23_miss_sf": 0.69,
         },
     )
     # MMT scope electron and selection, also for fake rate measurements
@@ -577,7 +577,7 @@ def build_config(
             "electron_iso_cut": 0.15,  # 0.15 in paper
             "max_ele_iso": 0.15,
             "ele_id": "Electron_mvaFall17V2noIso_WP90",
-            "p4_miss_sf": 0.69,
+            "p4_23_miss_sf": 0.69,
         },
     )
     # ETT scope electron and selection, also for fake rate measurements
@@ -602,7 +602,7 @@ def build_config(
             "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
-            "p4_miss_sf": 0.47,
+            "p4_23_miss_sf": 0.47,
         },
     )
     # MTT scope electron and selection, also for fake rate measurements
@@ -627,7 +627,7 @@ def build_config(
             "max_electron_eta": 2.5,
             "electron_iso_cut": 0.15,  # 0.15 in paper
             "ele_id": "Electron_mvaFall17V2noIso_WP90",
-            "p4_miss_sf": 0.47,
+            "p4_23_miss_sf": 0.47,
         },
     )
     # MME scope electron and selection, also for fake rate measurements
@@ -647,7 +647,7 @@ def build_config(
             "min_electron_pt": 10.0,
             "max_electron_eta": 2.5,
             "electron_iso_cut": 0.15,  # 0.15 in paper
-            "p4_miss_sf": 0.69,
+            "p4_23_miss_sf": 0.69,
         },
     )
     # EEM scope electron and selection, also for fake rate measurements
@@ -668,7 +668,7 @@ def build_config(
             "tripleselection_min_dR_lep1lep2": 0.3,
             "muon_iso_cut": 0.15,
             "muon_id": "Muon_mediumId",
-            "p4_miss_sf": 0.69,
+            "p4_23_miss_sf": 0.69,
         },
     )
     # # EMT TrueGenTriple
@@ -1322,7 +1322,7 @@ def build_config(
             q.deltaPhi_WH,
             q.eta_vis,
             q.phi_vis,
-            q.scalarPtSum,
+            q.Lt,
             q.pt_vis,
             q.nbtag,
             q.bpt_1,
