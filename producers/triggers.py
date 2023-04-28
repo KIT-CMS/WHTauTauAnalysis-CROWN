@@ -5,9 +5,8 @@ from code_generation.producer import ExtendedVectorProducer
 ####################
 # Set of producers used for trigger flags
 ####################
-
-MuMuGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
-    name="MuMuGenerateSingleMuonTriggerFlags",
+EMTGenerateSingleElectronTriggerFlags = ExtendedVectorProducer(
+    name="EMTGenerateSingleElectronTriggerFlags",
     call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
     input=[
         q.p4_1,
@@ -18,60 +17,14 @@ MuMuGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
         nanoAOD.TriggerObject_phi,
     ],
     output="flagname",
-    scope=["mm"],
-    vec_config="singlemoun_trigger",
-)
-MuMuGenerateDoubleMuonTriggerFlags = ExtendedVectorProducer(
-    name="MuMuGenerateDoubleMuonTriggerFlags",
-    call='trigger::GenerateDoubleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {p1_ptcut}, {p2_ptcut}, {p1_etacut}, {p2_etacut}, {p1_trigger_particle_id}, {p2_trigger_particle_id}, {p1_filterbit}, {p2_filterbit}, {max_deltaR_triggermatch})',
-    input=[
-        q.p4_1,
-        q.p4_2,
-        nanoAOD.TriggerObject_bit,
-        nanoAOD.TriggerObject_id,
-        nanoAOD.TriggerObject_pt,
-        nanoAOD.TriggerObject_eta,
-        nanoAOD.TriggerObject_phi,
-    ],
-    output="flagname",
-    scope=["mm"],
-    vec_config="doublemuon_trigger",
-)
-MTGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
-    name="MTGenerateSingleMuonTriggerFlags",
-    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
-    input=[
-        q.p4_1,
-        nanoAOD.TriggerObject_bit,
-        nanoAOD.TriggerObject_id,
-        nanoAOD.TriggerObject_pt,
-        nanoAOD.TriggerObject_eta,
-        nanoAOD.TriggerObject_phi,
-    ],
-    output="flagname",
-    scope=["mt"],
-    vec_config="singlemoun_trigger",
-)
-ETGenerateSingleElectronTriggerFlags = ExtendedVectorProducer(
-    name="ETGenerateSingleElectronTriggerFlags",
-    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
-    input=[
-        q.p4_1,
-        nanoAOD.TriggerObject_bit,
-        nanoAOD.TriggerObject_id,
-        nanoAOD.TriggerObject_pt,
-        nanoAOD.TriggerObject_eta,
-        nanoAOD.TriggerObject_phi,
-    ],
-    output="flagname",
-    scope=["et"],
+    scope=["emt"],
     vec_config="singleelectron_trigger",
 )
-EMGenerateSingleElectronTriggerFlags = ExtendedVectorProducer(
-    name="EMGenerateSingleElectronTriggerFlags",
+METGenerateSingleElectronTriggerFlags = ExtendedVectorProducer(
+    name="METGenerateSingleElectronTriggerFlags",
     call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
     input=[
-        q.p4_1,
+        q.p4_2,
         nanoAOD.TriggerObject_bit,
         nanoAOD.TriggerObject_id,
         nanoAOD.TriggerObject_pt,
@@ -79,26 +32,11 @@ EMGenerateSingleElectronTriggerFlags = ExtendedVectorProducer(
         nanoAOD.TriggerObject_phi,
     ],
     output="flagname",
-    scope=["em"],
+    scope=["met"],
     vec_config="singleelectron_trigger",
 )
-GenerateSingleLeadingTauTriggerFlags = ExtendedVectorProducer(
-    name="GenerateSingleLeadingTauTriggerFlags",
-    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
-    input=[
-        q.p4_1,
-        nanoAOD.TriggerObject_bit,
-        nanoAOD.TriggerObject_id,
-        nanoAOD.TriggerObject_pt,
-        nanoAOD.TriggerObject_eta,
-        nanoAOD.TriggerObject_phi,
-    ],
-    output="flagname",
-    scope=["tt"],
-    vec_config="singletau_trigger_leading",
-)
-GenerateSingleTrailingTauTriggerFlags = ExtendedVectorProducer(
-    name="GenerateSingleTrailingTauTriggerFlags",
+EMTGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
+    name="EMTGenerateSingleMuonTriggerFlags",
     call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
     input=[
         q.p4_2,
@@ -109,30 +47,14 @@ GenerateSingleTrailingTauTriggerFlags = ExtendedVectorProducer(
         nanoAOD.TriggerObject_phi,
     ],
     output="flagname",
-    scope=["et", "mt", "tt"],
-    vec_config="singletau_trigger_trailing",
-)
-EMGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
-    name="EMGenerateSingleMuonTriggerFlags",
-    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
-    input=[
-        q.p4_2,
-        nanoAOD.TriggerObject_bit,
-        nanoAOD.TriggerObject_id,
-        nanoAOD.TriggerObject_pt,
-        nanoAOD.TriggerObject_eta,
-        nanoAOD.TriggerObject_phi,
-    ],
-    output="flagname",
-    scope=["em"],
+    scope=["emt"],
     vec_config="singlemoun_trigger",
 )
-MTGenerateCrossTriggerFlags = ExtendedVectorProducer(
-    name="GenerateCrossTriggerFlags",
-    call='trigger::GenerateDoubleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {p1_ptcut}, {p2_ptcut}, {p1_etacut}, {p2_etacut}, {p1_trigger_particle_id}, {p2_trigger_particle_id}, {p1_filterbit}, {p2_filterbit}, {max_deltaR_triggermatch})',
+METGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
+    name="METGenerateSingleMuonTriggerFlags",
+    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
     input=[
         q.p4_1,
-        q.p4_2,
         nanoAOD.TriggerObject_bit,
         nanoAOD.TriggerObject_id,
         nanoAOD.TriggerObject_pt,
@@ -140,15 +62,14 @@ MTGenerateCrossTriggerFlags = ExtendedVectorProducer(
         nanoAOD.TriggerObject_phi,
     ],
     output="flagname",
-    scope=["mt"],
-    vec_config="mutau_cross_trigger",
+    scope=["met"],
+    vec_config="singlemoun_trigger",
 )
-ETGenerateCrossTriggerFlags = ExtendedVectorProducer(
-    name="GenerateCrossTriggerFlags",
-    call='trigger::GenerateDoubleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {p1_ptcut}, {p2_ptcut}, {p1_etacut}, {p2_etacut}, {p1_trigger_particle_id}, {p2_trigger_particle_id}, {p1_filterbit}, {p2_filterbit}, {max_deltaR_triggermatch})',
+MMTGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
+    name="MMTGenerateSingleMuonTriggerFlags",
+    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
     input=[
         q.p4_1,
-        q.p4_2,
         nanoAOD.TriggerObject_bit,
         nanoAOD.TriggerObject_id,
         nanoAOD.TriggerObject_pt,
@@ -156,15 +77,14 @@ ETGenerateCrossTriggerFlags = ExtendedVectorProducer(
         nanoAOD.TriggerObject_phi,
     ],
     output="flagname",
-    scope=["et"],
-    vec_config="eltau_cross_trigger",
+    scope=["mmt"],
+    vec_config="singlemoun_trigger",
 )
-TTGenerateDoubleTriggerFlags = ExtendedVectorProducer(
-    name="TTGenerateDoubleTriggerFlags",
-    call='trigger::GenerateDoubleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {p1_ptcut}, {p2_ptcut}, {p1_etacut}, {p2_etacut}, {p1_trigger_particle_id}, {p2_trigger_particle_id}, {p1_filterbit}, {p2_filterbit}, {max_deltaR_triggermatch})',
+ETTGenerateSingleElectronTriggerFlags = ExtendedVectorProducer(
+    name="ETTGenerateSingleElectronTriggerFlags",
+    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
     input=[
         q.p4_1,
-        q.p4_2,
         nanoAOD.TriggerObject_bit,
         nanoAOD.TriggerObject_id,
         nanoAOD.TriggerObject_pt,
@@ -172,15 +92,14 @@ TTGenerateDoubleTriggerFlags = ExtendedVectorProducer(
         nanoAOD.TriggerObject_phi,
     ],
     output="flagname",
-    scope=["tt"],
-    vec_config="doubletau_trigger",
+    scope=["ett"],
+    vec_config="singleelectron_trigger",
 )
-EMGenerateCrossTriggerFlags = ExtendedVectorProducer(
-    name="EMGenerateCrossTriggerFlags",
-    call='trigger::GenerateDoubleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {p1_ptcut}, {p2_ptcut}, {p1_etacut}, {p2_etacut}, {p1_trigger_particle_id}, {p2_trigger_particle_id}, {p1_filterbit}, {p2_filterbit}, {max_deltaR_triggermatch})',
+MTTGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
+    name="MTTGenerateSingleMuonTriggerFlags",
+    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
     input=[
         q.p4_1,
-        q.p4_2,
         nanoAOD.TriggerObject_bit,
         nanoAOD.TriggerObject_id,
         nanoAOD.TriggerObject_pt,
@@ -188,6 +107,36 @@ EMGenerateCrossTriggerFlags = ExtendedVectorProducer(
         nanoAOD.TriggerObject_phi,
     ],
     output="flagname",
-    scope=["em"],
-    vec_config="elmu_cross_trigger",
+    scope=["mtt"],
+    vec_config="singlemoun_trigger",
+)
+EEMGenerateSingleElectronTriggerFlags = ExtendedVectorProducer(
+    name="EEMGenerateSingleElectronTriggerFlags",
+    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
+    input=[
+        q.p4_1,
+        nanoAOD.TriggerObject_bit,
+        nanoAOD.TriggerObject_id,
+        nanoAOD.TriggerObject_pt,
+        nanoAOD.TriggerObject_eta,
+        nanoAOD.TriggerObject_phi,
+    ],
+    output="flagname",
+    scope=["eem"],
+    vec_config="singleelectron_trigger",
+)
+MMEGenerateSingleMuonTriggerFlags = ExtendedVectorProducer(
+    name="MMEGenerateSingleMuonTriggerFlags",
+    call='trigger::GenerateSingleTriggerFlag({df}, {output}, {input}, "{hlt_path}", {ptcut}, {etacut}, {trigger_particle_id}, {filterbit}, {max_deltaR_triggermatch} )',
+    input=[
+        q.p4_1,
+        nanoAOD.TriggerObject_bit,
+        nanoAOD.TriggerObject_id,
+        nanoAOD.TriggerObject_pt,
+        nanoAOD.TriggerObject_eta,
+        nanoAOD.TriggerObject_phi,
+    ],
+    output="flagname",
+    scope=["mme"],
+    vec_config="singlemoun_trigger",
 )

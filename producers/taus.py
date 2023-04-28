@@ -12,21 +12,21 @@ VsJetTauIDCut = Producer(
     call="physicsobject::tau::CutTauID({df}, {output}, {input}, {vsjet_tau_id_bit})",
     input=[nanoAOD.Tau_ID_vsJet],
     output=[],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 VsElectronTauIDCut = Producer(
     name="VsElectronTauIDCut",
     call="physicsobject::tau::CutTauID({df}, {output}, {input}, {vsele_tau_id_bit})",
     input=[nanoAOD.Tau_ID_vsEle],
     output=[],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 VsMuonTauIDCut = Producer(
     name="VsMuonTauIDCut",
     call="physicsobject::tau::CutTauID({df}, {output}, {input}, {vsmu_tau_id_bit})",
     input=[nanoAOD.Tau_ID_vsMu],
     output=[],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 
 ####################
@@ -53,7 +53,7 @@ TauPtCorrection_eleFake = Producer(
         nanoAOD.Tau_genMatch,
     ],
     output=[q.Tau_pt_ele_corrected],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 TauPtCorrection_muFake = Producer(
     name="TauPtCorrection_muFake",
@@ -65,7 +65,7 @@ TauPtCorrection_muFake = Producer(
         nanoAOD.Tau_genMatch,
     ],
     output=[q.Tau_pt_ele_mu_corrected],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 TauPtCorrection_genTau = Producer(
     name="TauPtCorrection_genTau",
@@ -77,21 +77,21 @@ TauPtCorrection_genTau = Producer(
         nanoAOD.Tau_genMatch,
     ],
     output=[q.Tau_pt_corrected],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 TauPtCorrection_data = Producer(
     name="TauPtCorrection_data",
     call="basefunctions::rename<ROOT::RVec<float>>({df}, {input}, {output})",
     input=[nanoAOD.Tau_pt],
     output=[q.Tau_pt_corrected],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 TauMassCorrection_data = Producer(
     name="TauMassCorrection_data",
     call="basefunctions::rename<ROOT::RVec<float>>({df}, {input}, {output})",
     input=[nanoAOD.Tau_mass],
     output=[q.Tau_mass_corrected],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 TauMassCorrection = Producer(
     name="TauMassCorrection",
@@ -102,14 +102,14 @@ TauMassCorrection = Producer(
         q.Tau_pt_corrected,
     ],
     output=[q.Tau_mass_corrected],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 TauEnergyCorrection_byValue = ProducerGroup(
     name="TauEnergyCorrection",
     call=None,
     input=None,
     output=None,
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
     subproducers=[TauPtCorrection_eleFake, TauPtCorrection_byValue, TauMassCorrection],
 )
 TauEnergyCorrection = ProducerGroup(
@@ -117,7 +117,7 @@ TauEnergyCorrection = ProducerGroup(
     call=None,
     input=None,
     output=None,
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
     subproducers=[
         TauPtCorrection_eleFake,
         TauPtCorrection_muFake,
@@ -130,7 +130,7 @@ TauEnergyCorrection_data = ProducerGroup(
     call=None,
     input=None,
     output=None,
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
     subproducers=[
         TauPtCorrection_data,
         TauMassCorrection_data,
@@ -164,22 +164,7 @@ TauDMCut = Producer(
     output=[],
     scopes=["global"],
 )
-# TauIDCuts = VectorProducer(
-#     name="TauIDCuts",
-#     call='physicsobject::tau::CutTauID({df}, {output}, "{tau_id}", {tau_id_idx})',
-#     input=[],
-#     output=[],
-#     scopes=["global"],
-#     vec_configs=["tau_id", "tau_id_idx"],
-# )
-# BaseTaus = ProducerGroup(
-#     name="BaseTaus",
-#     call="physicsobject::CombineMasks({df}, {output}, {input})",
-#     input=[],
-#     output=[q.base_taus_mask],
-#     scopes=["global"],
-#     subproducers=[TauPtCut, TauEtaCut, TauDzCut, TauDMCut],
-# )
+
 ######
 # Good taus selection for nonglobal scope
 ######
@@ -188,35 +173,35 @@ GoodTauPtCut = Producer(
     call="physicsobject::CutPt({df}, {input}, {output}, {min_tau_pt})",
     input=[q.Tau_pt_corrected],
     output=[],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 GoodTauEtaCut = Producer(
     name="GoodTauEtaCut",
     call="physicsobject::CutEta({df}, {input}, {output}, {max_tau_eta})",
     input=[nanoAOD.Tau_eta],
     output=[],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 GoodTauDzCut = Producer(
     name="GoodTauDzCut",
     call="physicsobject::CutDz({df}, {input}, {output}, {max_tau_dz})",
     input=[nanoAOD.Tau_dz],
     output=[],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 GoodTauDMCut = Producer(
     name="GoodTauDMCut",
     call="physicsobject::tau::CutDecayModes({df}, {output}, {input}, {vec_open}{tau_dms}{vec_close})",
     input=[nanoAOD.Tau_decayMode],
     output=[],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
 GoodTaus = ProducerGroup(
     name="GoodTaus",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
     input=[],
     output=[q.good_taus_mask],
-    scopes=["et", "mt", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
     subproducers=[
         GoodTauPtCut,
         GoodTauEtaCut,
@@ -232,5 +217,5 @@ NumberOfGoodTaus = Producer(
     call="quantities::NumberOfGoodLeptons({df}, {output}, {input})",
     input=[q.good_taus_mask],
     output=[q.ntaus],
-    scopes=["mt", "et", "tt"],
+    scopes=["emt", "met", "mmt", "ett", "mtt"],
 )
