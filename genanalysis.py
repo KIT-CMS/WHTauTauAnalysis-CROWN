@@ -25,7 +25,6 @@ def build_config(
     available_eras: List[str],
     available_scopes: List[str],
 ):
-
     if sample == "data":
         print("WARNING: no genparticles available in data, what are you doing ??")
     configuration = Configuration(
@@ -55,31 +54,21 @@ def build_config(
     ###### scope Specifics ######
     # MT/MM scope Muon selection
     configuration.add_config_parameters(
-        ["emt"],
+        ["mm"],
         {
-            "electron_index_in_triple": 0,
-            "max_ele_dxy": 0.045,
-            "max_ele_dz": 0.2,
+            "muon_index_in_pair": 0,
+            "second_muon_index_in_pair": 1,
+            "muon_iso_cut": 0.15,
+            "min_muon_pt": 23.0,
+            "max_muon_eta": 2.4,
             "max_muon_dxy": 0.045,
             "max_muon_dz": 0.2,
             "muon_id": "Muon_mediumId",
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
-            "min_electron_pt": 15.0,
-            "max_electron_eta": 2.5,  # in paper 2.1
-            "electron_iso_cut": 0.15,
-            "muon_index_in_triple": 1,
-            "min_muon_pt": 15.0,
-            "max_muon_eta": 2.4,
-            "muon_iso_cut": 0.15,
-            "truegen_mother_pdgid_23": SampleModifier(
-                {"rem_htautau": 25, "tt": 6, "vv": 24}, default=None
+            "truegen_mother_pdgid": SampleModifier(
+                {"emb_mc": 23, "tt": 6, "vv": 24}, default=None
             ),
-            "truegen_mother_pdgid_1": SampleModifier(
-                {"rem_htautau": 24, "tt": 6, "vv": 24}, default=None
-            ),
-            "truegen_daughter_1_pdgid": 11,
-            "truegen_daugher_2_pdgid": 15,
-            "truegen_daugher_3_pdgid": 15,
+            "truegen_daughter_1_pdgid": 13,
+            "truegen_daugher_2_pdgid": 13,
         },
     )
 

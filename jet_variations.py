@@ -53,13 +53,13 @@ def add_jetVariations(
                     "jet_jes_shift": 1,
                     "jet_jes_sources": JEC_sources,
                 },
-                ("mt", "et", "tt"): {"btag_sf_variation": "up_jes"},
+                ("emt", "met", "mtt", "ett", "mtt"): {"btag_sf_variation": "up_jes"},
             },
             producers={
                 "global": {
                     jets.JetEnergyCorrection,
                 },
-                ("mt", "et", "tt"): {scalefactors.btagging_SF},
+                ("emt", "met", "mtt", "ett", "mtt"): {scalefactors.btagging_SF},
             },
         ),
         samples=[
@@ -76,13 +76,13 @@ def add_jetVariations(
                     "jet_jes_shift": -1,
                     "jet_jes_sources": JEC_sources,
                 },
-                ("mt", "et", "tt"): {"btag_sf_variation": "up_jes"},
+                ("emt", "met", "mtt", "ett", "mtt"): {"btag_sf_variation": "up_jes"},
             },
             producers={
                 "global": {
                     jets.JetEnergyCorrection,
                 },
-                ("mt", "et", "tt"): {scalefactors.btagging_SF},
+                ("emt", "met", "mtt", "ett", "mtt"): {scalefactors.btagging_SF},
             },
         ),
         samples=[
