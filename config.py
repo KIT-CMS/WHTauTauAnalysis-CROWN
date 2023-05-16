@@ -1651,7 +1651,7 @@ def build_config(
             SystematicShift(
                 name="tauMuFakeEsDown",
                 shift_config={
-                    "emt": {
+                    ("emt", "mmt"): {
                         "tau_mufake_es": "down",
                     }
                 },
@@ -1662,7 +1662,7 @@ def build_config(
             SystematicShift(
                 name="tauMuFakeEsUp",
                 shift_config={
-                    "emt": {
+                    ("emt", "mmt"): {
                         "tau_mufake_es": "up",
                     }
                 },
