@@ -337,7 +337,7 @@ EleID_SF = ProducerGroup(
 ###################################
 EMTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
     name="EMTGenerateSingleMuonTriggerSF_MC",
-    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}", "{mc_muon_trg_extrapolation}")',
     input=[q.pt_2, q.eta_2],
     output="flagname",
     scope=["emt"],
@@ -345,7 +345,7 @@ EMTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
 )
 METGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
     name="METGenerateSingleMuonTriggerSF_MC",
-    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}", {mc_muon_trg_extrapolation})',
     input=[q.pt_1, q.eta_1],
     output="flagname",
     scope=["met"],
@@ -353,7 +353,7 @@ METGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
 )
 MMTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
     name="MMTGenerateSingleMuonTriggerSF_MC",
-    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}", {mc_muon_trg_extrapolation})',
     input=[q.pt_1, q.eta_1],
     output="flagname",
     scope=["mmt"],
@@ -361,7 +361,7 @@ MMTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
 )
 MTTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
     name="MTTGenerateSingleMuonTriggerSF_MC",
-    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}", {mc_muon_trg_extrapolation})',
     input=[q.pt_1, q.eta_1],
     output="flagname",
     scope=["mtt"],
@@ -369,7 +369,7 @@ MTTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
 )
 MMEGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
     name="MMEGenerateSingleMuonTriggerSF_MC",
-    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}", {mc_muon_trg_extrapolation})',
     input=[q.pt_1, q.eta_1],
     output="flagname",
     scope=["mme"],
@@ -377,7 +377,7 @@ MMEGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
 )
 EMTGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
     name="EMTGenerateSingleElectronTriggerSF_MC",
-    call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}", {mc_electron_trg_extrapolation})',
     input=[q.pt_1, q.eta_1],
     output="flagname",
     scope=["emt"],
@@ -385,7 +385,7 @@ EMTGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
 )
 EEMGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
     name="EETGenerateSingleElectronTriggerSF_MC",
-    call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}", {mc_electron_trg_extrapolation})',
     input=[q.pt_1, q.eta_1],
     output="flagname",
     scope=["eem"],
@@ -393,7 +393,7 @@ EEMGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
 )
 METGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
     name="METGenerateSingleElectronTriggerSF_MC",
-    call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}", {mc_electron_trg_extrapolation})',
     input=[q.pt_2, q.eta_2],
     output="flagname",
     scope=["met"],
@@ -401,7 +401,7 @@ METGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
 )
 ETTGenerateSingleElectronTriggerSF_MC = ExtendedVectorProducer(
     name="ETTGenerateSingleElectronTriggerSF_MC",
-    call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}")',
+    call='scalefactor::embedding::electron_sf({df}, {input}, {output}, "{mc_electron_sf_file}", "mc", "{mc_trigger_sf}", {mc_electron_trg_extrapolation})',
     input=[q.pt_1, q.eta_1],
     output="flagname",
     scope=["ett"],

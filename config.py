@@ -427,7 +427,7 @@ def build_config(
             "tau_vsjet_sf_dependence": "pt",  # or "dm", "eta"
         },
     )
-    # Muon scale factors configuration / right now we use this scale factors (official)
+    # # Muon scale factors configuration / right now we use this scale factors for ID (official)
     configuration.add_config_parameters(
         ["emt", "met", "mmt", "mtt", "mme", "eem"],
         {
@@ -718,7 +718,20 @@ def build_config(
                     "2018": "data/recoil_corrections/PuppiMETSys_2018.root",
                 }
             ),
-            "applyRecoilCorrections": SampleModifier({"wj": True}, default=False),
+            "applyRecoilCorrections": SampleModifier(
+                {
+                    "wjets": True,
+                    "dyjets": True,
+                    "electroweak_boson": True,
+                    "ggh_htautau": True,
+                    "vbf_htautau": True,
+                    "rem_htautau": True,
+                    "ggh_hww": True,
+                    "vbf_hww": True,
+                    "rem_VH": True,
+                },
+                default=False,
+            ),
             "apply_recoil_resolution_systematic": False,
             "apply_recoil_response_systematic": False,
             "recoil_systematic_shift_up": False,
@@ -1655,7 +1668,7 @@ def build_config(
                         "tau_mufake_es": "down",
                     }
                 },
-                producers={"emt": [taus.TauPtCorrection_muFake]},
+                producers={("emt", "mmt"): [taus.TauPtCorrection_muFake]},
             )
         )
         configuration.add_shift(
@@ -1666,7 +1679,7 @@ def build_config(
                         "tau_mufake_es": "up",
                     }
                 },
-                producers={"emt": [taus.TauPtCorrection_muFake]},
+                producers={("emt", "mmt"): [taus.TauPtCorrection_muFake]},
             )
         )
         configuration.add_shift(
