@@ -319,7 +319,7 @@ EleID_SF = ProducerGroup(
     call=None,
     input=None,
     output=None,
-    scopes=["met", "emt", "ett"],
+    scopes=["met", "emt", "ett", "mme", "eem"],
     subproducers={
         "met": [
             Ele_2_IDWP90_SF,
@@ -337,7 +337,7 @@ EleID_SF = ProducerGroup(
 ###################################
 EMTGenerateSingleMuonTriggerSF_MC = ExtendedVectorProducer(
     name="EMTGenerateSingleMuonTriggerSF_MC",
-    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}", "{mc_muon_trg_extrapolation}")',
+    call='scalefactor::embedding::muon_sf({df}, {input}, {output}, "{mc_muon_sf_file}", "mc", "{mc_trigger_sf}", {mc_muon_trg_extrapolation})',
     input=[q.pt_2, q.eta_2],
     output="flagname",
     scope=["emt"],

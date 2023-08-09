@@ -49,10 +49,39 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "max_deltaR_triggermatch": 0.4,
                         },
                     ],
-                    "2016": [
+                    "2016preVFP": [
                         {
                             "flagname": "trg_single_mu22",
                             "hlt_path": "HLT_IsoMu22",
+                            "ptcut": 23,
+                            "etacut": 2.5,
+                            "filterbit": 3,
+                            "trigger_particle_id": 13,
+                            "max_deltaR_triggermatch": 0.4,
+                        },
+                        {
+                            "flagname": "trg_single_mu22_tk",
+                            "hlt_path": "HLT_IsoTkMu22",
+                            "ptcut": 23,
+                            "etacut": 2.5,
+                            "filterbit": 3,
+                            "trigger_particle_id": 13,
+                            "max_deltaR_triggermatch": 0.4,
+                        },
+                    ],
+                    "2016postVFP": [
+                        {
+                            "flagname": "trg_single_mu22",
+                            "hlt_path": "HLT_IsoMu22",
+                            "ptcut": 23,
+                            "etacut": 2.5,
+                            "filterbit": 3,
+                            "trigger_particle_id": 13,
+                            "max_deltaR_triggermatch": 0.4,
+                        },
+                        {
+                            "flagname": "trg_single_mu22_tk",
+                            "hlt_path": "HLT_IsoTkMu22",
                             "ptcut": 23,
                             "etacut": 2.5,
                             "filterbit": 3,
@@ -128,7 +157,18 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "max_deltaR_triggermatch": 0.4,
                         },
                     ],
-                    "2016": [
+                    "2016postVFP": [
+                        {
+                            "flagname": "trg_single_ele25",
+                            "hlt_path": "HLT_Ele25_eta2p1_WPTight_Gsf",
+                            "ptcut": 26,
+                            "etacut": 2.1,
+                            "filterbit": 1,
+                            "trigger_particle_id": 11,
+                            "max_deltaR_triggermatch": 0.4,
+                        },
+                    ],
+                    "2016preVFP": [
                         {
                             "flagname": "trg_single_ele25",
                             "hlt_path": "HLT_Ele25_eta2p1_WPTight_Gsf",
