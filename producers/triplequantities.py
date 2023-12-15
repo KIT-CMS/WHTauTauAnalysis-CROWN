@@ -6,11 +6,11 @@ from code_generation.producer import Producer, ProducerGroup, ExtendedVectorProd
 ####################
 # Set of general producers for DiTauPair Quantities
 ####################
-p4_123 = Producer(
-    name="p4_123",
+p4_123met = Producer(
+    name="p4_123met",
     call="lorentzvectors::CombineP4s({df}, {output}, {input})",
-    input=[q.p4_1, q.p4_2, q.p4_3],
-    output=[q.p4_123],
+    input=[q.p4_1, q.p4_2, q.p4_3, q.met_p4_recoilcorrected],
+    output=[q.p4_123met],
     scopes=[
         "emt",
         "met",
@@ -218,11 +218,11 @@ p4_23_miss = Producer(
     output=[q.p4_23_miss],
     scopes=["emt", "met", "mmt", "mme", "eem", "ett", "mtt"],
 )
-pt_123 = Producer(
-    name="pt_123",
+pt_123met = Producer(
+    name="pt_123met",
     call="quantities::pt({df}, {output}, {input_vec})",
-    input=[q.p4_123],
-    output=[q.pt_123],
+    input=[q.p4_123met],
+    output=[q.pt_123met],
     scopes=["emt", "met", "mmt", "ett", "mtt", "mme", "eem"],
 )
 p4_H = Producer(
@@ -885,7 +885,7 @@ EMTTripleQuantities = ProducerGroup(
         UnrollMuLV2,
         UnrollTauLV3,
         p4_23,
-        p4_123,
+        p4_123met,
         p4_23_miss,
         p4_H,
         m_vis,
@@ -901,7 +901,7 @@ EMTTripleQuantities = ProducerGroup(
         deltaPhi_12,
         deltaPhi_13,
         deltaPhi_WH,
-        pt_123,
+        pt_123met,
     ],
 )
 METTripleQuantities = ProducerGroup(
@@ -915,7 +915,7 @@ METTripleQuantities = ProducerGroup(
         UnrollMuLV1,
         UnrollTauLV3,
         p4_23,
-        p4_123,
+        p4_123met,
         p4_23_miss,
         p4_H,
         m_vis,
@@ -931,7 +931,7 @@ METTripleQuantities = ProducerGroup(
         deltaPhi_12,
         deltaPhi_13,
         deltaPhi_WH,
-        pt_123,
+        pt_123met,
     ],
 )
 MMTTripleQuantities = ProducerGroup(
@@ -945,7 +945,7 @@ MMTTripleQuantities = ProducerGroup(
         UnrollMuLV1,
         UnrollTauLV3,
         p4_23,
-        p4_123,
+        p4_123met,
         p4_23_miss,
         p4_H,
         m_vis,
@@ -961,7 +961,7 @@ MMTTripleQuantities = ProducerGroup(
         deltaPhi_12,
         deltaPhi_13,
         deltaPhi_WH,
-        pt_123,
+        pt_123met,
     ],
 )
 MTTTripleQuantities = ProducerGroup(
@@ -975,7 +975,7 @@ MTTTripleQuantities = ProducerGroup(
         UnrollTauLV2,
         UnrollTauLV3,
         p4_23,
-        p4_123,
+        p4_123met,
         p4_23_miss,
         p4_H,
         m_vis,
@@ -991,7 +991,7 @@ MTTTripleQuantities = ProducerGroup(
         deltaPhi_12,
         deltaPhi_13,
         deltaPhi_WH,
-        pt_123,
+        pt_123met,
     ],
 )
 ETTTripleQuantities = ProducerGroup(
@@ -1005,7 +1005,7 @@ ETTTripleQuantities = ProducerGroup(
         UnrollTauLV2,
         UnrollTauLV3,
         p4_23,
-        p4_123,
+        p4_123met,
         p4_23_miss,
         p4_H,
         m_vis,
@@ -1021,7 +1021,7 @@ ETTTripleQuantities = ProducerGroup(
         deltaPhi_12,
         deltaPhi_13,
         deltaPhi_WH,
-        pt_123,
+        pt_123met,
     ],
 )
 MMETripleQuantities = ProducerGroup(
@@ -1035,7 +1035,7 @@ MMETripleQuantities = ProducerGroup(
         UnrollMuLV2,
         UnrollElLV3,
         p4_23,
-        p4_123,
+        p4_123met,
         p4_23_miss,
         p4_H,
         m_vis,
@@ -1051,7 +1051,7 @@ MMETripleQuantities = ProducerGroup(
         deltaPhi_12,
         deltaPhi_13,
         deltaPhi_WH,
-        pt_123,
+        pt_123met,
     ],
 )
 EEMTripleQuantities = ProducerGroup(
@@ -1065,7 +1065,7 @@ EEMTripleQuantities = ProducerGroup(
         UnrollElLV1,
         UnrollElLV2,
         p4_23,
-        p4_123,
+        p4_123met,
         p4_23_miss,
         p4_H,
         m_vis,
@@ -1081,7 +1081,7 @@ EEMTripleQuantities = ProducerGroup(
         deltaPhi_12,
         deltaPhi_13,
         deltaPhi_WH,
-        pt_123,
+        pt_123met,
     ],
 )
 ## advanced event quantities (can be caluculated when ditau pair and met and all jets are determined)
