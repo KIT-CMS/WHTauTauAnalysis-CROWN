@@ -12,8 +12,10 @@ def run(args):
     available_samples = [
         "ggh_htautau",
         "ggh_hbb",
+        "ggh_hww",
         "vbf_htautau",
         "vbf_hbb",
+        "vbf_hww",
         "rem_htautau",
         "rem_hbb",
         "embedding",

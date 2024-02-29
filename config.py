@@ -49,6 +49,9 @@ def build_config(
     configuration.add_config_parameters(
         "global",
         {
+            # for LHE weights
+            "muR": 1.0,
+            "muF": 1.0,
             "PU_reweighting_file": EraModifier(
                 {
                     "2016preVFP": "data/jsonpog-integration/POG/LUM/2016preVFP_UL/puWeights.json.gz",
@@ -668,6 +671,7 @@ def build_config(
     configuration.add_config_parameters(
         ["mmt"],
         {
+            "ss_or_os": "ss",
             "min_tau_pt": 20.0,
             "max_tau_eta": 2.3,
             "max_tau_dz": 0.2,
@@ -883,6 +887,7 @@ def build_config(
             event.npartons,
             event.MetFilter,
             event.PUweights,
+            event.LHE_Scale_weight,
             muons.BaseMuons,
             electrons.BaseElectrons,
             jets.JetEnergyCorrection,
@@ -1409,7 +1414,13 @@ def build_config(
             samples=["data", "embedding", "embedding_mc"],
         ),
     )
-
+    configuration.add_modification_rule(
+        "global",
+        RemoveProducer(
+            producers=[event.LHE_Scale_weight],
+            samples=["data", "embedding", "embedding_mc", "diboson"],
+        ),
+    )
     configuration.add_modification_rule(
         scopes,
         RemoveProducer(

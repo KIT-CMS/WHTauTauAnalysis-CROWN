@@ -8,6 +8,34 @@ def add_btagVariations(configuration, available_sample_types):
     #########################
     configuration.add_shift(
         SystematicShift(
+            name="btagJesUp",
+            shift_config={
+                ("emt", "met", "mmt", "mtt", "ett"): {"btag_sf_variation": "up_jes"},
+            },
+            producers={("emt", "met", "mmt", "mtt", "ett"): scalefactors.btagging_SF},
+        ),
+        samples=[
+            sample
+            for sample in available_sample_types
+            if sample not in ["data", "embedding", "embedding_mc"]
+        ],
+    )
+    configuration.add_shift(
+        SystematicShift(
+            name="btagJesDown",
+            shift_config={
+                ("emt", "met", "mmt", "mtt", "ett"): {"btag_sf_variation": "down_jes"},
+            },
+            producers={("emt", "met", "mmt", "mtt", "ett"): scalefactors.btagging_SF},
+        ),
+        samples=[
+            sample
+            for sample in available_sample_types
+            if sample not in ["data", "embedding", "embedding_mc"]
+        ],
+    )
+    configuration.add_shift(
+        SystematicShift(
             name="btagUncHFUp",
             shift_config={
                 ("emt", "met", "mmt", "mtt", "ett"): {"btag_sf_variation": "up_hf"},

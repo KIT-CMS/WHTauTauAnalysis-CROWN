@@ -4,7 +4,7 @@ from code_generation.quantity import NanoAODQuantity
 lumi = Quantity("lumi")
 puweight = Quantity("puweight")
 prefireweight = Quantity("prefiring_wgt")
-
+lhe_scale_weight = Quantity("lhe_scale_weight")
 base_taus_mask = Quantity("base_taus_mask")
 good_taus_mask = Quantity("good_taus_mask")
 base_muons_mask = Quantity("base_muons_mask")
