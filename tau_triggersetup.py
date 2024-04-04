@@ -17,7 +17,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu27",
@@ -26,7 +26,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                     ],
                     "2017": [
@@ -37,7 +37,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu27",
@@ -46,7 +46,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                     ],
                     "2016preVFP": [
@@ -57,7 +57,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu22_tk",
@@ -66,7 +66,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu22_eta2p1",
@@ -75,7 +75,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu22_tk_eta2p1",
@@ -84,7 +84,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu24",
@@ -93,7 +93,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                     ],
                     "2016postVFP": [
@@ -104,7 +104,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu22_tk",
@@ -113,7 +113,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu22_eta2p1",
@@ -122,7 +122,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu22_tk_eta2p1",
@@ -131,7 +131,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_mu24",
@@ -140,7 +140,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.5,
                             "filterbit": 3,
                             "trigger_particle_id": 13,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                     ],
                 }
@@ -161,7 +161,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.1,
                             "filterbit": 1,
                             "trigger_particle_id": 11,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_ele32",
@@ -170,7 +170,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.1,
                             "filterbit": 1,
                             "trigger_particle_id": 11,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_ele35",
@@ -179,7 +179,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.1,
                             "filterbit": 1,
                             "trigger_particle_id": 11,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                     ],
                     "2017": [
@@ -190,7 +190,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.1,
                             "filterbit": 1,
                             "trigger_particle_id": 11,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_ele32",
@@ -199,7 +199,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.1,
                             "filterbit": 1,
                             "trigger_particle_id": 11,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                         {
                             "flagname": "trg_single_ele35",
@@ -208,7 +208,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.1,
                             "filterbit": 1,
                             "trigger_particle_id": 11,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                     ],
                     "2016postVFP": [
@@ -219,7 +219,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.1,
                             "filterbit": 1,
                             "trigger_particle_id": 11,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                     ],
                     "2016preVFP": [
@@ -230,7 +230,7 @@ def add_diTauTriggerSetup(configuration: Configuration):
                             "etacut": 2.1,
                             "filterbit": 1,
                             "trigger_particle_id": 11,
-                            "max_deltaR_triggermatch": 0.4,
+                            "max_deltaR_triggermatch": 0.5,
                         },
                     ],
                 }
