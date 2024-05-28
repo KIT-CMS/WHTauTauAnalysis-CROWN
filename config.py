@@ -347,8 +347,10 @@ def build_config(
             "tau_sf_vsjet_tauDM10": "nom",
             "tau_sf_vsjet_tauDM11": "nom",
             "tau_vsjet_sf_dependence": "dm",  # or "dm", "eta"
+            "tau_vsjet_vseleWP": "VVLoose",
         },
     )
+
     configuration.add_config_parameters(
         scopes,
         {
@@ -541,6 +543,18 @@ def build_config(
             "tau_vsjet_sf_dependence": "pt",  # or "dm", "eta"
         },
     )
+    configuration.add_config_parameters(
+        ["emt", "met", "ett"],
+        {
+            "tau_vsjet_vseleWP": "Tight",
+        },
+    )
+    configuration.add_config_parameters(
+        ["mmt", "mtt"],
+        {
+            "tau_vsjet_vseleWP": "VVLoose",
+        },
+    )
     # # Muon scale factors configuration
     configuration.add_config_parameters(
         ["emt", "met", "mmt", "mtt", "mme", "eem"],
@@ -635,8 +649,8 @@ def build_config(
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
             "deltaR_jet_veto": 0.15,
-            "tripleselection_min_dR_leptau": 0.5,
-            "tripleselection_min_dR_leplep": 0.3,
+            "tripleselection_min_dR_leptau": 0.0,
+            "tripleselection_min_dR_leplep": 0.0,
             "p4_23_miss_sf": 0.69,
         },
     )
@@ -662,8 +676,8 @@ def build_config(
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
             "deltaR_jet_veto": 0.5,
-            "tripleselection_min_dR_leptau": 0.5,
-            "tripleselection_min_dR_leplep": 0.3,
+            "tripleselection_min_dR_leptau": 0.0,
+            "tripleselection_min_dR_leplep": 0.0,
             "p4_23_miss_sf": 0.69,
         },
     )
@@ -686,7 +700,7 @@ def build_config(
             "muon_iso_cut": 0.15,
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.0,
-            "tripleselection_min_dR_leplep": 0.3,
+            "tripleselection_min_dR_leplep": 0.0,
             "min_electron_pt": 15.0,  # 15 in paper
             "max_electron_eta": 2.5,  # in paper 2.1
             "electron_iso_cut": 0.15,  # 0.15 in paper
@@ -706,12 +720,12 @@ def build_config(
             "vsele_tau_id_bit": 1,  # vloose, 6 (tight) in paper
             "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
             "electron_index_in_triple": 0,
-            "min_electron_pt": 28.0,
+            "min_electron_pt": 26.0,
             "max_electron_eta": 2.1,
             "electron_iso_cut": 0.15,  # 0.15 in paper
             "ele_id": "Electron_mvaFall17V2noIso_WP90",
             "deltaR_jet_veto": 0.5,
-            "tripleselection_min_dR_leptau": 0.5,
+            "tripleselection_min_dR_leptau": 0.0,
             "tripleselection_min_dR_tautau": 0.5,
             "muon_id": "Muon_mediumId",
             "min_muon_pt": 10.0,
@@ -736,7 +750,7 @@ def build_config(
             "muon_iso_cut": 0.5,
             "muon_id": "Muon_mediumId",
             "deltaR_jet_veto": 0.5,
-            "tripleselection_min_dR_leptau": 0.5,
+            "tripleselection_min_dR_leptau": 0.0,
             "tripleselection_min_dR_tautau": 0.5,
             "min_electron_pt": 15.0,
             "max_electron_eta": 2.5,
