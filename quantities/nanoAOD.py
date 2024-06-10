@@ -53,6 +53,7 @@ Electron_charge = NanoAODQuantity("Electron_charge")
 Electron_indexToGen = NanoAODQuantity("Electron_genPartIdx")
 Electron_IDWP90 = NanoAODQuantity("Electron_mvaFall17V2noIso_WP90")
 Electron_IDWP80 = NanoAODQuantity("Electron_mvaFall17V2noIso_WP80")
+Electron_IDWPL = NanoAODQuantity("Electron_mvaFall17V2noIso_WPL")
 
 GenJet_pt = NanoAODQuantity("GenJet_pt")
 GenJet_eta = NanoAODQuantity("GenJet_eta")

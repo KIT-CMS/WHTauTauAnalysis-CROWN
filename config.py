@@ -612,7 +612,7 @@ def build_config(
             "max_muon_eta": 2.4,
             "max_muon_dxy": 0.045,
             "max_muon_dz": 0.2,
-            # "muon_id": "Muon_mediumId",
+            "muon_id": "Muon_looseId",
         },
     )
     # electron base selection:
@@ -623,7 +623,7 @@ def build_config(
             "max_ele_eta": 2.5,
             "max_ele_dxy": 0.045,
             "max_ele_dz": 0.2,
-            # "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            "ele_id": "Electron_mvaFall17V2noIso_WPL",
         },
     )
     # in the channels for the signal extraction, the base selection is also taken into account for the base masks to estimate the jet to lepton fake contribution. so execpt of the tau id working point, one can choose the good particles properties here
@@ -642,9 +642,9 @@ def build_config(
             "max_electron_eta": 2.5,  # in paper 2.1
             "electron_iso_cut": 0.15,  # 0.15 in paper
             "max_ele_iso": 0.15,
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            "good_ele_id": "Electron_mvaFall17V2noIso_WP90",
             "muon_index_in_triple": 1,
-            "muon_id": "Muon_mediumId",
+            "good_muon_id": "Muon_mediumId",
             "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
@@ -669,9 +669,9 @@ def build_config(
             "max_electron_eta": 2.5,  # in paper 2.1
             "electron_iso_cut": 0.5,  # 0.15 in paper
             "max_ele_iso": 0.15,
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            "good_ele_id": "Electron_mvaFall17V2noIso_WP90",
             "muon_index_in_triple": 0,
-            "muon_id": "Muon_mediumId",
+            "good_muon_id": "Muon_mediumId",
             "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
@@ -692,7 +692,7 @@ def build_config(
             "vsjet_tau_id_bit": 1,  # vvvloose, 7 (vtight in paper)
             "vsele_tau_id_bit": 1,  # vvloose, 6 (tight) in paper
             "vsmu_tau_id_bit": 1,  # vloose, 4 (tight) in paper
-            "muon_id": "Muon_mediumId",
+            "good_muon_id": "Muon_mediumId",
             "muon_index_in_triple": 0,
             "second_muon_index_in_triple": 1,
             "min_muon_pt": 10.0,
@@ -705,7 +705,7 @@ def build_config(
             "max_electron_eta": 2.5,  # in paper 2.1
             "electron_iso_cut": 0.15,  # 0.15 in paper
             "max_ele_iso": 0.15,
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            "good_ele_id": "Electron_mvaFall17V2noIso_WP90",
             "p4_23_miss_sf": 0.69,
         },
     )
@@ -723,11 +723,11 @@ def build_config(
             "min_electron_pt": 26.0,
             "max_electron_eta": 2.1,
             "electron_iso_cut": 0.15,  # 0.15 in paper
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            "good_ele_id": "Electron_mvaFall17V2noIso_WP90",
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.0,
             "tripleselection_min_dR_tautau": 0.5,
-            "muon_id": "Muon_mediumId",
+            "good_muon_id": "Muon_mediumId",
             "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
@@ -748,14 +748,14 @@ def build_config(
             "min_muon_pt": 10.0,
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.5,
-            "muon_id": "Muon_mediumId",
+            "good_muon_id": "Muon_mediumId",
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_leptau": 0.0,
             "tripleselection_min_dR_tautau": 0.5,
             "min_electron_pt": 15.0,
             "max_electron_eta": 2.5,
             "electron_iso_cut": 0.15,  # 0.15 in paper
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            "good_ele_id": "Electron_mvaFall17V2noIso_WP90",
             "p4_23_miss_sf": 0.47,
         },
     )
@@ -769,8 +769,8 @@ def build_config(
             "min_muon_pt": 15.0,
             "max_muon_eta": 2.4,
             "muon_iso_cut": 0.15,
-            "muon_id": "Muon_mediumId",
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            "good_muon_id": "Muon_mediumId",
+            "good_ele_id": "Electron_mvaFall17V2noIso_WP90",
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_lep1lep1": 0.3,
             "tripleselection_min_dR_lep1lep2": 0.3,
@@ -792,12 +792,12 @@ def build_config(
             "min_electron_pt": 10.0,
             "max_electron_eta": 2.5,
             "electron_iso_cut": 0.15,
-            "ele_id": "Electron_mvaFall17V2noIso_WP90",
+            "good_ele_id": "Electron_mvaFall17V2noIso_WP90",
             "deltaR_jet_veto": 0.5,
             "tripleselection_min_dR_lep1lep1": 0.3,
             "tripleselection_min_dR_lep1lep2": 0.3,
             "muon_iso_cut": 0.15,
-            "muon_id": "Muon_mediumId",
+            "good_muon_id": "Muon_mediumId",
             "p4_23_miss_sf": 0.69,
         },
     )

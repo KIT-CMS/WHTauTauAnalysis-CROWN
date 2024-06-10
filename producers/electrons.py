@@ -39,7 +39,7 @@ ElectronIDCut = Producer(
     call='physicsobject::electron::CutID({df}, {output}, "{ele_id}")',
     input=[],
     output=[],
-    scopes=["emt", "met", "ett", "eem", "mme", "mtt", "mmt"],
+    scopes=["global", "eem", "mme"],
 )
 BaseElectrons = ProducerGroup(
     name="BaseElectrons",
@@ -52,7 +52,7 @@ BaseElectrons = ProducerGroup(
         ElectronEtaCut,
         ElectronDxyCut,
         ElectronDzCut,
-        # ElectronIDCut
+        ElectronIDCut,
     ],
 )
 # ElectronPtCut_fake = Producer(
@@ -111,6 +111,13 @@ GoodElectronIsoCut = Producer(
     output=[],
     scopes=["emt", "met", "ett", "mme", "eem", "mtt", "mmt"],
 )
+GoodElectronIDCut = Producer(
+    name="GoodElectronIDCut",
+    call='physicsobject::electron::CutID({df}, {output}, "{good_ele_id}")',
+    input=[],
+    output=[],
+    scopes=["emt", "met", "ett", "eem", "mme", "mtt", "mmt"],
+)
 GoodElectrons = ProducerGroup(
     name="GoodElectrons",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
@@ -121,7 +128,7 @@ GoodElectrons = ProducerGroup(
         GoodElectronPtCut,
         GoodElectronEtaCut,
         GoodElectronIsoCut,
-        ElectronIDCut,
+        GoodElectronIDCut,
     ],
 )
 VetoElectrons = Producer(

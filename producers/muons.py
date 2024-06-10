@@ -46,7 +46,7 @@ MuonIDCut = Producer(
     call='physicsobject::muon::CutID({df}, {output}, "{muon_id}")',
     input=[],
     output=[],
-    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
+    scopes=["global"],
 )
 BaseMuons = ProducerGroup(
     name="BaseMuons",
@@ -60,7 +60,7 @@ BaseMuons = ProducerGroup(
         MuonDxyCut,
         MuonDzCut,
         MuonIsTrackerOrIsGlobalCut,
-        # MuonIDCut
+        MuonIDCut,
     ],
 )
 # MuonPtCut_fake = Producer(
@@ -119,6 +119,13 @@ GoodMuonIsoCut = Producer(
     output=[],
     scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
 )
+GoodMuonIDCut = Producer(
+    name="GoodMuonIDCut",
+    call='physicsobject::muon::CutID({df}, {output}, "{good_muon_id}")',
+    input=[],
+    output=[],
+    scopes=["emt", "met", "mmt", "mtt", "mme", "eem", "ett"],
+)
 GoodMuons = ProducerGroup(
     name="GoodMuons",
     call="physicsobject::CombineMasks({df}, {output}, {input})",
@@ -129,7 +136,7 @@ GoodMuons = ProducerGroup(
         GoodMuonPtCut,
         GoodMuonEtaCut,
         GoodMuonIsoCut,
-        MuonIDCut,
+        GoodMuonIDCut,
     ],
 )
 NumberOfGoodMuons = Producer(
