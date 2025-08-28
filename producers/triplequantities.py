@@ -363,6 +363,20 @@ muon_is_mediumid_3 = Producer(
     output=[q.muon_is_mediumid_3],
     scopes=["eem"],
 )
+muon_is_tightid_1 = Producer(
+    name="muon_is_tightid_1",
+    call="quantities::muon::id({df}, {output}, 0, {input})",
+    input=[q.leptontriple, nanoAOD.Muon_id_tight],
+    output=[q.muon_is_tightid_1],
+    scopes=["met", "mmt", "mme", "mtt"],
+)
+muon_is_tightid_2 = Producer(
+    name="muon_is_tightid_2",
+    call="quantities::muon::id({df}, {output}, 1, {input})",
+    input=[q.leptontriple, nanoAOD.Muon_id_tight],
+    output=[q.muon_is_tightid_2],
+    scopes=["mmt", "mme", "emt"],
+)
 muon_is_tracker_3 = Producer(
     name="muon_is_tracker_3",
     call="quantities::muon::is_tracker({df}, {output}, 2, {input})",
@@ -440,6 +454,20 @@ electron_is_nonisowp90_3 = Producer(
     input=[q.leptontriple, nanoAOD.Electron_IDWP90],
     output=[q.electron_is_nonisowp90_3],
     scopes=["mme"],
+)
+electron_is_nonisowp80_1 = Producer(
+    name="electron_is_nonisowp80_1",
+    call="quantities::electron::id({df}, {output}, 0, {input})",
+    input=[q.leptontriple, nanoAOD.Electron_IDWP80],
+    output=[q.electron_is_nonisowp80_1],
+    scopes=["emt", "eem", "ett"],
+)
+electron_is_nonisowp80_2 = Producer(
+    name="electron_is_nonisowp80_2",
+    call="quantities::electron::id({df}, {output}, 1, {input})",
+    input=[q.leptontriple, nanoAOD.Electron_IDWP80],
+    output=[q.electron_is_nonisowp80_2],
+    scopes=["met", "eem"],
 )
 tau_dxy_2 = Producer(
     name="tau_dxy_2",
@@ -730,6 +758,7 @@ UnrollMuLV1 = ProducerGroup(
         muon_iso_wh_1,
         muon_is_global_wh_1,
         muon_is_mediumid_1,
+        muon_is_tightid_1,
     ],
 )
 UnrollMuLV2 = ProducerGroup(
@@ -749,6 +778,7 @@ UnrollMuLV2 = ProducerGroup(
         muon_iso_wh_2,
         muon_is_global_wh_2,
         muon_is_mediumid_2,
+        muon_is_tightid_2,
     ],
 )
 UnrollMuLV3 = ProducerGroup(
@@ -787,6 +817,7 @@ UnrollElLV1 = ProducerGroup(
         electron_q_wh_1,
         electron_iso_wh_1,
         electron_is_nonisowp90_1,
+        electron_is_nonisowp80_1,
     ],
 )
 UnrollElLV2 = ProducerGroup(
@@ -805,6 +836,7 @@ UnrollElLV2 = ProducerGroup(
         electron_q_wh_2,
         electron_iso_wh_2,
         electron_is_nonisowp90_2,
+        electron_is_nonisowp80_2,
     ],
 )
 UnrollElLV3 = ProducerGroup(

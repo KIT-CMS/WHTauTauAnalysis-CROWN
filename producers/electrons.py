@@ -5,11 +5,30 @@ from code_generation.producer import Producer, ProducerGroup
 ####################
 # Set of producers used for loosest selection of electrons
 ####################
-
+ElectronPtCorrectionMC = Producer(
+    name="ElectronPtCorrectionMC",
+    call='physicsobject::electron::PtCorrectionMC({df}, correctionManager, {output}, {input}, {ele_es_era}, "{ele_es_variation}", {ele_es_file})',
+    input=[
+        nanoAOD.Electron_pt,
+        nanoAOD.Electron_eta,
+        nanoAOD.Electron_seedGain,
+        nanoAOD.Electron_dEsigmaUp,
+        nanoAOD.Electron_dEsigmaDown,
+    ],
+    output=[q.Electron_pt_corrected],
+    scopes=["global"],
+)
+RenameElectronPt = Producer(
+    name="RenameElectronPt",
+    call="basefunctions::rename<ROOT::RVec<float>>({df}, {input}, {output})",
+    input=[nanoAOD.Electron_pt],
+    output=[q.Electron_pt_corrected],
+    scopes=["global"],
+)
 ElectronPtCut = Producer(
     name="ElectronPtCut",
     call="physicsobject::CutPt({df}, {input}, {output}, {min_ele_pt})",
-    input=[nanoAOD.Electron_pt],
+    input=[q.Electron_pt_corrected],
     output=[],
     scopes=["global"],
 )

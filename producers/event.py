@@ -23,7 +23,7 @@ RunLumiEventFilter = VectorProducer(
 
 JSONFilter = BaseFilter(
     name="JSONFilter",
-    call='basefunctions::JSONFilter({df}, "{golden_json_file}", {input}, "GoldenJSONFilter")',
+    call='basefunctions::JSONFilter({df}, correctionManager, "{golden_json_file}", {input}, "GoldenJSONFilter")',
     input=[nanoAOD.run, nanoAOD.luminosityBlock],
     scopes=["global"],
 )
@@ -178,7 +178,7 @@ npartons = Producer(
 
 PUweights = Producer(
     name="PUweights",
-    call='reweighting::puweights({df}, {output}, {input}, "{PU_reweighting_file}", "{PU_reweighting_era}", "{PU_reweighting_variation}")',
+    call='reweighting::puweights({df}, correctionManager, {output}, {input}, "{PU_reweighting_file}", "{PU_reweighting_era}", "{PU_reweighting_variation}")',
     input=[nanoAOD.Pileup_nTrueInt],
     output=[q.puweight],
     scopes=["global"],
@@ -323,12 +323,30 @@ LHE_Scale_weight = Producer(
     call="reweighting::lhe_scale_weights({df}, {output}, {input}, {muR}, {muF})",
     input=[nanoAOD.LHEScaleWeight],
     output=[q.lhe_scale_weight],
-    scopes=[        "global",
+    scopes=[
+        "global",
         "emt",
         "met",
         "mmt",
         "ett",
         "mtt",
         "mme",
-        "eem",],
+        "eem",
+    ],
+)
+LHE_Pdf_weight = Producer(
+    name="LHE_Pdf_weight",
+    call="basefunctions::rename<ROOT::RVec<Float_t>>({df}, {input}, {output})",
+    input=[nanoAOD.LHEPdfWeight],
+    output=[q.lhe_pdf_weight],
+    scopes=[
+        "global",
+        "emt",
+        "met",
+        "mmt",
+        "ett",
+        "mtt",
+        "mme",
+        "eem",
+    ],
 )

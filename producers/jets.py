@@ -7,7 +7,7 @@ from code_generation.producer import Producer, ProducerGroup
 ####################
 JetPtCorrection = Producer(
     name="JetPtCorrection",
-    call="physicsobject::jet::JetPtCorrection({df}, {output}, {input}, {jet_reapplyJES}, {jet_jes_sources}, {jet_jes_shift}, {jet_jer_shift}, {jet_jec_file}, {jet_jer_tag}, {jet_jes_tag}, {jet_jec_algo})",
+    call="physicsobject::jet::JetPtCorrection({df}, correctionManager, {output}, {input}, {jet_reapplyJES}, {jet_jes_sources}, {jet_jes_shift}, {jet_jer_shift}, {jet_jec_file}, {jet_jer_tag}, {jet_jes_tag}, {jet_jec_algo})",
     input=[
         nanoAOD.Jet_pt,
         nanoAOD.Jet_eta,
@@ -165,6 +165,22 @@ VetoOverlappingJets = Producer(
     input=[nanoAOD.Jet_eta, nanoAOD.Jet_phi, q.p4_2, q.p4_3],
     output=[q.jet_overlap_veto_mask],
     scopes=["emt", "met", "mmt", "ett", "mtt", "mme", "eem"],
+)
+JetHemVeto = Producer(
+    name="JetHemVeto",
+    call="jet::JetHemVeto({df}, {input}, {output})",
+    input=[nanoAOD.Jet_eta,nanoAOD.Jet_phi, nanoAOD.run],
+    output=[q.jet_hem_veto_mask],
+    scopes=["global"],
+)
+JetHemVetoFlag = Producer(
+    name="JetHemVetoFlag",
+    call="physicsobject::LeptonVetoFlag({df}, {output}, {input})",
+    input=[q.jet_hem_veto_mask],
+    output=[q.hem_veto_flag],
+    scopes=[
+        "global"
+    ],
 )
 GoodJetsWithVeto = ProducerGroup(
     name="GoodJetsWithVeto",
@@ -414,6 +430,36 @@ mjj = Producer(
         "eem",
     ],
 )
+# jet_flavour_1 = Producer(
+#     name="jet_flavour_1",
+#     call="quantities::jet::flavor({df}, {output}, {input}, 0)",
+#     input=[nanoAOD.Jet_flavor, q.good_jet_collection],
+#     output=[q.jet_flavour_1],
+#     scopes=[
+#         "emt",
+#         "met",
+#         "mmt",
+#         "ett",
+#         "mtt",
+#         "mme",
+#         "eem",
+#     ],
+# )
+# jet_flavour_2 = Producer(
+#     name="jet_flavour_2",
+#     call="quantities::jet::flavor({df}, {output}, {input}, 1)",
+#     input=[nanoAOD.Jet_flavor, q.good_jet_collection],
+#     output=[q.jet_flavour_2],
+#     scopes=[
+#         "emt",
+#         "met",
+#         "mmt",
+#         "ett",
+#         "mtt",
+#         "mme",
+#         "eem",
+#     ],
+# )
 BasicJetQuantities = ProducerGroup(
     name="BasicJetQuantities",
     call=None,
@@ -441,6 +487,8 @@ BasicJetQuantities = ProducerGroup(
         jphi_2,
         jtag_value_2,
         mjj,
+        # jet_flavour_1,
+        # jet_flavour_2,
     ],
 )
 

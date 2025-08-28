@@ -12,7 +12,7 @@ eras = Producer(
 )
 Transform_pt_1 = Producer(
     name="Transform_pt_1",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.pt_1,
     ],
@@ -21,7 +21,7 @@ Transform_pt_1 = Producer(
 )
 Transform_pt_2 = Producer(
     name="Transform_pt_2",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.pt_2,
     ],
@@ -30,7 +30,7 @@ Transform_pt_2 = Producer(
 )
 Transform_pt_3 = Producer(
     name="Transform_pt_3",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.pt_3,
     ],
@@ -39,7 +39,7 @@ Transform_pt_3 = Producer(
 )
 Transform_eta_1 = Producer(
     name="Transform_eta_1",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.eta_1,
     ],
@@ -48,7 +48,7 @@ Transform_eta_1 = Producer(
 )
 Transform_eta_2 = Producer(
     name="Transform_eta_2",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.eta_2,
     ],
@@ -57,7 +57,7 @@ Transform_eta_2 = Producer(
 )
 Transform_eta_3 = Producer(
     name="Transform_eta_3",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.eta_3,
     ],
@@ -66,7 +66,7 @@ Transform_eta_3 = Producer(
 )
 Transform_deltaR_12 = Producer(
     name="Transform_deltaR_12",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.deltaR_12,
     ],
@@ -75,7 +75,7 @@ Transform_deltaR_12 = Producer(
 )
 Transform_deltaR_13 = Producer(
     name="Transform_deltaR_13",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.deltaR_13,
     ],
@@ -84,7 +84,7 @@ Transform_deltaR_13 = Producer(
 )
 Transform_deltaR_23 = Producer(
     name="Transform_deltaR_23",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.deltaR_23,
     ],
@@ -93,7 +93,7 @@ Transform_deltaR_23 = Producer(
 )
 Transform_m_vis = Producer(
     name="Transform_m_vis",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.m_vis,
     ],
@@ -102,7 +102,7 @@ Transform_m_vis = Producer(
 )
 Transform_phi_1 = Producer(
     name="Transform_phi_1",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.phi_1,
     ],
@@ -111,7 +111,7 @@ Transform_phi_1 = Producer(
 )
 Transform_decaymode_3 = Producer(
     name="Transform_decaymode_3",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "i")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "i")',
     input=[
         q.decaymode_3,
     ],
@@ -120,7 +120,7 @@ Transform_decaymode_3 = Producer(
 )
 Transform_phi_3 = Producer(
     name="Transform_phi_3",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.phi_3,
     ],
@@ -129,7 +129,7 @@ Transform_phi_3 = Producer(
 )
 Transform_phi_2 = Producer(
     name="Transform_phi_2",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.phi_2,
     ],
@@ -138,7 +138,7 @@ Transform_phi_2 = Producer(
 )
 Transform_phi_1 = Producer(
     name="Transform_phi_1",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.phi_1,
     ],
@@ -147,7 +147,7 @@ Transform_phi_1 = Producer(
 )
 Transform_Lt = Producer(
     name="Transform_Lt",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.Lt,
     ],
@@ -156,7 +156,7 @@ Transform_Lt = Producer(
 )
 Transform_era_2016preVFP = Producer(
     name="Transform_era_2016preVFP",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "i")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "i")',
     input=[
         q.era_2016preVFP,
     ],
@@ -165,7 +165,7 @@ Transform_era_2016preVFP = Producer(
 )
 Transform_era_2016postVFP = Producer(
     name="Transform_era_2016postVFP",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "i")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "i")',
     input=[
         q.era_2016postVFP,
     ],
@@ -174,7 +174,7 @@ Transform_era_2016postVFP = Producer(
 )
 Transform_era_2017 = Producer(
     name="Transform_era_2017",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "i")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "i")',
     input=[
         q.era_2017,
     ],
@@ -183,7 +183,7 @@ Transform_era_2017 = Producer(
 )
 Transform_era_2018 = Producer(
     name="Transform_era_2018",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "i")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "i")',
     input=[
         q.era_2018,
     ],
@@ -192,7 +192,7 @@ Transform_era_2018 = Producer(
 )
 Transform_met = Producer(
     name="Transform_met",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.met,
     ],
@@ -201,7 +201,7 @@ Transform_met = Producer(
 )
 Transform_m_tt = Producer(
     name="Transform_m_tt",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.m_tt,
     ],
@@ -210,7 +210,7 @@ Transform_m_tt = Producer(
 )
 Transform_mjj = Producer(
     name="Transform_mjj",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.mjj,
     ],
@@ -219,7 +219,7 @@ Transform_mjj = Producer(
 )
 Transform_mt_1 = Producer(
     name="Transform_mt_1",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.mt_1,
     ],
@@ -228,7 +228,7 @@ Transform_mt_1 = Producer(
 )
 Transform_mt_2 = Producer(
     name="Transform_mt_2",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.mt_2,
     ],
@@ -237,7 +237,7 @@ Transform_mt_2 = Producer(
 )
 Transform_mt_3 = Producer(
     name="Transform_mt_3",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.mt_3,
     ],
@@ -246,7 +246,7 @@ Transform_mt_3 = Producer(
 )
 Transform_pt_vis = Producer(
     name="Transform_pt_vis",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.pt_vis,
     ],
@@ -255,7 +255,7 @@ Transform_pt_vis = Producer(
 )
 Transform_pt_W = Producer(
     name="Transform_pt_W",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.pt_W,
     ],
@@ -264,21 +264,93 @@ Transform_pt_W = Producer(
 )
 Transform_metphi = Producer(
     name="Transform_metphi",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.metphi,
     ],
     output=[q.transformed_metphi],
     scopes=["mmt", "emt", "met", "ett", "mtt"],
 )
+Transform_njets = Producer(
+    name="Transform_njets",
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "i")',
+    input=[
+        q.njets,
+    ],
+    output=[q.transformed_njets],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
+)
+Transform_deltaPhi_WH = Producer(
+    name="Transform_deltaPhi_WH",
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "d")',
+    input=[
+        q.deltaPhi_WH,
+    ],
+    output=[q.transformed_deltaPhi_WH],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
+)
+Transform_jpt_1 = Producer(
+    name="Transform_jpt_1",
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
+    input=[
+        q.jpt_1,
+    ],
+    output=[q.transformed_jpt_1],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
+)
+Transform_jpt_2 = Producer(
+    name="Transform_jpt_2",
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
+    input=[
+        q.jpt_2,
+    ],
+    output=[q.transformed_jpt_2],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
+)
+Transform_jeta_1 = Producer(
+    name="Transform_jeta_1",
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
+    input=[
+        q.jeta_1,
+    ],
+    output=[q.transformed_jeta_1],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
+)
+Transform_jeta_2 = Producer(
+    name="Transform_jeta_2",
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
+    input=[
+        q.jeta_2,
+    ],
+    output=[q.transformed_jeta_2],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
+)
+Transform_jphi_1 = Producer(
+    name="Transform_jphi_1",
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
+    input=[
+        q.jphi_1,
+    ],
+    output=[q.transformed_jphi_1],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
+)
+Transform_jphi_2 = Producer(
+    name="Transform_jphi_2",
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
+    input=[
+        q.jphi_2,
+    ],
+    output=[q.transformed_jphi_2],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
+)
 Transform_pt_123met = Producer(
     name="Transform_pt_123met",
-    call='ml::StandardTransformer({df}, {input}, {output}, "{feature_transformation_file}", "f")',
+    call='ml::StandardTransformer({df}, correctionManager, {input}, {output}, "{feature_transformation_file}", "f")',
     input=[
         q.pt_123met,
     ],
     output=[q.transformed_pt_123met],
-    scopes=["ett", "mtt"],
+    scopes=["mmt", "emt", "met", "ett", "mtt"],
 )
 LLTTransformVars = ProducerGroup(
     name="LLTTransformVars",
@@ -300,8 +372,8 @@ LLTTransformVars = ProducerGroup(
         Transform_phi_3,
         Transform_Lt,
         Transform_deltaR_13,
-        Transform_deltaR_23,
         Transform_deltaR_12,
+        Transform_deltaR_23,
         Transform_era_2016preVFP,
         Transform_era_2016postVFP,
         Transform_era_2017,
@@ -315,6 +387,14 @@ LLTTransformVars = ProducerGroup(
         Transform_pt_vis,
         Transform_pt_W,
         Transform_metphi,
+        Transform_njets,
+        Transform_jpt_1,
+        Transform_jpt_2,
+        Transform_jeta_1,
+        Transform_jeta_2,
+        Transform_jphi_1,
+        Transform_jphi_2,
+        Transform_pt_123met,
     ],
 )
 LTTTransformVars = ProducerGroup(
@@ -353,76 +433,168 @@ LTTTransformVars = ProducerGroup(
         Transform_pt_W,
         Transform_metphi,
         Transform_pt_123met,
+        Transform_njets,
+        Transform_jpt_1,
+        Transform_jpt_2,
+        Transform_jeta_1,
+        Transform_jeta_2,
+        Transform_jphi_1,
+        Transform_jphi_2,
     ],
 )
 Evaluate_ORT_LLT = Producer(
     name="Evaluate_ORT_LLT",
-    call='ml::GenericOnnxEvaluator<27>({df}, onnxSessionManager, {output}, "{model_file}", {input_vec})',
+    call='ml::GenericOnnxEvaluator<26>({df}, onnxSessionManager, {output}, "{model_file}", {input_vec})',
     input=[
         q.transformed_era_2016preVFP,
         q.transformed_era_2016postVFP,
         q.transformed_era_2017,
         q.transformed_era_2018,
-        q.transformed_pt_3,
-        q.transformed_decaymode_3,
-        q.transformed_eta_3,
-        q.transformed_phi_3,
-        q.transformed_deltaR_13,
-        q.transformed_deltaR_23,
-        q.transformed_pt_1,
         q.transformed_eta_1,
-        q.transformed_phi_1,
-        q.transformed_pt_2,
         q.transformed_eta_2,
-        q.transformed_phi_2,
-        q.transformed_m_vis,
-        q.transformed_Lt,
-        q.transformed_met,
-        q.transformed_m_tt,
-        q.transformed_mjj,
+        q.transformed_eta_3,
+        q.transformed_jpt_1,
+        q.transformed_jpt_2,
         q.transformed_mt_1,
         q.transformed_mt_2,
         q.transformed_mt_3,
-        q.transformed_pt_vis,
+        q.transformed_pt_123met,
+        q.transformed_deltaR_12,
+        q.transformed_deltaR_13,
+        q.transformed_deltaR_23,
+        q.transformed_pt_1,
+        q.transformed_pt_2,
+        q.transformed_pt_3,
+        q.transformed_njets,
+        q.transformed_met,
+        q.transformed_m_vis,
+        q.transformed_Lt,
         q.transformed_pt_W,
-        q.transformed_metphi,
+        q.transformed_pt_vis,
+        q.transformed_m_tt,
     ],
     output=[q.output_vector, q.predicted_class, q.predicted_max_value],
     scopes=["mmt", "emt", "met"],
 )
 Evaluate_ORT_LTT = Producer(
     name="Evaluate_ORT_LTT",
-    call='ml::GenericOnnxEvaluator<28>({df}, onnxSessionManager, {output}, "{model_file}", {input_vec})',
+    call='ml::GenericOnnxEvaluator<26>({df}, onnxSessionManager, {output}, "{model_file}", {input_vec})',
     input=[
         q.transformed_era_2016preVFP,
         q.transformed_era_2016postVFP,
         q.transformed_era_2017,
         q.transformed_era_2018,
-        q.transformed_pt_3,
-        q.transformed_decaymode_3,
-        q.transformed_eta_3,
-        q.transformed_phi_3,
-        q.transformed_deltaR_13,
-        q.transformed_deltaR_23,
-        q.transformed_pt_1,
         q.transformed_eta_1,
-        q.transformed_phi_1,
-        q.transformed_pt_2,
         q.transformed_eta_2,
-        q.transformed_phi_2,
-        q.transformed_m_vis,
-        q.transformed_Lt,
-        q.transformed_met,
-        q.transformed_m_tt,
-        q.transformed_mjj,
+        q.transformed_eta_3,
+        q.transformed_jpt_1,
+        q.transformed_jpt_2,
         q.transformed_mt_1,
         q.transformed_mt_2,
         q.transformed_mt_3,
-        q.transformed_pt_vis,
-        q.transformed_pt_W,
-        q.transformed_metphi,
         q.transformed_pt_123met,
+        q.transformed_deltaR_12,
+        q.transformed_deltaR_13,
+        q.transformed_deltaR_23,
+        q.transformed_pt_1,
+        q.transformed_pt_2,
+        q.transformed_pt_3,
+        q.transformed_njets,
+        q.transformed_met,
+        q.transformed_m_vis,
+        q.transformed_Lt,
+        q.transformed_pt_W,
+        q.transformed_pt_vis,
+        q.transformed_m_tt,
     ],
     output=[q.output_vector, q.predicted_class, q.predicted_max_value],
     scopes=["ett", "mtt"],
 )
+# Evaluate_ORT_LLT = Producer(
+#     name="Evaluate_ORT_LLT",
+#     call='ml::GenericOnnxEvaluator<36>({df}, onnxSessionManager, {output}, "{model_file}", {input_vec})',
+#     input=[
+#         q.transformed_era_2016preVFP,
+#         q.transformed_era_2016postVFP,
+#         q.transformed_era_2017,
+#         q.transformed_era_2018,
+#         q.transformed_pt_3,
+#         q.transformed_decaymode_3,
+#         q.transformed_eta_3,
+#         q.transformed_phi_3,
+#         q.transformed_deltaR_13,
+#         q.transformed_deltaR_12,
+#         q.transformed_deltaR_23,
+#         q.transformed_pt_1,
+#         q.transformed_eta_1,
+#         q.transformed_phi_1,
+#         q.transformed_pt_2,
+#         q.transformed_eta_2,
+#         q.transformed_phi_2,
+#         q.transformed_m_vis,
+#         q.transformed_Lt,
+#         q.transformed_met,
+#         q.transformed_m_tt,
+#         q.transformed_mjj,
+#         q.transformed_mt_1,
+#         q.transformed_mt_2,
+#         q.transformed_mt_3,
+#         q.transformed_pt_vis,
+#         q.transformed_pt_W,
+#         q.transformed_metphi,
+#         q.transformed_njets,
+#         q.transformed_jpt_1,
+#         q.transformed_jpt_2,
+#         q.transformed_jeta_1,
+#         q.transformed_jeta_2,
+#         q.transformed_jphi_1,
+#         q.transformed_jphi_2,
+#         q.transformed_pt_123met,
+#     ],
+#     output=[q.output_vector, q.predicted_class, q.predicted_max_value],
+#     scopes=["mmt", "emt", "met"],
+# )
+# Evaluate_ORT_LTT = Producer(
+#     name="Evaluate_ORT_LTT",
+#     call='ml::GenericOnnxEvaluator<36>({df}, onnxSessionManager, {output}, "{model_file}", {input_vec})',
+#     input=[
+#         q.transformed_era_2016preVFP,
+#         q.transformed_era_2016postVFP,
+#         q.transformed_era_2017,
+#         q.transformed_era_2018,
+#         q.transformed_pt_3,
+#         q.transformed_decaymode_3,
+#         q.transformed_eta_3,
+#         q.transformed_phi_3,
+#         q.transformed_deltaR_13,
+#         q.transformed_deltaR_23,
+#         q.transformed_deltaR_12,
+#         q.transformed_pt_1,
+#         q.transformed_eta_1,
+#         q.transformed_phi_1,
+#         q.transformed_pt_2,
+#         q.transformed_eta_2,
+#         q.transformed_phi_2,
+#         q.transformed_m_vis,
+#         q.transformed_Lt,
+#         q.transformed_met,
+#         q.transformed_m_tt,
+#         q.transformed_mjj,
+#         q.transformed_mt_1,
+#         q.transformed_mt_2,
+#         q.transformed_mt_3,
+#         q.transformed_pt_vis,
+#         q.transformed_pt_W,
+#         q.transformed_metphi,
+#         q.transformed_pt_123met,
+#         q.transformed_njets,
+#         q.transformed_jpt_1,
+#         q.transformed_jpt_2,
+#         q.transformed_jeta_1,
+#         q.transformed_jeta_2,
+#         q.transformed_jphi_1,
+#         q.transformed_jphi_2,
+#     ],
+#     output=[q.output_vector, q.predicted_class, q.predicted_max_value],
+#     scopes=["ett", "mtt"],
+# )
